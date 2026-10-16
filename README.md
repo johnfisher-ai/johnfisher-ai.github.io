@@ -44,7 +44,7 @@ It runs the Nu HTML validator, checks every internal link and anchor, checks eac
 | `handbooks/` | The Handbooks shelf |
 | `about/`<br>`search/`<br>`404.qmd` | About<br>Search<br>The not-found page |
 | `_partials/` | Shared blocks for the shelf, the lab cards and the page head |
-| `assets/` | Theme, card template, endnote style, Plus Jakarta Sans, the AI+ mark and icons |
+| `assets/` | Theme, card and Start here templates, endnote style, card image sources, Plus Jakarta Sans, the AI+ mark and icons |
 | `tools/` | Post-render script, the call-to-action filter and the checks |
 | `docs/` | The finished site that GitHub Pages serves |
 
@@ -98,6 +98,10 @@ Link to another article or guide through its `index.qmd`, for example `[Title](.
 ## When a piece goes live
 
 A finished article or guide waits with `draft: true` until the day of its first LinkedIn post. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines. On the day, delete `draft: true`, add `date` and set `date-modified` to that day, then render and run the checks. When a guide goes live, its partner articles that are already live get a "Try it" line linking to the guide.
+
+## The home page's Start here row
+
+The row offers one first piece for each audience. `index.qmd` lists the pieces in order under the `start-here` listing, and its `labels` say who each one is for, for example `what-an-ai-control-plane-is: "For CTOs and architects"`. A piece still marked `draft: true` stays out of the row, so it fills in as pieces go live. To change a pick, edit both lists.
 
 ## Audience and topic pages
 

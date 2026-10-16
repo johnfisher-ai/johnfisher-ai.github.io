@@ -1,0 +1,20 @@
+```{=html}
+<%
+/* "Start here" row on the home page: one first piece per audience, in the order index.qmd lists them.
+   A piece still marked draft is left out by Quarto, so the row fills in as pieces go live.
+   template-params: labels (slug -> who the piece is the first read for), empty (text shown before any goes live). */
+const p = (typeof templateParams !== 'undefined' && templateParams) ? templateParams : {};
+const labels = p.labels || {};
+const slugOf = (path) => { const m = String(path).match(/(?:articles|guides)\/([^\/]+)\//); return m ? m[1] : ''; };
+%>
+<% if (items.length === 0) { %>
+<div class="ai-empty"><p><%= p.empty || 'Nothing here yet.' %></p></div>
+<% } %>
+<ul class="list ai-start">
+<% for (const item of items) { %>
+<li class="ai-start-item" <%= metadataAttrs(item) %>>
+<a class="ai-start-link" href="<%- item.path %>"><span class="ai-start-for"><%= labels[slugOf(item.path)] || '' %></span><span class="ai-start-title"><%= item.title %></span></a>
+</li>
+<% } %>
+</ul>
+```

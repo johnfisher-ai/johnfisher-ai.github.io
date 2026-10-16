@@ -13,6 +13,26 @@ listing:
       empty: "The first articles are on their way. Follow on LinkedIn to see each one as it's published."
     sort: "date desc"
     max-items: 4
+  # One first piece per audience (tags in claude/7 Audience tags.md). Drafts stay out until their go-live day.
+  - id: start-here
+    contents:
+      - articles/adoption-is-outrunning-governance/index.qmd
+      - articles/what-an-ai-control-plane-is/index.qmd
+      - articles/plan-for-the-new-agent-protocols/index.qmd
+      - articles/map-agentic-threats-to-controls/index.qmd
+      - articles/every-ai-claim-is-statistical/index.qmd
+      - articles/accurate-and-missing-almost-every-case/index.qmd
+    template: assets/start-here.ejs
+    sort: false
+    template-params:
+      empty: "Each audience gets a first article here as the series goes live."
+      labels:
+        adoption-is-outrunning-governance: "For CIOs"
+        what-an-ai-control-plane-is: "For CTOs and architects"
+        plan-for-the-new-agent-protocols: "For developers and AI engineers"
+        map-agentic-threats-to-controls: "For CISOs"
+        every-ai-claim-is-statistical: "For analysts"
+        accurate-and-missing-almost-every-case: "For data scientists"
 ---
 
 ::: {.ai-intro}
@@ -27,6 +47,15 @@ I'm John Fisher. I help enterprises architect the data foundation that AI depend
 ## Newest articles
 
 ::: {#newest-articles}
+:::
+
+::: {.ai-actions}
+[All articles](articles/index.qmd){.btn .btn-outline-primary}
+:::
+
+## Start here
+
+::: {#start-here}
 :::
 
 ## Handbooks
