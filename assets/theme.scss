@@ -152,7 +152,9 @@ main img, img.figure-img {
 
 /* ---------- title block ---------- */
 #title-block-header .quarto-categories .quarto-category,
-.quarto-title .quarto-categories .quarto-category {
+.quarto-title .quarto-categories .quarto-category,
+.quarto-categories .ai-title-category {
+  display: inline-block;
   text-transform: none;
   font-size: 0.8125rem;
   letter-spacing: 0;
@@ -162,8 +164,10 @@ main img, img.figure-img {
   border: 1px solid var(--ai-border-strong);
   border-radius: 999px;
   padding: 0.1rem 0.6rem;
+  margin: 0 0.4rem 0.4rem 0;
 }
-.quarto-category a { color: inherit !important; }
+.quarto-category a, .ai-title-category a { color: inherit !important; text-decoration: none; }
+.ai-title-category a:hover, .ai-title-category a:focus-visible { text-decoration: underline; }
 #title-block-header .quarto-title-meta-heading,
 #title-block-header .quarto-title-meta-contents {
   color: var(--ai-muted);

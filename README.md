@@ -31,7 +31,7 @@ Run before every change is published:
 bash tools/checks/run.sh
 ```
 
-It runs the Nu HTML validator, checks every internal link and anchor, checks each page's title, language and footer, checks each article's title, teaser, preview image and license, and runs axe on every page at 1280 px in light mode and 375 px in dark mode, with a sideways-scroll check. Links to other sites are checked at each release with the [W3C Link Checker](https://validator.w3.org/checklink).
+It runs the Nu HTML validator, checks every internal link and anchor, checks each page's title, language and footer, checks each article's title, teaser, preview image and license, and runs axe on every page at 1280 px in light mode and 375 px in dark mode. It fails on any sideways scroll, script error or failed request. Links to other sites are checked at each release with the [W3C Link Checker](https://validator.w3.org/checklink).
 
 ## Layout
 

@@ -10,3 +10,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Files the Claude desktop app saves into this folder; not part of the site
+Claude outputs/

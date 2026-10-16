@@ -16,6 +16,7 @@ Quarto writes the site into docs/. This script then makes five kinds of change:
 Every change is idempotent: running the script twice changes nothing the second time.
 Python standard library, plus Pagefind from tools/package.json.
 """
+import html
 import json
 import math
 import os
@@ -23,6 +24,7 @@ import re
 import subprocess
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import quote
 
 SITE = "AI+ by John Fisher"
 SITE_URL = "https://johnfisher-ai.github.io"
@@ -151,6 +153,14 @@ def fix_page(f: Path, s: str, minutes: dict) -> str:
     s = s.replace(' append-hash="true"', "")
     s = re.sub(r'<div class="sourceCode([^"]*)" id="(cb\d+)">',
                r'<div class="sourceCode\1" id="\2" tabindex="0" role="region" aria-label="Code">', s)
+    # List.js throws on a listing with no items yet; skip starting it until the first item exists
+    s = s.replace("if (!listingTargetEl) {", "if (!listingTargetEl || !listingTargetEl.children.length) {")
+    # Quarto writes the site-root offset only when its own search is on; its scripts need it to find
+    # listings.json (which turns category chips into links)
+    if 'name="quarto:offset"' not in s:
+        depth = len(f.relative_to(OUT).parts) - 1
+        offset = "/" if f.name == "404.html" else ("./" if depth == 0 else "../" * depth)
+        s = s.replace("</head>", f'<meta name="quarto:offset" content="{offset}">\n</head>', 1)
     if "quarto-listing-category" in s:
         s = s.replace('<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">',
                       '<div id="quarto-margin-sidebar" class="sidebar margin-sidebar" role="complementary" aria-label="Filter by category">')
@@ -166,10 +176,17 @@ def fix_page(f: Path, s: str, minutes: dict) -> str:
         return m.group(0)
     s = re.sub(r'(<span class="ai-reading" data-path="([^"]*)">)(?:.*?)(</span>)', card, s)
 
-    # 5. Category chips on article and guide pages
+    # 5. Category chips on article and guide pages link to the Articles or Guides & Labs filter.
+    #    Built here rather than by Quarto's script, which links them to the home page when a reader
+    #    arrives without a referrer, and which needs listings.json at a path it cannot find.
     if is_item_page(f):
         section = f.relative_to(OUT).parts[0]
-        s = re.sub(r'(<div class="quarto-category"><a href=")[^"#]*(#category=)', r"\1/" + section + r"/\2", s)
+
+        def chip(m):
+            label = html.unescape(m.group(1))
+            return (f'<div class="ai-title-category"><a href="/{section}/#category={quote(label, safe="")}">'
+                    f'{m.group(1)}</a></div>')
+        s = re.sub(r'<div class="quarto-category">([^<]*)</div>', chip, s)
 
     # 6. Search: Pagefind indexes each page's main content, without the endnotes or the call-to-action box
     if address not in ("/404.html", "/search/"):
