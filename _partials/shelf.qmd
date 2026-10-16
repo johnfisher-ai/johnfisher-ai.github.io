@@ -1,0 +1,40 @@
+::: {.ai-panels}
+
+::: {.ai-panel}
+[Published · Edition 2026.1, October 2026]{.ai-status}
+
+### The AI Control Plane Handbook
+
+A vendor-neutral handbook on the enterprise AI control plane: architecture, orchestration, trust and security, a north-star reference architecture, and a 12- to 24-month plan with value at every phase.
+
+::: {.ai-links}
+[Read the handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/){.btn .btn-primary}
+[Executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/)
+[Assessment toolkit](https://johnfisher-ai.github.io/ai-control-plane-handbook/toolkit/)
+[Quantum briefing](https://johnfisher-ai.github.io/ai-control-plane-handbook/quantum/)
+:::
+:::
+
+::: {.ai-panel}
+[Hands-on]{.ai-status}
+
+### Statistics, Data Science and AI: A Visual Handbook
+
+A visual handbook on statistics and data science. Its chapter pages pair with Python notebooks you can read online or run in Colab.
+
+::: {.ai-links}
+[Open the handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/){.btn .btn-primary}
+:::
+:::
+
+::: {.ai-panel .ai-panel-next}
+[Coming next]{.ai-status}
+
+### More handbooks
+
+- Data Science
+- Statistics
+- AI and Python Development Trends
+:::
+
+:::

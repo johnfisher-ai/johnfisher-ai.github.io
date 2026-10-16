@@ -1,0 +1,34 @@
+---
+title: "Search"
+description: "Search the articles, guides and pages on AI+."
+include-in-header:
+  text: '<link rel="stylesheet" href="/pagefind/pagefind-ui.css">'
+---
+
+```{=html}
+<div id="search" class="site-search"></div>
+<noscript><p>Search needs JavaScript. Without it, browse the <a href="/articles/">articles</a>, the <a href="/guides/">guides and labs</a> or the <a href="/handbooks/">handbooks</a>.</p></noscript>
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    var ui = new PagefindUI({
+      element: '#search',
+      baseUrl: '/',
+      showSubResults: true,
+      showImages: false,
+      autofocus: true,
+      translations: { placeholder: 'Search AI+' }
+    });
+    (function label() {
+      var input = document.querySelector('#search input');
+      if (input) { input.setAttribute('aria-label', 'Search AI+'); } else { window.requestAnimationFrame(label); }
+    })();
+    var q = new URLSearchParams(window.location.search).get('q');
+    if (q) { ui.triggerSearch(q); }
+  });
+</script>
+```
+
+[Search covers this site. The handbooks have their own search on their own sites.]{.ai-small}
+
+[Search by [Pagefind](https://pagefind.app/), used under the [MIT License](/assets/licenses/pagefind-LICENSE.txt). It runs in your browser: nothing you type is sent anywhere.]{.ai-small}

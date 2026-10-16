@@ -1,0 +1,18 @@
+---
+title: "Articles"
+description: "Each article makes one argument you can use, gives its sources as numbered endnotes, and points to the handbook, chapter, guide or study it comes from."
+reading-time: false
+listing:
+  id: articles
+  contents: "*/index.qmd"
+  template: ../assets/cards.ejs
+  template-params:
+    heading: 2
+    empty: "The first articles are on their way. Follow on LinkedIn to see each one as it's published."
+  sort: "date desc"
+  categories: true
+  filter-ui: true
+  sort-ui: false
+  feed:
+    title: "AI+ by John Fisher: articles"
+---

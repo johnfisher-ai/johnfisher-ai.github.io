@@ -1,0 +1,3 @@
+# Build tools for AI+. Quarto is pinned because tools/postrender.py adjusts its output.
+quarto-cli==1.10.19
+jupyter

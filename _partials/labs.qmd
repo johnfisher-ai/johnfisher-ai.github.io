@@ -1,0 +1,30 @@
+::: {.ai-panels}
+
+::: {.ai-panel .ai-panel-lab}
+[Visual guides and Colab notebooks]{.ai-status}
+
+### Python, Visually
+
+A library of Python guides, each a set of numbered notebooks that open in Colab with nothing to install. The guides from the language basics through files, APIs, testing and databases are complete, and more library guides are planned.
+
+::: {.ai-links}
+[Open Python, Visually](https://johnfisher-ai.github.io/Python-Visual-Guides/){.btn .btn-primary}
+:::
+:::
+
+::: {.ai-panel .ai-panel-lab}
+[Code you can run]{.ai-status}
+
+### A config-driven agent network
+
+A broker sends each question to specialist agents and holds risky answers at a human approval gate. The roster, the prompts and every agent's reply live in one XML file, so the network is data, not code.
+
+A live run needs your own OpenAI API key and costs a fraction of a cent a question. Its 19 tests run against a stub model, with no key and no cost.
+
+::: {.ai-links}
+[Read the write-up](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/){.btn .btn-primary}
+[Code on GitHub](https://github.com/johnfisher-ai/fisher-agentic-network-langgraph)
+:::
+:::
+
+:::

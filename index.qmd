@@ -1,0 +1,40 @@
+---
+title: "AI+"
+subtitle: "AI, plus the data science, math, statistics and Python behind it."
+pagetitle: "AI+ by John Fisher"
+description: "Articles, handbooks, guides and labs by John Fisher on AI, data science, statistics and Python."
+body-classes: home
+listing:
+  - id: newest-articles
+    contents: "articles/*/index.qmd"
+    template: assets/cards.ejs
+    template-params:
+      heading: 3
+      empty: "The first articles are on their way. Follow on LinkedIn to see each one as it's published."
+    sort: "date desc"
+    max-items: 4
+---
+
+::: {.ai-intro}
+I'm John Fisher. I help enterprises architect the data foundation that AI depends on, and I'm also a statistician. AI+ is where I write about both, with handbooks to read and labs you can run.
+:::
+
+::: {.ai-actions}
+[Follow on LinkedIn](https://www.linkedin.com/in/johnrfisher){.btn .btn-primary}
+[Connect on LinkedIn](https://www.linkedin.com/in/johnrfisher){.btn .btn-outline-primary}
+:::
+
+## Newest articles
+
+::: {#newest-articles}
+:::
+
+## Handbooks
+
+{{< include /_partials/shelf.qmd >}}
+
+## Guides & Labs
+
+Short guides say why a skill matters, then send you to a visual guide or a notebook you can run in Colab.
+
+[Go to Guides & Labs](guides/index.qmd){.btn .btn-outline-primary}

@@ -1,0 +1,8 @@
+---
+title: "Handbooks"
+description: "Long-form handbooks by John Fisher. Each lives on its own site, with its own contents and search; this shelf links to them."
+---
+
+## On the shelf
+
+{{< include /_partials/shelf.qmd >}}

@@ -1,0 +1,75 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "**/*.qmd"
+  resources:
+    - .nojekyll
+    - favicon.ico
+    - robots.txt
+    - assets/fonts/
+    - assets/img/
+    - assets/licenses/
+  post-render:
+    - tools/postrender.py
+
+website:
+  title: "AI+ by John Fisher"
+  description: "AI, plus the data science, math, statistics and Python behind it. Articles, handbooks, guides and labs by John Fisher."
+  site-url: https://johnfisher-ai.github.io/
+  favicon: assets/img/favicon.svg
+  image: assets/img/social-card.png
+  open-graph: true
+  twitter-card: true
+  search: false
+  navbar:
+    logo: assets/img/mark.svg
+    logo-alt: "AI+ by John Fisher, home"
+    title: false
+    left:
+      - href: index.qmd
+        text: Home
+      - href: handbooks/index.qmd
+        text: Handbooks
+      - href: articles/index.qmd
+        text: Articles
+      - href: guides/index.qmd
+        text: "Guides & Labs"
+      - href: about/index.qmd
+        text: About
+    right:
+      - href: search/index.qmd
+        text: Search
+        icon: search
+      - href: https://www.linkedin.com/in/johnrfisher
+        text: "Follow on LinkedIn"
+        icon: linkedin
+  page-footer:
+    left: |
+      John Fisher works for Salesforce. The views here are his own, not Salesforce's, and are drawn from public information; this site is not affiliated with or endorsed by Salesforce. Product names are trademarks of their owners.
+
+      Writing is licensed CC BY 4.0 unless an article says otherwise; code is MIT. [Licenses](/about/#licenses).
+    right:
+      - text: "Articles feed"
+        href: articles/index.xml
+      - text: "Guides feed"
+        href: guides/index.xml
+
+language:
+  title-block-modified: "Last checked"
+  section-title-references: "Endnotes"
+
+format:
+  html:
+    theme: [default, assets/theme.scss]
+    css: assets/css/fonts.css
+    lang: en
+    toc: false
+    html-math-method: mathml
+    citations-hover: false
+    footnotes-hover: false
+    csl: assets/endnotes.csl
+    include-in-header: _partials/head.html
+
+execute:
+  freeze: auto

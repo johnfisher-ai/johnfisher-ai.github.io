@@ -1,0 +1,8 @@
+{
+  "name": "ai-plus-build",
+  "private": true,
+  "description": "Build tools for AI+: Pagefind indexes the rendered site for search",
+  "dependencies": {
+    "pagefind": "1.4.0"
+  }
+}

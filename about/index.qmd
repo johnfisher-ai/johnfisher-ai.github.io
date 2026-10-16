@@ -1,0 +1,45 @@
+---
+title: "About"
+description: "Who writes AI+, how it's licensed, and how to cite it."
+---
+
+I'm John Fisher. At Salesforce, I help enterprises architect the data foundation that AI depends on: MuleSoft for integration and APIs, Informatica for data management, and the MCP and A2A protocols that connect agents to tools, data and each other. Before Salesforce, I spent fourteen years at TIBCO leading solution engineering for enterprise accounts. Across both companies, my work has sat where enterprise architecture, integration and data meet business strategy.
+
+I'm also a statistician. I hold a master's in computer science and mathematics from Drexel University and a master's in applied statistics and data science from West Chester University of Pennsylvania. At the West Chester Statistical Institute, I lead the statistical analysis for research teams publishing peer-reviewed studies. And I'm building Aethos, an open-source, AI-first programming language for data cleaning, machine learning and AI.
+
+## What AI+ covers {#covers}
+
+AI+ is the home for my writing. The articles work through what happens when AI agents move past experiments and start acting across real enterprise systems, and through the statistics, data science and Python that decide whether an AI result holds up. Each article makes one argument, gives its sources as numbered endnotes, and points to the handbook, chapter, guide or study it comes from.
+
+The [Handbooks](/handbooks/) shelf and [Guides & Labs](/guides/) link to my other sites, where the handbooks, visual guides and notebooks live.
+
+Some of what I write names Salesforce, MuleSoft or Informatica technology. It's the technology I know most deeply, so it's often the quickest way to make an idea concrete. I use it as one example of a broader pattern, not as the only answer, and the target architectures I start from are vendor-neutral by design.
+
+## Disclosure {#disclosure}
+
+John Fisher works for Salesforce. The views here are his own, not Salesforce's, and are drawn from public information; this site is not affiliated with or endorsed by Salesforce. Product names are trademarks of their owners.
+
+Some of these ideas are settled; others are still taking shape, and I expect to revise them as the technology and the standards change. Each article shows the date its facts were last checked.
+
+## Licenses {#licenses}
+
+- **Articles and guide articles:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You may share and adapt them, including commercially, as long as you credit the source.
+- **Articles drawn from *The AI Control Plane Handbook*:** [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/), the handbook's own license. You may share them with credit, but not commercially and not in a changed form.
+- Each article names its license under "Reuse", at its end.
+- **The code that builds this site:** the [MIT License](https://github.com/johnfisher-ai/johnfisher-ai.github.io/blob/main/LICENSE-CODE).
+- The handbooks and labs on my other sites keep their own licenses.
+- The AI+ name and mark are not covered by these licenses.
+
+## How to cite {#cite}
+
+Cite an article by author, title, site, date and address. For example:
+
+> Fisher, John. "Article title." *AI+ by John Fisher*, date published. https://johnfisher-ai.github.io/articles/article-address/
+
+## Privacy {#privacy}
+
+This site sets no cookies and runs no analytics or tracking scripts.
+
+## Contact {#contact}
+
+If you see things differently, or have seen something work in practice, I'd like to hear from you on LinkedIn: [linkedin.com/in/johnrfisher](https://www.linkedin.com/in/johnrfisher).

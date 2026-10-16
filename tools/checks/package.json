@@ -1,0 +1,11 @@
+{
+  "name": "ai-plus-checks",
+  "private": true,
+  "description": "Accessibility and HTML checks for the rendered AI+ site in docs/",
+  "type": "module",
+  "dependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "playwright-core": "1.56.0",
+    "vnu-jar": "26.9.30"
+  }
+}

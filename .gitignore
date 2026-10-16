@@ -1,0 +1,12 @@
+# Quarto working files
+/.quarto/
+/_site/
+**/*.quarto_ipynb
+
+# Python and tooling
+__pycache__/
+/tools/node_modules/
+/tools/checks/node_modules/
+
+# macOS
+.DS_Store

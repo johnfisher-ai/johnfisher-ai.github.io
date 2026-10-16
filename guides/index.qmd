@@ -1,0 +1,26 @@
+---
+title: "AI guides and hands-on labs"
+pagetitle: "Guides & Labs"
+description: "Short guides say why a skill matters, then send you to a visual guide or a notebook you can run in Colab."
+reading-time: false
+listing:
+  id: guides
+  contents: "*/index.qmd"
+  template: ../assets/cards.ejs
+  template-params:
+    heading: 2
+    empty: "The first guide articles are on their way. The labs below are open now."
+  sort: "date desc"
+  categories: true
+  filter-ui: true
+  sort-ui: false
+  feed:
+    title: "AI+ by John Fisher: guides"
+---
+
+::: {#guides}
+:::
+
+## Where the labs live
+
+{{< include /_partials/labs.qmd >}}

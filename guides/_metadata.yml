@@ -1,0 +1,6 @@
+# Applies to every guide article in this folder. Each guide still sets its own license in its front matter.
+reading-time: true
+template-partials:
+  - ../assets/partials/title-metadata.html
+filters:
+  - ../tools/filters/cta.lua

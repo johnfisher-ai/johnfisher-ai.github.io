@@ -1,0 +1,12 @@
+---
+title: "Page not found"
+---
+
+There's no page at this address. Check the link, or try one of these:
+
+- [Home](/)
+- [Articles](/articles/)
+- [Guides & Labs](/guides/)
+- [Handbooks](/handbooks/)
+
+You can also search the site from the top bar.

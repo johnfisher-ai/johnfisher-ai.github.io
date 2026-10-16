@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AI+ endnotes: superscript numbers in order of first citation; each endnote prints its title field as written. -->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+  <info>
+    <title>AI+ endnotes</title>
+    <id>https://johnfisher-ai.github.io/assets/endnotes.csl</id>
+    <updated>2026-10-15T00:00:00+00:00</updated>
+  </info>
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout vertical-align="sup" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <bibliography second-field-align="flush">
+    <layout>
+      <text variable="citation-number" suffix=". "/>
+      <text variable="title"/>
+      <text variable="URL" prefix=" "/>
+    </layout>
+  </bibliography>
+</style>
