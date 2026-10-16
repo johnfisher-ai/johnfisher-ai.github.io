@@ -1,0 +1,55 @@
+---
+title: "88.7% accurate and missing almost every case"
+description: "A survey model scored 88.7% accuracy by answering no to almost everyone. Judge a classifier against its base rate, and read recall and kappa too."
+draft: true
+date-modified: 2026-10-16
+categories: [CIO, Analyst, Data Scientist, Machine learning]
+source: "NSDUH study"
+image: card.png
+image-alt: "A card showing a model that is 88.7% accurate yet finds only 2.7% of the people with depression at its default cut-off."
+license: "CC BY"
+cta-source: "Read [chapter 115 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html) and [run its notebook yourself](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/model-evaluation.ipynb)."
+references:
+  - id: nsduh-analysis
+    type: webpage
+    title: "John Fisher, “The Statistical Analysis,” in *Depression and Substance Use in the NSDUH*, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
+  - id: vb-ch115
+    type: webpage
+    title: "John Fisher, “Model Evaluation,” chapter 115 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html
+---
+
+A model built to predict depression from seven survey measures reached 88.7% accuracy on 134,897 adults. At its default setting it flagged 805 of them, although about one in nine had reported a depressive episode, so nearly all of its accuracy came from answering "no".[@nsduh-analysis] Accuracy alone could not tell that model apart from a useful one.
+
+## Accuracy rewards the majority answer
+
+In the analysis sample, 119,664 adults reported no depressive episode and 15,233 did, so a model that always answers "no" is right 88.7% of the time.[@nsduh-analysis] The penalised logistic regression in the analysis matched that score at the default cut-off of 0.50, and its Cohen's kappa was 0.04, effectively zero.[@nsduh-analysis] Kappa measures agreement beyond what chance alone would produce, which is why it exposed what the accuracy figure hid. A kappa near zero means the model agreed with the truth about as often as chance would, given how rare the outcome is.
+
+The model itself carried real signal. Its AUC of 0.7406 means it ranked a randomly chosen person with depression above a randomly chosen person without it about three times in four.[@nsduh-analysis] The failure was in the decision rule, because the default cut-off of 0.50 sat far above the probabilities the model gives for an outcome this rare. AUC judges the ranking across every possible cut-off, and accuracy judges a single one, which is how the two can disagree so sharply.
+
+| Cut-off | Depressed adults found | Precision | Kappa | Adults flagged |
+|---|---|---|---|---|
+| 0.50 | 2.7% | 50.8% | 0.040 | 805 (1%) |
+| 0.30 | 15.8% | 37.5% | 0.167 | 6,421 (5%) |
+| 0.20 | 39.0% | 29.0% | 0.233 | 20,496 (15%) |
+| 0.15 | 54.2% | 24.2% | 0.212 | 34,070 (25%) |
+| 0.10 | 73.5% | 19.6% | 0.160 | 56,950 (42%) |
+
+: One model at five cut-offs, with the same AUC at every one[@nsduh-analysis]
+
+Lowering the cut-off to 0.20 finds 39% of the people with depression, at the cost of flagging 15% of everyone for a closer look.[@nsduh-analysis] At that cut-off, 29% of the people flagged have depression, so about seven in ten flags are false alarms.[@nsduh-analysis] That rate suits a quick follow-up question and would be far too high for anything costly or intrusive. Which row is right depends on what happens to a person the model flags, and a cheap follow-up justifies a lower threshold than a costly intervention does.
+
+The outcome is rare enough that people without depression outnumber those with it by 7.86 to 1. Class weighting and resampling, the other standard responses to imbalance, move the model along the same trade-off without adding information, so a team still has to choose where on the curve to sit.[@nsduh-analysis]
+
+The Visual Handbook's chapter on model evaluation shows the same pattern with fraud, where a model that labels every transaction legitimate is 87% accurate and catches no fraud at all.[@vb-ch115] Any outcome that is rare enough produces the same illusion, from fraud and equipment failure to an agent's request that needs a human to review it.
+
+## What to do next
+
+1. **CIO.** Ask for the base rate with every accuracy figure, and for the share of the cases that matter that the model actually finds.
+2. **Analyst.** Report recall, precision and kappa beside accuracy for any classifier whose positive class is rare.
+3. **Data Scientist.** Set the cut-off from the cost of each kind of error, and show the people who will use the model a table like the one above before they choose.
+
+## Go deeper
+
+[The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) shows the classifier, every cut-off and the code behind them. [Chapter 115 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html) covers the confusion matrix, precision and recall, the threshold and the precision-recall curve, with a notebook to run.

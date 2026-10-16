@@ -1,0 +1,59 @@
+---
+title: "Every AI claim is a statistical claim"
+description: "A model's accuracy, a pilot's savings and a survey's headline are all estimates from a sample. Three questions show whether each one holds up."
+draft: true
+date-modified: 2026-10-16
+categories: [CIO, CTO, Analyst, Statistics]
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card headed Every AI claim is a statistical claim, listing three questions to ask of any AI number: compared with what, measured on whom, and how sure."
+license: "CC BY"
+cta-source: "Read [chapter 2 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html) and [run its notebook yourself](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/statistics-data-science-and-ai.ipynb)."
+references:
+  - id: nsduh-analysis
+    type: webpage
+    title: "John Fisher, “The Statistical Analysis,” in *Depression and Substance Use in the NSDUH*, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
+  - id: vb-ch2
+    type: webpage
+    title: "John Fisher, “Statistics, Data Science & AI,” chapter 2 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html
+  - id: vb-ch74
+    type: webpage
+    title: "John Fisher, “Margin of Error,” chapter 74 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html
+---
+
+Every claim made for an AI system is a statistical claim. An accuracy rate, the savings from a pilot and the share of customers who would use a new agent are all estimates from a sample, and every estimate carries error. In my analysis of a national health survey, one model was 88.7% accurate and still found almost none of the people it was built to find,[@nsduh-analysis] which is the kind of number that statistics exists to catch.
+
+## What the plus in AI+ stands for
+
+The site's name reads as AI, plus the data science, math, statistics and Python behind it. The Visual Handbook's second chapter sets out how those parts fit: statistics makes sense of data, machine learning learns patterns to predict, and data science combines the two with code and domain knowledge to deliver something useful.[@vb-ch2] Statistics asks why a pattern exists, and machine learning asks what comes next.[@vb-ch2]
+
+Statistics runs through every stage of an AI system, from collecting the right data to measuring whether the system works once it is live.[@vb-ch2] A large language model is the clearest case, because it writes by estimating the probability of each possible next word and choosing a likely one.[@vb-ch2] When a vendor or a team reports a number about such a system, the number is a statistic, and it can be tested like one.
+
+## Questions that test an AI number
+
+Three questions catch most of the ways a number misleads. The survey analysis shows each failure on real data, drawn from 134,897 adults in three years of the National Survey on Drug Use and Health.[@nsduh-analysis]
+
+| Question | What goes wrong without it | What it looked like in the survey analysis |
+|---|---|---|
+| Compared with what? | An accuracy rate can reflect how rare the outcome is more than how good the model is | 88.7% of adults reported no depressive episode, so a model that answered "no" to almost everyone scored 88.7% accuracy |
+| Measured on whom? | A sample that over-represents some groups misstates the population | Unweighted, 11.29% reported a past-year depressive episode, and weighted to the population the figure was 8.44% |
+| How sure? | Ignoring how the sample was drawn makes estimates look more precise than they are | Standard errors that respect the survey design were 1.74 to 1.96 times larger, so naive intervals were about half as wide as they should be |
+
+: Three questions to ask of any AI number, with the failure each one caught in a real analysis
+
+The same discipline applies to the model's own scorecard. A model's accuracy is a proportion, so it carries a margin of error exactly as a poll does.[@vb-ch74] That margin shrinks with the square root of the test set, which means halving it takes four times as many labeled examples.[@vb-ch74] A leaderboard number reported without its margin tells you less than it appears to.
+
+None of the three questions needs advanced mathematics. Each needs a habit of asking before a number goes into a decision, and each has a standard answer that a careful analyst can produce.
+
+## What to do next
+
+1. **CIO.** Ask for the baseline with every accuracy figure, meaning the score of a model that always gives the most common answer.
+2. **CTO.** Require a margin of error, and the sample behind it, on any model metric that decides whether a system ships.
+3. **Analyst.** When a sample over-represents some groups, report the figure weighted to the population and say which figure answers the question being asked.
+
+## Go deeper
+
+[Chapter 2 of *Statistics, Data Science and AI: A Visual Handbook*](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html) maps how statistics, machine learning and data science fit together, with a notebook you can run. [The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) works through all three questions on one dataset, with the code behind every figure.

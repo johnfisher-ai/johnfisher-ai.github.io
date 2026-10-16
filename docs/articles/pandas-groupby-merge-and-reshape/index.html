@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it.">
+
+<title>pandas groupby, merge and reshape without surprises · AI+ by John Fisher</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-14aa6f31fa32b3bb09cabdffe385851c.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<meta name="theme-color" content="#0F172A">
+<meta name="author" content="John Fisher">
+<meta name="quarto:status" content="draft">
+
+
+<link rel="stylesheet" href="../../assets/css/fonts.css">
+<meta property="og:title" content="pandas groupby, merge and reshape without surprises">
+<meta property="og:description" content="Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it.">
+<meta property="og:image" content="https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/card.png">
+<meta property="og:site_name" content="AI+ by John Fisher">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:alt" content="A code card listing three pandas defaults to watch: groupby drops missing keys, merge multiplies rows on a repeated key, and pivot_table averages duplicates.">
+<meta name="twitter:title" content="pandas groupby, merge and reshape without surprises">
+<meta name="twitter:description" content="Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it.">
+<meta name="twitter:image" content="https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/card.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:image:alt" content="A code card listing three pandas defaults to watch: groupby drops missing keys, merge multiplies rows on a repeated key, and pivot_table averages duplicates.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/">
+<meta property="og:url" content="https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/">
+<meta property="og:type" content="article">
+<meta name="quarto:offset" content="../../">
+<meta name="robots" content="noindex">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+<a class="skip-link" href="#quarto-document-content">Skip to content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo light-content">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../handbooks/"> 
+<span class="menu-text">Handbooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../articles/"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guides/"> 
+<span class="menu-text">Guides &amp; Labs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../search/"> <i class="bi bi-search" aria-hidden="true">
+</i> 
+<span class="menu-text">Search</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/johnrfisher"> <i class="bi bi-linkedin" aria-hidden="true">
+</i> 
+<span class="menu-text">Follow on LinkedIn</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">pandas groupby, merge and reshape without surprises</h1>
+  <div class="quarto-categories">
+    <div class="ai-title-category"><a href="/articles/#category=Analyst">Analyst</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=Developer">Developer</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=Python">Python</a></div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it.
+  </div>
+</div>
+
+<!-- Quarto 1.10.19 title-metadata.html, with a reading-time field filled in by tools/postrender.py -->
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Last checked</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 16, 2026</p>
+    </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Reading time</div>
+    <div class="quarto-title-meta-contents">
+      <p class="ai-reading">4 min</p>
+    </div>
+  </div>
+  
+  </div>
+  
+
+
+</header>
+
+
+<p>Most data analysis in Python runs through three pandas operations: grouping, merging and reshaping. The Visual Handbook’s chapter on Python for data analysis teaches all three on an online store’s order log.<span class="citation" data-cites="vb-ch151"><sup><a href="#ref-vb-ch151" role="doc-biblioref">1</a></sup></span> Each one has a default that can change a result without raising an error, and each has an argument that turns the surprise into a check.</p>
+<section id="defaults-that-change-your-numbers-silently" class="level2">
+<h2 class="anchored" data-anchor-id="defaults-that-change-your-numbers-silently">Defaults that change your numbers silently</h2>
+<p>The code below shows all three on tables small enough to check by eye. It runs as written on pandas 3.0.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" tabindex="0" role="region" aria-label="Code"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. groupby leaves out rows whose key is missing</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>orders <span class="op">=</span> pd.DataFrame({<span class="st">"region"</span>: [<span class="st">"East"</span>, <span class="st">"West"</span>, <span class="va">None</span>], <span class="st">"revenue"</span>: [<span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>]})</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>orders.groupby(<span class="st">"region"</span>)[<span class="st">"revenue"</span>].<span class="bu">sum</span>()                <span class="co"># East 100, West 200, and the 300 is gone</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>orders.groupby(<span class="st">"region"</span>, dropna<span class="op">=</span><span class="va">False</span>)[<span class="st">"revenue"</span>].<span class="bu">sum</span>()  <span class="co"># keeps a missing-region group of 300</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. merge multiplies rows when a key repeats where you expected it once</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>rates <span class="op">=</span> pd.DataFrame({<span class="st">"region"</span>: [<span class="st">"East"</span>, <span class="st">"East"</span>, <span class="st">"West"</span>], <span class="st">"rate"</span>: [<span class="fl">0.10</span>, <span class="fl">0.20</span>, <span class="fl">0.30</span>]})</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>orders.merge(rates, on<span class="op">=</span><span class="st">"region"</span>, how<span class="op">=</span><span class="st">"left"</span>)             <span class="co"># 4 rows from 3 orders</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>orders.merge(rates, on<span class="op">=</span><span class="st">"region"</span>, how<span class="op">=</span><span class="st">"left"</span>, validate<span class="op">=</span><span class="st">"many_to_one"</span>)  <span class="co"># raises MergeError</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. pivot_table averages duplicate cells unless you choose the function</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> pd.DataFrame({<span class="st">"store"</span>: [<span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>], <span class="st">"month"</span>: [<span class="st">"Jan"</span>] <span class="op">*</span> <span class="dv">3</span>, <span class="st">"units"</span>: [<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">5</span>]})</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sales.pivot_table(index<span class="op">=</span><span class="st">"store"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"units"</span>)                 <span class="co"># A shows 20.0</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sales.pivot_table(index<span class="op">=</span><span class="st">"store"</span>, columns<span class="op">=</span><span class="st">"month"</span>, values<span class="op">=</span><span class="st">"units"</span>, aggfunc<span class="op">=</span><span class="st">"sum"</span>)  <span class="co"># A shows 40</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Grouping drops rows whose key is missing by default, so the group totals stop adding up to the column total.<span class="citation" data-cites="pandas-groupby"><sup><a href="#ref-pandas-groupby" role="doc-biblioref">2</a></sup></span> Pass <code>dropna=False</code> when a missing key should appear as a group of its own, which it usually should in a report.</p>
+<p>A merge returns one row for every matching pair of keys. When a lookup table repeats a key that should be unique, every order that matches it is duplicated, and every total built on the result grows with it. The <code>validate</code> argument states the relationship you expect, such as <code>"many_to_one"</code>, and raises an error when the data disagrees, while <code>indicator=True</code> adds a column that shows which rows found a match.<span class="citation" data-cites="pandas-merge"><sup><a href="#ref-pandas-merge" role="doc-biblioref">3</a></sup></span></p>
+<p><code>pivot_table</code> combines cells that share an index and a column with the mean by default, so two orders of 10 and 30 units appear as 20.<span class="citation" data-cites="pandas-pivot-table"><sup><a href="#ref-pandas-pivot-table" role="doc-biblioref">4</a></sup></span> Name the function with <code>aggfunc</code>, or use <code>pivot</code>, which raises an error when it meets duplicates.</p>
+<p>None of the three raises a warning, because each behaves exactly as documented. The damage shows up later, as a total that no longer matches the source system or a dashboard that drifts after a supplier adds a duplicate row to a reference file.</p>
+<p>The pattern repeats across all three operations. pandas picks a reasonable default, the default hides a problem in the data, and one argument brings the problem into view, at the cost of a few characters. A plain check catches what the arguments miss, because comparing the row count and the column total before and after each step shows at once when a step has added or lost data.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Analyst.</strong> Check that group totals add back to the column total after every <code>groupby</code>, and pass <code>dropna=False</code> whenever missing keys matter.</li>
+<li><strong>Developer.</strong> Give every <code>merge</code> a <code>validate</code> argument, and use <code>indicator=True</code> while you develop to see which rows failed to match.</li>
+<li><strong>Analyst and Developer.</strong> Name <code>aggfunc</code> in every <code>pivot_table</code>, and count rows before and after each merge and reshape in your tests.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">Chapter 151 of the Visual Handbook</a> covers Python, NumPy, pandas, reshaping and charts across five notebooks, from a raw order log to a finished chart. Its fourth notebook works through groupby, merges, <code>pivot_table</code> and <code>melt</code> on real data.</p>
+
+
+<div class="cta" aria-label="Follow and connect" role="note">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">chapter 151 of the Visual Handbook</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/python-for-data-analysis--4-reshaping-and-aggregation.ipynb">run its reshaping notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-vb-ch151" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Python for Data Analysis,” chapter 151 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html</a></div>
+</div>
+<div id="ref-pandas-groupby" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">pandas development team, “pandas.DataFrame.groupby,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html</a></div>
+</div>
+<div id="ref-pandas-merge" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">pandas development team, “pandas.merge,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html">https://pandas.pydata.org/docs/reference/api/pandas.merge.html</a></div>
+</div>
+<div id="ref-pandas-pivot-table" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">pandas development team, “pandas.pivot_table,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html">https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/johnfisher-ai\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>John Fisher works for Salesforce. The views here are his own, not Salesforce’s, and are drawn from public information; this site is not affiliated with or endorsed by Salesforce. Product names are trademarks of their owners.</p>
+<p>Writing is licensed CC BY 4.0 unless an article says otherwise; code is MIT. <a href="../../about/#licenses">Licenses</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../articles/index.xml">
+<p>Articles feed</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../guides/index.xml">
+<p>Guides feed</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

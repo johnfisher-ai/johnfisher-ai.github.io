@@ -1,0 +1,62 @@
+---
+title: "The same survey says 11.29% or 8.44%"
+description: "A national survey puts depression at 11.29% or 8.44%, depending on whether its weights are used. Check both before you quote a survey number."
+draft: true
+date-modified: 2026-10-16
+categories: [Analyst, CIO, Statistics]
+source: "NSDUH study"
+image: card.png
+image-alt: "A card comparing two figures from the same survey: 11.29% of respondents unweighted and 8.44% of adults weighted to the population."
+license: "CC BY"
+cta-source: "Read [the survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) and [run its notebook yourself](https://colab.research.google.com/github/johnfisher-ai/fisher-nsduh-analysis/blob/main/notebooks/nsduh_mde_analysis.ipynb)."
+references:
+  - id: nsduh-analysis
+    type: webpage
+    title: "John Fisher, “The Statistical Analysis,” in *Depression and Substance Use in the NSDUH*, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
+  - id: nsduh-overview
+    type: webpage
+    title: "John Fisher, *Depression and Substance Use in the NSDUH*, overview, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/
+  - id: vb-ch74
+    type: webpage
+    title: "John Fisher, “Margin of Error,” chapter 74 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html
+---
+
+The National Survey on Drug Use and Health asked 134,897 adults across 2022 to 2024 about depression, among much else.[@nsduh-analysis] Counted as they answered, 11.29% reported a past-year major depressive episode. Weighted to represent the adult population, the figure is 8.44%.[@nsduh-analysis] Both numbers come from the same people, and only the weighted one describes the country.
+
+## Why the weights move the number
+
+The survey is a stratified multistage probability sample. Some groups are over-sampled on purpose, so that estimates for them are precise enough to publish, and every respondent carries a weight saying how many people they represent.[@nsduh-overview] Young adults are among the over-sampled groups, and they report depression at much higher rates, so the unweighted figure overstates the national rate by about a third.[@nsduh-overview] A weight undoes the over-sampling. Each young adult counts for fewer people in the population than an older respondent does, so the young adults together count for their true share.
+
+| Measure | Unweighted | Weighted to the population |
+|---|---|---|
+| Major depressive episode, past year | 11.29% | 8.44% |
+| Marijuana, past month | 19.32% | 16.22% |
+| Alcohol, past month | 52.65% | 51.80% |
+| Cigarettes, past month | 14.34% | 14.86% |
+
+: Prevalence among adults, computed two ways from the same respondents[@nsduh-analysis]
+
+Depression and marijuana move most, and both are concentrated in younger adults, who are over-represented among respondents.[@nsduh-analysis] Cigarette use moves slightly the other way. The direction and the size of the shift depend on who was over-sampled and on how the measure varies across those groups, which is why no rule of thumb replaces computing both.
+
+Who is in the sample matters as much as how each person counts. The three survey years hold 174,407 respondents, and 34,875 of them are aged 12 to 17, who answer a different set of questions and were never asked the adult depression question.[@nsduh-analysis] They are a restriction on the population, so every figure in the analysis describes adults 18 and over.[@nsduh-analysis]
+
+## The margin of error moves too
+
+The design changes the precision of an estimate as well as the estimate itself. In the same analysis, standard errors that respect the survey's strata and replicates were 1.74 to 1.96 times larger than naive ones, so a confidence interval built without the design would be roughly half as wide as it should be.[@nsduh-analysis] With a sample this large, no conclusion reversed, but the reported precision would have been wrong.
+
+A margin of error measures precision and nothing more. It can be small on a sample that describes the wrong population, because it says how much an estimate would vary across repeated samples drawn the same way.[@vb-ch74] Weighting fixes who the estimate describes, and the design-based margin says how sure you can be.
+
+Survey numbers often lose this context on the way to a slide. A press release quotes one figure, a vendor deck repeats it, and by the time it supports a decision nobody can say whether it was weighted or how wide its interval was.
+
+## What to do next
+
+1. **Analyst.** Use the survey's weights and design variables, meaning its strata and its clusters or replicates, for every estimate you publish, and report the design-based margin of error with it.
+2. **Analyst.** When you show an unweighted figure while exploring the data, label it as describing respondents, and keep it out of any headline.
+3. **CIO.** Before a survey figure goes into a board paper, ask whether it was weighted and how wide its margin of error is.
+
+## Go deeper
+
+[The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) computes every descriptive figure both ways, with the R pipeline and a Python notebook behind it. [Chapter 74 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html) explains the margin of error and the three things that drive it, and [chapter 70](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html) designs and analyzes a survey from start to finish.

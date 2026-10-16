@@ -1,0 +1,74 @@
+---
+title: "pandas groupby, merge and reshape without surprises"
+description: "Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it."
+draft: true
+date-modified: 2026-10-16
+categories: [Analyst, Developer, Python]
+source: "Visual Handbook"
+image: card.png
+image-alt: "A code card listing three pandas defaults to watch: groupby drops missing keys, merge multiplies rows on a repeated key, and pivot_table averages duplicates."
+license: "CC BY"
+cta-source: "Read [chapter 151 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html) and [run its reshaping notebook yourself](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/python-for-data-analysis--4-reshaping-and-aggregation.ipynb)."
+references:
+  - id: vb-ch151
+    type: webpage
+    title: "John Fisher, “Python for Data Analysis,” chapter 151 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html
+  - id: pandas-groupby
+    type: webpage
+    title: "pandas development team, “pandas.DataFrame.groupby,” pandas documentation, accessed October 2026."
+    URL: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html
+  - id: pandas-merge
+    type: webpage
+    title: "pandas development team, “pandas.merge,” pandas documentation, accessed October 2026."
+    URL: https://pandas.pydata.org/docs/reference/api/pandas.merge.html
+  - id: pandas-pivot-table
+    type: webpage
+    title: "pandas development team, “pandas.pivot_table,” pandas documentation, accessed October 2026."
+    URL: https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html
+---
+
+Most data analysis in Python runs through three pandas operations: grouping, merging and reshaping. The Visual Handbook's chapter on Python for data analysis teaches all three on an online store's order log.[@vb-ch151] Each one has a default that can change a result without raising an error, and each has an argument that turns the surprise into a check.
+
+## Defaults that change your numbers silently
+
+The code below shows all three on tables small enough to check by eye. It runs as written on pandas 3.0.
+
+```python
+import pandas as pd
+
+# 1. groupby leaves out rows whose key is missing
+orders = pd.DataFrame({"region": ["East", "West", None], "revenue": [100, 200, 300]})
+orders.groupby("region")["revenue"].sum()                # East 100, West 200, and the 300 is gone
+orders.groupby("region", dropna=False)["revenue"].sum()  # keeps a missing-region group of 300
+
+# 2. merge multiplies rows when a key repeats where you expected it once
+rates = pd.DataFrame({"region": ["East", "East", "West"], "rate": [0.10, 0.20, 0.30]})
+orders.merge(rates, on="region", how="left")             # 4 rows from 3 orders
+orders.merge(rates, on="region", how="left", validate="many_to_one")  # raises MergeError
+
+# 3. pivot_table averages duplicate cells unless you choose the function
+sales = pd.DataFrame({"store": ["A", "A", "B"], "month": ["Jan"] * 3, "units": [10, 30, 5]})
+sales.pivot_table(index="store", columns="month", values="units")                 # A shows 20.0
+sales.pivot_table(index="store", columns="month", values="units", aggfunc="sum")  # A shows 40
+```
+
+Grouping drops rows whose key is missing by default, so the group totals stop adding up to the column total.[@pandas-groupby] Pass `dropna=False` when a missing key should appear as a group of its own, which it usually should in a report.
+
+A merge returns one row for every matching pair of keys. When a lookup table repeats a key that should be unique, every order that matches it is duplicated, and every total built on the result grows with it. The `validate` argument states the relationship you expect, such as `"many_to_one"`, and raises an error when the data disagrees, while `indicator=True` adds a column that shows which rows found a match.[@pandas-merge]
+
+`pivot_table` combines cells that share an index and a column with the mean by default, so two orders of 10 and 30 units appear as 20.[@pandas-pivot-table] Name the function with `aggfunc`, or use `pivot`, which raises an error when it meets duplicates.
+
+None of the three raises a warning, because each behaves exactly as documented. The damage shows up later, as a total that no longer matches the source system or a dashboard that drifts after a supplier adds a duplicate row to a reference file.
+
+The pattern repeats across all three operations. pandas picks a reasonable default, the default hides a problem in the data, and one argument brings the problem into view, at the cost of a few characters. A plain check catches what the arguments miss, because comparing the row count and the column total before and after each step shows at once when a step has added or lost data.
+
+## What to do next
+
+1. **Analyst.** Check that group totals add back to the column total after every `groupby`, and pass `dropna=False` whenever missing keys matter.
+2. **Developer.** Give every `merge` a `validate` argument, and use `indicator=True` while you develop to see which rows failed to match.
+3. **Analyst and Developer.** Name `aggfunc` in every `pivot_table`, and count rows before and after each merge and reshape in your tests.
+
+## Go deeper
+
+[Chapter 151 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html) covers Python, NumPy, pandas, reshaping and charts across five notebooks, from a raw order log to a finished chart. Its fourth notebook works through groupby, merges, `pivot_table` and `melt` on real data.
