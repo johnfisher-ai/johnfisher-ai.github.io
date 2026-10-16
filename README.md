@@ -76,15 +76,28 @@ Cite a source in the text with `[@short-key]`. Endnotes are numbered in order of
 
 The audience tags are CIO, CTO, CISO, Architect, Developer, AI Engineer, Analyst, Data Scientist and IT Operations, spelled exactly so.
 
-Guide articles follow the same pattern in `guides/<slug>/index.qmd`, with the level (Beginner, Intermediate or Advanced) among the categories and two buttons:
+Guide articles follow the same pattern in `guides/<slug>/index.qmd`. Their categories put the level (Beginner, Intermediate or Advanced) between the audiences and the topic, and two more fields give the time to complete the lab and its format, which the page and the card show in place of a reading time:
+
+```yaml
+categories: [Analyst, Developer, Data Scientist, Beginner, Machine learning]
+lab-time: "About an hour"
+lab-format: "Visual guide and Colab lab"
+```
+
+Each guide ends with two buttons, followed by the articles it puts into practice:
 
 ```markdown
-[Open the visual guide](https://...){.btn .btn-primary} [Open in Colab](https://...){.btn .btn-outline-primary}
+::: {.ai-actions}
+[Open the visual guide](https://...){.btn .btn-primary}
+[Open in Colab](https://...){.btn .btn-outline-primary}
+:::
 ```
+
+Link to another article or guide through its `index.qmd`, for example `[Title](../../articles/<slug>/index.qmd)`. While that piece is a draft, Quarto prints the link text without the link, so no page sends a reader to a Draft banner, and the link appears once the piece goes live.
 
 ## When a piece goes live
 
-A finished article or guide waits with `draft: true` until the day of its first LinkedIn post. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines. On the day, delete `draft: true`, add `date` and set `date-modified` to that day, then render and run the checks.
+A finished article or guide waits with `draft: true` until the day of its first LinkedIn post. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines. On the day, delete `draft: true`, add `date` and set `date-modified` to that day, then render and run the checks. When a guide goes live, its partner articles that are already live get a "Try it" line linking to the guide.
 
 ## Audience and topic pages
 

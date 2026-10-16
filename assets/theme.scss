@@ -173,6 +173,12 @@ main img, img.figure-img {
   color: var(--ai-muted);
   opacity: 1 !important;
 }
+/* A guide shows Time and Format beside Last checked, so its row has three columns on wider screens */
+@media (min-width: 576px) {
+  #title-block-header.quarto-title-block.default .quarto-title-meta:has(.ai-lab-format) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 .quarto-title .description,
 #title-block-header .description,
 #title-block-header .subtitle {

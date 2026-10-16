@@ -1,0 +1,53 @@
+---
+title: "Choose the right statistical test in four questions"
+description: "Four questions about your data pick the right test: outcome, groups, design and assumptions. Learn the map, then run it on clinic data in Colab."
+draft: true
+date-modified: 2026-10-16
+categories: [Analyst, Beginner, Statistics]
+lab-time: "About 45 minutes"
+lab-format: "Visual guide and Colab lab"
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card with the four questions that pick a statistical test: is the outcome numeric or categorical, how many groups are there, are they independent or paired, and do the assumptions hold."
+license: "CC BY"
+references:
+  - id: vb-ch83
+    type: webpage
+    title: "John Fisher, “Choosing the Right Test,” chapter 83 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html
+  - id: vb-ch85
+    type: webpage
+    title: "John Fisher, “Review & Choosing the Right Test,” chapter 85 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html
+---
+
+## Why it matters
+
+Results from pilots, A/B tests and model comparisons often reach a decision as a single p-value, and if the wrong test produced it, even a perfect calculation gives a meaningless answer.[@vb-ch83] Ask which test was used, and ask for the size of the effect and its confidence interval beside the p-value, because with enough data a trivial effect is significant.[@vb-ch85]
+
+Four questions about the data almost force the choice of test, and the discipline lies in asking them before running anything.[@vb-ch83; @vb-ch85] A classic slip is treating paired measurements as independent, as when two models are scored on the same cross-validation folds, and it can erase a real improvement or manufacture a false one.[@vb-ch83]
+
+## What you will do
+
+The lab runs on a clinic dataset written for the book, with 200 patients, their blood pressure before and after treatment, their wait times at three clinics and whether they were satisfied.[@vb-ch83]
+
+1. Ask the four questions in order. Is the outcome numeric or categorical, how many groups are there, are the groups independent or paired, and do the test's assumptions hold?[@vb-ch83]
+2. Read the test off the decision map. Switch to its rank-based twin when the data are skewed or have outliers, and to Fisher's exact test when a cell's expected count falls below about 5.[@vb-ch83]
+3. Route four questions about the clinic through the map. Blood pressure fell by about 9 mmHg within patients (a paired t-test), and the new treatment lowered it more than the standard one did, by 11.6 mmHg against 6.3 (a Welch t-test).[@vb-ch83]
+4. Report the other two answers with the same care, although neither is significant. Satisfaction shows no clear link to treatment (a p-value of about 0.27), and wait times do not differ by clinic under ANOVA or under its rank-based twin.[@vb-ch83]
+5. Close each result with its p-value, effect size and confidence interval, as the review chapter does for the five case studies that follow it.[@vb-ch85]
+
+![The decision map from the visual guide. Start from the outcome, follow the number of groups and the design, and read off the test, with its rank-based fallback after the slash.[@vb-ch83]](decision-map.png){fig-alt="A decision tree that starts by asking what the outcome is. For a numeric outcome, two paired groups lead to the paired t-test or Wilcoxon, two independent groups to the Welch t-test or Mann-Whitney, and three or more groups to ANOVA or Kruskal-Wallis. For a categorical outcome, a rate leads to the z-test for proportions, and two variables lead to the chi-square test."}
+
+## Before you start
+
+All the notebook needs is a free Google account for Colab, which already has SciPy and statsmodels. The notebook fetches the clinic data from the book's repository, so it runs free with no setup. It helps to have met the t-test and the chi-square test, and the [review chapter](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html) turns the whole map into a `choose_test()` helper with the assumption checks in code.
+
+::: {.ai-actions}
+[Open the visual guide](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html){.btn .btn-primary}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/choosing-the-right-test.ipynb){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+[Every AI claim is a statistical claim](../../articles/every-ai-claim-is-statistical/index.qmd) sets out three questions to ask of any AI number. The right test is how an analyst answers two of them, "Compared with what?" and "How sure?"

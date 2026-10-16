@@ -1,0 +1,58 @@
+---
+title: "Quote a survey figure with its weights and margin of error"
+description: "One survey gives 11.29% or 8.44% for the same measure, depending on its weights. Learn to weight a survey and state its margin of error, in Colab."
+draft: true
+date-modified: 2026-10-16
+categories: [Analyst, CIO, CTO, Beginner, Statistics]
+lab-time: "About an hour"
+lab-format: "Visual guide and Colab lab"
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card comparing two estimates of support for a parks levy from the same survey: 55% from the raw responses and 63% once each household is weighted."
+license: "CC BY"
+references:
+  - id: nsduh-analysis
+    type: webpage
+    title: "John Fisher, “The Statistical Analysis,” in *Depression and Substance Use in the NSDUH*, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
+  - id: vb-ch70
+    type: webpage
+    title: "John Fisher, “Case Study: Designing and Analyzing a Survey,” chapter 70 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html
+  - id: vb-ch74
+    type: webpage
+    title: "John Fisher, “Margin of Error,” chapter 74 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html
+---
+
+## Why it matters
+
+Strategy papers lean on survey figures about customers, staff and AI adoption, and one national health survey shows how far such a figure can move, from 11.29% of its respondents to 8.44% of adults once its weights are applied.[@nsduh-analysis] Before a survey number supports a decision, ask whether it was weighted and how wide its margin of error is.
+
+Once you know a survey's design, weighting it and stating an honest margin of error take a few lines of statsmodels.[@vb-ch70] The margin needs the most care, because unequal weights make it wider than the textbook formula gives, and it covers sampling error only, so it says nothing about a biased sample or a leading question.[@vb-ch70; @vb-ch74]
+
+## What you will do
+
+A simulated city wants to know whether a parks levy has majority support. Its survey of 1,200 households was written for the book, so the true answer is known and every estimate can be checked against it.[@vb-ch70]
+
+1. Lay out the design. The four districts are sampled at different rates, so each household carries a weight equal to its district's population divided by the number sampled there.[@vb-ch70]
+2. Plot support by district before averaging anything. Oldtown, the district least in favor, was over-sampled on purpose and supplies a third of the respondents from under a fifth of the city's households.[@vb-ch70]
+3. Estimate support twice with `DescrStatsW` from statsmodels. The raw responses give about 55%, and the weighted estimate is 63%, close to the city's true 62%.[@vb-ch70]
+4. Give the weighted figure a margin of error that allows for the weights. Unequal weights cut the effective sample from 932 respondents to about 660, and the margin comes to about 4 points either side.[@vb-ch70]
+5. Size the next survey. Holding the margin near 3 points takes roughly 1,000 respondents under simple random sampling and about 1,400 with this design.[@vb-ch70]
+
+![Support for the levy in each district, and the number of respondents in each. Oldtown, where support is lowest, has the most respondents because it was over-sampled. From the visual guide, on data written for the book.[@vb-ch70]](support-by-district.png){fig-alt="Two bar charts. On the left, the share of respondents supporting the levy in each district, about 67 percent in Hillcrest, 59 percent in Lakeside, 30 percent in Oldtown and 74 percent in Riverside, with a dashed majority line at 50 percent. On the right, the number of respondents in each district, about 196 in Hillcrest, 203 in Lakeside, 302 in Oldtown and 231 in Riverside."}
+
+## Before you start
+
+A free Google account is all you need to run the notebook in Colab. It reads the survey from the book's repository and uses pandas, statsmodels and seaborn, which Colab already has, so there is nothing to install and nothing to pay. If margins of error are new to you, [chapter 74 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html) explains what sets their size.
+
+::: {.ai-actions}
+[Open the visual guide](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html){.btn .btn-primary}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/case-study-designing-and-analyzing-a-survey.ipynb){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+- [The same survey says 11.29% or 8.44%](../../articles/ask-how-a-survey-was-weighted/index.qmd) applies weights and design-based standard errors to a national survey of 134,897 adults.
+- [Adoption is outrunning governance](../../articles/adoption-is-outrunning-governance/index.qmd) reads four recent surveys about AI agents one at a time, because their samples and measures differ.

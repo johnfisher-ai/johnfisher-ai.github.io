@@ -1,6 +1,7 @@
 ```{=html}
 <%
-/* Card grid for articles and guide articles.
+/* Card grid for articles and guide articles. An article card shows its reading time, and a guide card
+   shows the time to complete its lab (lab-time in its front matter).
    template-params: heading (2 or 3, to keep heading order), empty (text shown before the first item). */
 const p = (typeof templateParams !== 'undefined' && templateParams) ? templateParams : {};
 const h = p.heading || 2;
@@ -19,7 +20,7 @@ const chipClass = (c) => topics.includes(c) ? 'ai-chip ai-chip-topic' : (levels.
 <div class="ai-card-body">
 <h<%= h %> class="listing-title"><%= item.title %></h<%= h %>>
 <% if (item.description) { %><p class="listing-description"><%= item.description %></p><% } %>
-<p class="ai-meta"><span class="listing-date"><%= item.date %></span><% if (item['reading-time']) { %> · <span class="ai-reading" data-path="<%- item.path %>"><%= item['reading-time'] %></span><% } %></p>
+<p class="ai-meta"><span class="listing-date"><%= item.date %></span><% if (item['lab-time']) { %> · <span class="ai-lab-time"><%= item['lab-time'] %></span><% } else if (item['reading-time']) { %> · <span class="ai-reading" data-path="<%- item.path %>"><%= item['reading-time'] %></span><% } %></p>
 <% if (item.source) { %><p class="ai-source">Source: <%= item.source %></p><% } %>
 <% if (item.categories && item.categories.length) { %><p class="ai-chips"><% for (const c of item.categories) { %><span class="<%= chipClass(c) %>"><%= c %></span><% } %></p><% } %>
 </div>

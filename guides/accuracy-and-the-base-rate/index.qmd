@@ -1,0 +1,53 @@
+---
+title: "Catch a model that is 88.7% accurate and misses almost every case"
+description: "A survey model was 88.7% accurate and found almost no one. Learn the checks that expose a model like it, then run them on card fraud data in Colab."
+draft: true
+date-modified: 2026-10-16
+categories: [Analyst, Developer, Data Scientist, Beginner, Machine learning]
+lab-time: "About an hour"
+lab-format: "Visual guide and Colab lab"
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card listing the guide's four steps: price each error, split by time, catch the leak, and set the threshold by cost."
+license: "CC BY"
+references:
+  - id: nsduh-analysis
+    type: webpage
+    title: "John Fisher, “The Statistical Analysis,” in *Depression and Substance Use in the NSDUH*, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
+  - id: vb-ch191
+    type: webpage
+    title: "John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html
+---
+
+## Why it matters
+
+In a published analysis of a national health survey, a model that was 88.7% accurate flagged 805 of 134,897 adults, although about one in nine of them had reported a depressive episode.[@nsduh-analysis] Before you approve a model that looks for something rare, ask for the base rate, the share of real cases it finds and what each kind of mistake costs.
+
+Rare outcomes break the usual defaults, because accuracy rewards a model that never raises an alarm, ROC-AUC flatters one when negatives vastly outnumber positives, and rebalancing the classes keeps the ranking while distorting the probabilities.[@vb-ch191] The lab replaces each default with a check you can repeat on your own models.
+
+## What you will do
+
+The visual guide and its notebook follow one card issuer through four months of purchases, a scenario written for the book, with 318 frauds among 119,556 transactions.[@vb-ch191]
+
+1. Price each error before fitting a model. A false alarm costs $16 of analyst time and customer annoyance, while a missed fraud costs the amount written off plus $25 of handling.[@vb-ch191]
+2. Measure the model that does nothing. Flagging no transaction at all scores 99.73% accuracy, which is why the lab never reports accuracy again.[@vb-ch191]
+3. Split the data by time, and catch a warehouse column that lifts PR-AUC from 0.30 to 0.98 although it is filed weeks after each purchase, too late to inform the decision.[@vb-ch191]
+4. Compare oversampling, class weights and leaving the data alone. All three rank transactions almost identically, and the first two predict a fraud rate about 36 times the one observed.[@vb-ch191]
+5. Set the threshold from the costs, and then test the review team's capacity. The cheapest policy flags about five transactions a day for 31% less than flagging nothing, and working every case the team could costs 13 times as much as having no model.[@vb-ch191]
+
+![Total cost over 30 days at each threshold, and the cost of three policies on a log scale. From the visual guide, on data written for the book.[@vb-ch191]](threshold-cost.png){fig-alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, reaches its lowest point of $9,959 at 8.8 percent and rises gently after that. On the right, on a log scale, the cost-optimal threshold costs $9,959, flagging nothing costs $14,476 and filling the review team's capacity costs $190,667."}
+
+## Before you start
+
+You need a free Google account to run the notebook in Colab. It loads its data from the book's repository, and Colab already has pandas, scikit-learn and matplotlib, so there is nothing to install, no API key and no cost. Every cell runs as written, and a little pandas helps if you want to change the code.
+
+::: {.ai-actions}
+[Open the visual guide](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html){.btn .btn-primary}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/capstone-credit-card-fraud.ipynb){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+[88.7% accurate and missing almost every case](../../articles/accurate-and-missing-almost-every-case/index.qmd) reads the survey model at five cut-offs and lists the numbers to ask for beside accuracy.

@@ -1,4 +1,6 @@
-<!-- Quarto 1.10.19 title-metadata.html, with a reading-time field filled in by tools/postrender.py -->
+<!-- Quarto 1.10.19 title-metadata.html, with a reading-time field filled in by tools/postrender.py,
+     and a guide's time to complete (lab-time) and format (lab-format) from its front matter -->
+
 $if(by-affiliation/first)$
 <div class="quarto-title-meta-author">
   <div class="quarto-title-meta-heading">$labels.authors$</div>
@@ -62,6 +64,24 @@ $endif$
     <div class="quarto-title-meta-heading">Reading time</div>
     <div class="quarto-title-meta-contents">
       <p class="ai-reading"></p>
+    </div>
+  </div>
+  $endif$
+
+  $if(lab-time)$
+  <div>
+    <div class="quarto-title-meta-heading">Time</div>
+    <div class="quarto-title-meta-contents">
+      <p class="ai-lab-time">$lab-time$</p>
+    </div>
+  </div>
+  $endif$
+
+  $if(lab-format)$
+  <div>
+    <div class="quarto-title-meta-heading">Format</div>
+    <div class="quarto-title-meta-contents">
+      <p class="ai-lab-format">$lab-format$</p>
     </div>
   </div>
   $endif$
