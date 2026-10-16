@@ -1,8 +1,9 @@
 ---
 title: "Phase the work so value shows at every milestone"
 description: "A phased program shows value at months 3, 8, 14 and 24, with evidence for each milestone. It gives finance something to judge long before full payback."
-draft: true
-date-modified: 2026-10-15
+date: 2026-10-16
+date-modified: 2026-10-16
+sequence: 5
 categories: [CIO, AI control plane]
 source: "AI Control Plane Handbook"
 image: card.png

@@ -17,6 +17,1045 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Fri, 16 Oct 2026 00:39:44 GMT</lastBuildDate>
+<lastBuildDate>Fri, 16 Oct 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Adoption is outrunning governance</title>
+  <link>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>AI agents have reached the largest companies faster than the rules for running them. By Microsoft’s own telemetry, more than 80% of Fortune 500 companies use active AI agents built with low-code or no-code tools.<span class="citation" data-cites="ms-cyber-pulse"><sup>1</sup></span> Four recent surveys measure how far governance trails that spread. They ask different questions of different people, so each one needs to be read on its own terms.</p>
+<section id="each-survey-measures-something-different" class="level2">
+<h2 class="anchored" data-anchor-id="each-survey-measures-something-different">Each survey measures something different</h2>
+<p>In the table below, the middle column shows how far agents have spread in each study, and the last column shows what has not kept pace with them.</p>
+<table class="caption-top table">
+<caption>Four studies of AI agents, each read on its own terms</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Study</th>
+<th>How far agents have spread</th>
+<th>What lags behind</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Deloitte, State of AI in the Enterprise 2026, a survey of 3,235 business and IT leaders in 24 countries<span class="citation" data-cites="deloitte-state-of-ai"><sup>2</sup></span></td>
+<td>Close to three-quarters of companies plan to deploy agentic AI within two years</td>
+<td>Only 21% of the companies planning to deploy report a mature model for agent governance</td>
+</tr>
+<tr class="even">
+<td>KPMG AI Quarterly Pulse, third quarter of 2026, a survey of 314 US leaders at companies with revenue of $1 billion or more<span class="citation" data-cites="kpmg-pulse"><sup>3</sup></span></td>
+<td>62% of organizations are building, deploying or developing AI agents</td>
+<td>49% have set boundaries where agents may not make decisions on their own</td>
+</tr>
+<tr class="odd">
+<td>Microsoft Cyber Pulse, February 2026, from Microsoft’s telemetry and a survey it commissioned of more than 1,700 data security professionals<span class="citation" data-cites="ms-cyber-pulse"><sup>1</sup></span></td>
+<td>More than 80% of Fortune 500 companies use active AI agents built with low-code or no-code tools</td>
+<td>29% of employees have turned to unsanctioned AI agents for work tasks</td>
+</tr>
+<tr class="even">
+<td>BCG, The Widening AI Value Gap, September 2025<span class="citation" data-cites="bcg-value-gap"><sup>4</sup></span></td>
+<td>AI agents’ share of the value AI creates is expected to rise from about 17% in 2025 to 29% by 2028</td>
+<td>Only 5% of companies are “future-built” for AI, and 60% report hardly any material value</td>
+</tr>
+</tbody>
+</table>
+<p>The four results can’t be added up or charted as one trend, because their samples differ in country, company size and date, and each study counts something different. Deloitte counted plans to deploy,<span class="citation" data-cites="deloitte-state-of-ai"><sup>2</sup></span> KPMG counted organizations building or running agents,<span class="citation" data-cites="kpmg-pulse"><sup>3</sup></span> Microsoft measured agents in active use,<span class="citation" data-cites="ms-cyber-pulse"><sup>1</sup></span> and BCG estimated where the value of AI will come from.<span class="citation" data-cites="bcg-value-gap"><sup>4</sup></span></p>
+<p>Read one at a time, the studies still point the same way. In each one, the measure of adoption runs ahead of the measure of control, whether that control is a governance model, a boundary on what agents may decide alone, or a rule against tools nobody approved.</p>
+<p>Companies sense the gap in their own operations. In Deloitte’s 2026 technology predictions, 80% of organizations consider their basic automation mature, but only 28% say so once AI agents are included.<span class="citation" data-cites="deloitte-orchestration"><sup>5</sup></span> The cost of leaving the gap open shows up in forecasts. Gartner expects more than 40% of agentic AI projects to be canceled by the end of 2027 because of escalating costs, unclear business value or inadequate risk controls.<span class="citation" data-cites="gartner-cancel"><sup>6</sup></span> Each of those causes is something a control plane exists to manage, which is why the controls need to be in place before the next wave of agents arrives.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CIO.</strong> Ask for a list of every agent in use, including those built with low-code tools, with a named owner for each.</li>
+<li><strong>CTO.</strong> Route agent actions through one policy enforcement point, so each rule is written once and applied to every agent, whichever vendor built it.</li>
+<li><strong>CIO and CTO.</strong> Agree autonomy tiers before the next rollout. Each agent’s tier should set what it may do alone and what needs a person’s approval.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-01.html#agents-are-outrunning-integration-and-governance">Section 1 of <em>The AI Control Plane Handbook</em></a> sets these surveys beside an integration benchmark and an analyst forecast, and explains why coordinating models and agents has become an infrastructure problem. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-4">Slide 4 of the executive deck</a> puts the four results on one page, with speaker notes you can present from.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>Before you quote figures like these, <a href="../../guides/survey-weights-and-margins-of-error/index.html">Quote a survey figure with its weights and margin of error</a> shows what to check first, with a notebook you can run in Colab.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-ms-cyber-pulse" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Vasu Jakkal, “80% of Fortune 500 use active AI agents: Observability, governance, and security shape the new frontier,” Microsoft Security Blog, February 10, 2026 (Cyber Pulse, issue 1; Microsoft telemetry for November 2025 and a Microsoft-commissioned survey of more than 1,700 data security professionals, July 2025). <a href="https://www.microsoft.com/en-us/security/blog/2026/02/10/80-of-fortune-500-use-active-ai-agents-observability-governance-and-security-shape-the-new-frontier/">https://www.microsoft.com/en-us/security/blog/2026/02/10/80-of-fortune-500-use-active-ai-agents-observability-governance-and-security-shape-the-new-frontier/</a></div>
+</div>
+<div id="ref-deloitte-state-of-ai" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Deloitte, “From ambition to activation: Organizations stand at the untapped edge of AI’s potential, reveals Deloitte survey,” press release, January 21, 2026 (State of AI in the Enterprise 2026; survey of 3,235 business and IT leaders in 24 countries, August–September 2025). <a href="https://www.deloitte.com/us/en/about/press-room/state-of-ai-report-2026.html">https://www.deloitte.com/us/en/about/press-room/state-of-ai-report-2026.html</a></div>
+</div>
+<div id="ref-kpmg-pulse" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">KPMG, “Investment and AI agent deployment surge as execution becomes the differentiator,” March 31, 2026 (AI Quarterly Pulse Survey, Q1 2026; 237 US leaders); “AI investment and agent deployment hold steady amid growing focus on pragmatism,” June 24, 2026 (Q2 2026; 204 US leaders); and “AI’s value story sharpens as organizations gain confidence in governance, accountability and workforce adoption,” September 24, 2026 (Q3 2026; 314 US leaders, July–August 2026). <a href="https://kpmg.com/us/en/media/news/q1-ai-pulse2026.html" class="uri">https://kpmg.com/us/en/media/news/q1-ai-pulse2026.html</a> <a href="https://kpmg.com/us/en/media/news/q2-ai-pulse-2026.html" class="uri">https://kpmg.com/us/en/media/news/q2-ai-pulse-2026.html</a> <a href="https://kpmg.com/us/en/media/news/q3-ai-pulse-2026.html">https://kpmg.com/us/en/media/news/q3-ai-pulse-2026.html</a></div>
+</div>
+<div id="ref-bcg-value-gap" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Jessica Apotheker et al., “Are you generating value from AI? The widening gap,” Boston Consulting Group, September 30, 2025. <a href="https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap">https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap</a></div>
+</div>
+<div id="ref-deloitte-orchestration" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Sayantani Mazumder, China Widener, Gillian Crossan, Girija Krishnamurthy, Baris Sarer, and Diana Kearns-Manolatos, “Unlocking exponential value with AI agent orchestration,” Deloitte Insights (Technology, Media &amp; Telecommunications Predictions 2026), November 18, 2025. <a href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html">https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html</a></div>
+</div>
+<div id="ref-gartner-cancel" class="csl-entry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Gartner, “Gartner predicts over 40% of agentic AI projects will be canceled by end of 2027,” press release, June 25, 2025. <a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027">https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div> ]]></description>
+  <category>CIO</category>
+  <category>CTO</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>What an enterprise AI control plane is</title>
+  <link>https://johnfisher-ai.github.io/articles/what-an-ai-control-plane-is/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The hyperscalers now describe their agent platforms as control planes, and Microsoft calls Agent 365 “the control-plane for AI agents.”<span class="citation" data-cites="ms-frontier"><sup>1</sup></span> A label that every vendor can claim helps a buyer only when it means something that can be tested. A short definition and three capabilities give it that meaning, and each capability turns into a question to ask before anyone signs a contract.</p>
+<section id="a-definition-with-edges" class="level2">
+<h2 class="anchored" data-anchor-id="a-definition-with-edges">A definition with edges</h2>
+<p>A Deloitte Insights analysis from August 2026 defines an enterprise control plane as a governed, intelligent layer that mediates decisions across systems, deciding who can act, what data can be accessed, how workloads execute and how AI agents operate within defined cost, latency and regulatory boundaries.<span class="citation" data-cites="deloitte-orchestration-advantage"><sup>2</sup></span> It resembles service-oriented architecture, but it is event-driven and does more than expose reusable services, because it coordinates workflows as conditions change.</p>
+<p>HCLTech’s April 2026 analysis suggests judging a platform by what it governs as well as by what it does, since control planes compete for authority more than for attention.<span class="citation" data-cites="hcltech-control-planes"><sup>3</sup></span> The same analysis observes that an agent without identity constraints is automation without accountability.<span class="citation" data-cites="hcltech-control-planes"><sup>3</sup></span></p>
+</section>
+<section id="three-capabilities-turn-the-definition-into-questions" class="level2">
+<h2 class="anchored" data-anchor-id="three-capabilities-turn-the-definition-into-questions">Three capabilities turn the definition into questions</h2>
+<p>Deloitte’s analysis rests the control plane on three capabilities.<span class="citation" data-cites="deloitte-orchestration-advantage"><sup>2</sup></span> Each decides something different, and each can be put to a vendor as a single question.</p>
+<table class="caption-top table">
+<caption>The three capabilities of an AI control plane, with the question each one answers</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capability</th>
+<th>What it decides</th>
+<th>The question to ask</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Architecture</td>
+<td>Whether enterprise capabilities can be exposed securely and flexibly across channels, agents, clouds, edge and on-premises systems</td>
+<td>Can agents safely reach what the business can do?</td>
+</tr>
+<tr class="even">
+<td>Orchestration</td>
+<td>Which model and agent handle a task, where it runs and under which constraints</td>
+<td>Which model and agent should handle this task, and where?</td>
+</tr>
+<tr class="odd">
+<td>Trust, security and resilience</td>
+<td>Identity, authority, integrity and control across every human and machine interaction</td>
+<td>Can we prove who acted, on whose authority, and why?</td>
+</tr>
+</tbody>
+</table>
+<p>A product that answers one question well can still leave the other two open. A catalog of connectors speaks to architecture, a model router speaks to orchestration, and an audit dashboard speaks to trust, yet none of them alone decides who may act on what, which is why the definition asks for all three in one governed layer.</p>
+<p>A good answer to each question is something a vendor can show on your own systems:</p>
+<ul>
+<li><strong>Architecture.</strong> One real business capability, such as checking an order’s status, exposed as a governed API or tool that an agent reaches with its own identity and its own limits.</li>
+<li><strong>Orchestration.</strong> One task routed to a model and an agent by rules you can read, covering cost, latency and where the data may go.</li>
+<li><strong>Trust.</strong> The record of one completed action, naming the agent, the person it acted for, the policy that allowed it and the approval, if one was needed.</li>
+</ul>
+<p>Most enterprises span several ecosystems, so the harder task is coordinating control planes across them. That is the case for a vendor-neutral control plane, one that keeps identity, policy and audit in a layer the enterprise owns while models and agents come from many sources.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CIO.</strong> Put the three questions into your next platform review, and ask each vendor to answer them on one of your own use cases.</li>
+<li><strong>CTO.</strong> Map today’s stack against the three capabilities, product by product, and mark each question that no product answers yet.</li>
+<li><strong>Architect.</strong> Check that identity, policy and audit records sit in a layer you would keep if you changed model or agent vendors.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-02.html">Section 2 of <em>The AI Control Plane Handbook</em></a> sets out the definition and the lifecycle a control plane enforces for every agent, from proposal to retirement. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-7">Slide 7 of the executive deck</a> puts the three capabilities and their questions on one page.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-ms-frontier" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Microsoft, “Introducing the First Frontier Suite built on Intelligence + Trust,” Official Microsoft Blog, March 9, 2026; see also Microsoft, “What’s new in Microsoft Entra Agent ID,” Microsoft Learn, updated May 1, 2026, and Microsoft, “Microsoft Agent Framework overview,” Microsoft Learn, updated August 25, 2026. <a href="https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/" class="uri">https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/</a> <a href="https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id" class="uri">https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id</a> <a href="https://learn.microsoft.com/en-us/agent-framework/overview/">https://learn.microsoft.com/en-us/agent-framework/overview/</a></div>
+</div>
+<div id="ref-deloitte-orchestration-advantage" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Chris Thomas, Parth Patwari, Ram Ravi, Oniel Cross, Diana Kearns-Manolatos, and Iram Parveen, “The next tech infrastructure advantage is intelligence orchestration,” Deloitte Insights, August 21, 2026 (based on more than 30 expert interviews conducted March–May 2026). <a href="https://www.deloitte.com/us/en/insights/topics/technology-management/enterprise-ai-control-plane.html">https://www.deloitte.com/us/en/insights/topics/technology-management/enterprise-ai-control-plane.html</a></div>
+</div>
+<div id="ref-hcltech-control-planes" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Andy Packham, “Control planes: A strategic lens for enterprise platform decisions,” HCLTech, April 21, 2026. <a href="https://www.hcltech.com/blogs/enterprise-control-planes-platform-strategy">https://www.hcltech.com/blogs/enterprise-control-planes-platform-strategy</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div> ]]></description>
+  <category>CIO</category>
+  <category>CTO</category>
+  <category>Architect</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/articles/what-an-ai-control-plane-is/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/what-an-ai-control-plane-is/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Builders need to plan for the 2026 changes to MCP and A2A</title>
+  <link>https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Agents reach tools through the Model Context Protocol (MCP) and reach other agents through the Agent2Agent protocol (A2A), and both changed substantially in 2026. The pace is already a problem for the people who build on them, and in the 2026 Connectivity Benchmark, 68% of IT leaders said they find it hard to keep up with emerging agent standards and protocols.<span class="citation" data-cites="connectivity-benchmark"><sup>1</sup></span></p>
+<section id="where-each-change-lands" class="level2">
+<h2 class="anchored" data-anchor-id="where-each-change-lands">Where each change lands</h2>
+<p>MCP standardizes how agents reach tools and data,<span class="citation" data-cites="mcp-spec"><sup>2</sup></span> and A2A standardizes how agents collaborate.<span class="citation" data-cites="a2a-spec"><sup>3</sup></span> Both are now projects of the Agentic AI Foundation, hosted by the Linux Foundation.<span class="citation" data-cites="mcp-spec a2a-spec"><sup>2,3</sup></span> A third protocol, for agent payments, is moving the same way.</p>
+<table class="caption-top table">
+<caption>Three agent protocols that changed in 2026</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Protocol</th>
+<th>What changed in 2026</th>
+<th>Where it lands</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A2A</td>
+<td>Version 1.0, the first stable release, arrived in March 2026 with version negotiation, multi-tenancy and signed agent cards that let one agent verify another’s identity<span class="citation" data-cites="a2a-spec"><sup>3</sup></span></td>
+<td>Any agent that accepts work from another agent</td>
+</tr>
+<tr class="even">
+<td>MCP</td>
+<td>The July 2026 revision made the protocol stateless, removing sessions and the initialization handshake, and requires headers that name the method and tool on every HTTP request<span class="citation" data-cites="mcp-spec"><sup>2</sup></span></td>
+<td>Every MCP server that held session state, and every gateway that reads MCP traffic</td>
+</tr>
+<tr class="odd">
+<td>AP2</td>
+<td>Google contributed its Agent Payments Protocol to the FIDO Alliance in April 2026, where new working groups are developing standards for agent authentication and agent-initiated payments<span class="citation" data-cites="fido-agents"><sup>4</sup></span></td>
+<td>Any agent that can start a payment</td>
+</tr>
+</tbody>
+</table>
+<p>The MCP revision did more than remove state. It documents how OpenTelemetry trace context travels with each call, tightens authorization checks and deprecates several features with a minimum 12-month window.<span class="citation" data-cites="mcp-spec"><sup>2</sup></span> That window is the deadline for any tool that still relies on a deprecated feature. Agent payments are at an earlier stage, and until the new standards are settled, AP2 is best treated as pre-standard.</p>
+<p>For MCP, statelessness means every request carries what the server needs, and no server keeps a session between calls. A server can then run behind an ordinary load balancer, since no request depends on an earlier one. For A2A, an agent card is the description an agent publishes of itself, and a signature lets another agent check who published it before it trusts the work on offer.</p>
+<p>The cost of each change depends on how agent traffic is wired. Where every agent connects to every tool on its own, each team re-implements each change in its own code and on its own schedule, and the slowest team sets the pace for everyone. A control plane absorbs much of that work in one place. Its registry can check signed agent cards before one agent trusts another, and its gateway can apply policy to MCP’s standard headers and join every call to its trace, so a change to the protocol becomes a change to one policy, and the same traces show which tools still call a deprecated feature as the window closes.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Developer.</strong> List every MCP server you run, and check which ones still hold session state or leave out the method and tool headers, starting with the servers your production agents call most.</li>
+<li><strong>AI Engineer.</strong> Require a signed agent card before an agent accepts work from another agent, and give no privilege to roles an agent asserts about itself.</li>
+<li><strong>Developer and AI Engineer.</strong> Track the MCP deprecations against their 12-month window, and keep any payment flow built on AP2 behind a person’s approval while the standards work continues.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-04.html#open-protocols-for-tools-agents-and-payments">Section 4 of <em>The AI Control Plane Handbook</em></a> places the protocols inside a control plane’s routing, context engineering and delegation. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-2.html#slide-13">Slide 13 of the executive deck</a> sets the protocols beside context engineering and capability discovery.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-connectivity-benchmark" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ryan Yeager, “Agentic transformation reaches new heights: 2026 Connectivity Benchmark Report insights,” MuleSoft Blog, February 5, 2026. <a href="https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/">https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/</a></div>
+</div>
+<div id="ref-mcp-spec" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Model Context Protocol, specification (revision 2026-07-28), including “Authorization” for MCP servers and “Key changes” for that revision, Agentic AI Foundation (Linux Foundation). <a href="https://modelcontextprotocol.io/specification" class="uri">https://modelcontextprotocol.io/specification</a> <a href="https://modelcontextprotocol.io/specification/2026-07-28/changelog">https://modelcontextprotocol.io/specification/2026-07-28/changelog</a></div>
+</div>
+<div id="ref-a2a-spec" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Agent2Agent (A2A) Protocol, specification and project repository, Agentic AI Foundation (Linux Foundation); version 1.0, March 2026; see also Agentic AI Foundation, “A2A joins AAIF’s open agentic stack,” August 17, 2026. <a href="https://github.com/a2aproject/A2A" class="uri">https://github.com/a2aproject/A2A</a> <a href="https://aaif.io/blog/a2a-joins-aaif">https://aaif.io/blog/a2a-joins-aaif</a></div>
+</div>
+<div id="ref-fido-agents" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">FIDO Alliance, “FIDO Alliance to develop standards for trusted AI agent interactions,” April 28, 2026. <a href="https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/">https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div> ]]></description>
+  <category>Developer</category>
+  <category>AI Engineer</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Each OWASP agentic threat maps to a control you can test</title>
+  <link>https://johnfisher-ai.github.io/articles/map-agentic-threats-to-controls/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Security teams judge any agent platform against the threat lists they already use. For agents, the list is the OWASP Top 10 for Agentic Applications, published in December 2025, which names ten risks specific to AI agents.<span class="citation" data-cites="owasp-agentic"><sup>1</sup></span> Every one of the ten maps to controls a team can put in place and test now.</p>
+<section id="every-risk-on-the-list-has-a-control" class="level2">
+<h2 class="anchored" data-anchor-id="every-risk-on-the-list-has-a-control">Every risk on the list has a control</h2>
+<p>The table maps each risk to the controls that address it in an AI control plane.</p>
+<table class="caption-top table">
+<caption>Ten agentic risks from OWASP, with the controls that address each in the author’s mapping<span class="citation" data-cites="owasp-agentic"><sup>1</sup></span></caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Agentic risk</th>
+<th>What it looks like</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ASI01 Agent Goal Hijack</td>
+<td>Hidden instructions in content, documents or tool results redirect the agent’s goal</td>
+<td>Input and tool-result screening at the gateway<br>Allow-listed tools per agent<br>Approvals bound to the exact action</td>
+</tr>
+<tr class="even">
+<td>ASI02 Tool Misuse</td>
+<td>A legitimate tool is used in a harmful way</td>
+<td>Per-agent tool allow-lists<br>Schema validation<br>Rate, spend and exposure limits</td>
+</tr>
+<tr class="odd">
+<td>ASI03 Identity &amp; Privilege Abuse</td>
+<td>Leaked or inherited credentials let an agent act beyond its scope</td>
+<td>One identity per agent<br>Short-lived, task-scoped tokens<br>Delegation that narrows<br>Real-time revocation</td>
+</tr>
+<tr class="even">
+<td>ASI04 Agentic Supply Chain Vulnerabilities</td>
+<td>Poisoned tools, MCP servers, plugins or models enter at runtime</td>
+<td>Only registered, signed and version-pinned MCP servers are callable<br>A private registry of trusted servers<br>An agent bill of materials<span class="citation" data-cites="bcg-mcp"><sup>2</sup></span></td>
+</tr>
+<tr class="odd">
+<td>ASI05 Unexpected Code Execution</td>
+<td>Natural-language paths trigger code or commands</td>
+<td>Sandboxed execution<br>Code and shell tools only at an explicit tier<br>Limits on outbound connections</td>
+</tr>
+<tr class="even">
+<td>ASI06 Memory &amp; Context Poisoning</td>
+<td>Poisoned memory or context shapes later decisions</td>
+<td>Context only from governed sources (master data, catalog, lineage)<br>Provenance checks<br>Session integrity monitoring</td>
+</tr>
+<tr class="odd">
+<td>ASI07 Insecure Inter-Agent Communication</td>
+<td>Spoofed or altered messages between agents</td>
+<td>Signed agent cards<br>Mutual authentication<br>A2A traffic through the gateway<br>No privilege from self-asserted roles</td>
+</tr>
+<tr class="even">
+<td>ASI08 Cascading Failures</td>
+<td>Errors spread through automated pipelines</td>
+<td>Circuit breakers<br>Cumulative exposure limits across agents and sessions<br>Propose-only on stale data</td>
+</tr>
+<tr class="odd">
+<td>ASI09 Human-Agent Trust Exploitation</td>
+<td>Confident, polished output leads people to approve harmful actions</td>
+<td>Approvals bound to the exact action and showing the facts behind it<br>Approver drills<br>Limits that guard against consent fatigue</td>
+</tr>
+<tr class="even">
+<td>ASI10 Rogue Agents</td>
+<td>Agents act outside their mandate or hide what they do</td>
+<td>Registry and scanners<br>Honeytokens and decoy tools<br>Behavioral monitoring<br>The kill switch</td>
+</tr>
+</tbody>
+</table>
+<p>Several controls appear in more than one row, and they are the place to start. Approvals bound to the exact action defend against goal hijack and against people trusting a confident draft. One identity per agent, with delegation that narrows at each hop, closes off privilege abuse and limits what a spoofed message between agents can do. Exposure limits that add up across agents and sessions contain both tool misuse and cascading failures.</p>
+<p>The threat lists keep growing. Microsoft’s AI Red Team added seven agentic failure modes to its taxonomy in June 2026, among them agentic supply chain compromise, inter-agent trust escalation, session context contamination and MCP and plugin abuse.<span class="citation" data-cites="ms-red-team"><sup>3</sup></span> MITRE ATLAS has added agent-specific techniques since December 2025, such as AI Agent Tool Credential Harvesting and Publish Poisoned AI Agent Tool.<span class="citation" data-cites="mitre-atlas"><sup>4</sup></span> Tagging red-team scenarios with these names lets a team’s results map to the vocabulary other teams use.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Developer.</strong> Allow-list the tools each agent may call, validate every call against the tool’s schema, and accept only registered, signed and version-pinned MCP servers.</li>
+<li><strong>AI Engineer.</strong> Bind each approval to the exact action and show the approver the facts behind it, so a polished draft can’t carry a harmful change through.</li>
+<li><strong>CISO.</strong> Name an owner for what enters the agent registry and another for what approvers are shown, because no gateway closes either risk alone, and tag red-team scenarios with the risk names in the table.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-05.html#map-threats-to-controls">Section 5 of <em>The AI Control Plane Handbook</em></a> covers identity for agents, runtime controls, cryptography and human takeover after the kill switch. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-2.html#slide-17">Slide 17 of the executive deck</a> puts the ten risks and their controls on one page.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-owasp-agentic" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">OWASP GenAI Security Project, “OWASP Top 10 for Agentic Applications: The benchmark for agentic security in the age of autonomous AI,” December 9, 2025. <a href="https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/">https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/</a></div>
+</div>
+<div id="ref-bcg-mcp" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Tom Martin, Daniel Sack, Djon Kleine, Niels Degrande, and Nicolas de Bellefonds, “Put AI agents to work faster using MCP,” Boston Consulting Group, August 1, 2025. <a href="https://web-assets.bcg.com/pdf-src/prod-live/put-ai-to-work-faster-using-model-context-protocol.pdf">https://web-assets.bcg.com/pdf-src/prod-live/put-ai-to-work-faster-using-model-context-protocol.pdf</a></div>
+</div>
+<div id="ref-ms-red-team" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Microsoft AI Red Team, “Updating the taxonomy of failure modes in agentic AI systems: What a year of red teaming taught us,” Microsoft Security Blog, June 4, 2026. <a href="https://www.microsoft.com/en-us/security/blog/2026/06/04/updating-taxonomy-failure-modes-agentic-ai-systems-year-red-teaming-taught-us/">https://www.microsoft.com/en-us/security/blog/2026/06/04/updating-taxonomy-failure-modes-agentic-ai-systems-year-red-teaming-taught-us/</a></div>
+</div>
+<div id="ref-mitre-atlas" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">MITRE, ATLAS data release notes (CHANGELOG), versions 5.2.0 (December 24, 2025) to 2026.06 (June 30, 2026). <a href="https://github.com/mitre-atlas/atlas-data/blob/main/CHANGELOG.md">https://github.com/mitre-atlas/atlas-data/blob/main/CHANGELOG.md</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div> ]]></description>
+  <category>Developer</category>
+  <category>AI Engineer</category>
+  <category>CISO</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/articles/map-agentic-threats-to-controls/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/map-agentic-threats-to-controls/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Phase the work so value shows at every milestone</title>
+  <link>https://johnfisher-ai.github.io/articles/value-at-every-milestone/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Finance will judge an AI control plane program against published payback data, and that data sets a long horizon. In Deloitte’s 2025 survey of 1,854 executives in Europe and the Middle East, most achieved satisfactory ROI on a typical AI use case within two to four years, against the seven to 12 months expected of technology investments.<span class="citation" data-cites="deloitte-ai-roi"><sup>1</sup></span> A program that phases its work can show value well inside that horizon, one milestone at a time.</p>
+<section id="each-milestone-has-value-and-evidence" class="level2">
+<h2 class="anchored" data-anchor-id="each-milestone-has-value-and-evidence">Each milestone has value and evidence</h2>
+<p>The handbook’s plan runs for 24 months in four phases. Each phase ends in a milestone the business can see, with evidence to report at every steering review.</p>
+<table class="caption-top table">
+<caption>Value delivered and evidence to report at each milestone of a 24-month plan</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Milestone</th>
+<th>Value delivered</th>
+<th>Evidence to report</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Month 3, one front door</td>
+<td>Every known agent registered with an owner and a tier<br>Model and tool spend visible by use case<br>Duplicate and unused agents retired<br>The first use-case slice live in assist mode</td>
+<td>Agent coverage<br>Governed traffic<br>Baseline cost per outcome<br>The first slice’s KPIs against baseline</td>
+</tr>
+<tr class="even">
+<td>Month 8, reusable capabilities</td>
+<td>New agents reuse governed APIs and MCP tools in place of new integrations<br>Routine tasks move to lower-cost models within token limits<br>Use cases scale beyond the pilot</td>
+<td>Reuse of published capabilities<br>Cost per outcome trend<br>Run-rate value of live slices against plan</td>
+</tr>
+<tr class="odd">
+<td>Month 14, trusted autonomy</td>
+<td>Agents act in systems of record under approvals bound to each action, which is where most of each business case sits<br>Use-case KPI targets met by month 12<br>Incidents contained in minutes</td>
+<td>Oversight coverage and effectiveness<br>Time to contain<br>Evaluation pass rate<br>Use-case KPIs at target</td>
+</tr>
+<tr class="even">
+<td>Month 24, north star reached</td>
+<td>All goals met<br>Use cases at full run rate and sustained<br>New use cases start on shared controls at lower cost and risk<br>Models swappable without application changes<br>Post-quantum migration on track</td>
+<td>The full scorecard at target<br>Cumulative value against each business case</td>
+</tr>
+</tbody>
+</table>
+<p>The architecture delivers value of its own before any use case reaches full scale, from spend visibility at month 3 to faster delivery of every new agent at month 8. Each milestone also brings more of a real use case into production, starting with a first slice that works in assist mode and moving to agents that act in systems of record once the controls are in place.</p>
+<p>Expectations of AI payback are shortening. In KPMG’s 2025 Global CEO Outlook, 67% of 1,350 CEOs expected returns on AI within one to three years, where a year earlier most expected three to five.<span class="citation" data-cites="kpmg-ceo-outlook"><sup>2</sup></span> Google Cloud’s 2026 survey of 2,403 executives found 84% seeing increasing financial returns from AI and 26% seeing returns accelerate year over year.<span class="citation" data-cites="google-cloud-roi"><sup>3</sup></span> Phasing lets a program beat the two-to-four-year benchmark, because read-only and propose-only slices release capacity within months and help fund the controls that the larger gains depend on.</p>
+<p>Deloitte’s survey also found that 85% of the leaders it studied use different frameworks or timeframes for generative and agentic AI.<span class="citation" data-cites="deloitte-ai-roi"><sup>1</sup></span> A program can do the same, judging its early slices over months and the agents that act in systems of record over a longer horizon.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li>Agree the four milestones and the evidence for each with finance before the first phase starts, so every steering review reports against them.</li>
+<li>Pick a first use-case slice that can run in assist mode by month 3, so the program shows value while the larger controls are still being built.</li>
+<li>Set one horizon for read-only and propose-only slices and a longer one for agents that act in systems of record, and report each against its own.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-08.html#value-at-every-milestone">Section 8 of <em>The AI Control Plane Handbook</em></a> sets out the four phases, how three reference use cases phase in, and the first 90 days. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-3.html#slide-26">Slides 26 and 27 of the executive deck</a> show the plan and the value at each milestone.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-deloitte-ai-roi" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Deloitte, “AI ROI: The paradox of rising investment and elusive returns,” 2025 (survey of 1,854 executives in Europe and the Middle East, August–September 2025). <a href="https://www.deloitte.com/global/en/what-we-do/capabilities/ai/research/ai-roi-the-paradox-of-rising-investment-and-elusive-returns.html">https://www.deloitte.com/global/en/what-we-do/capabilities/ai/research/ai-roi-the-paradox-of-rising-investment-and-elusive-returns.html</a></div>
+</div>
+<div id="ref-kpmg-ceo-outlook" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">KPMG International, “KPMG 2025 Global CEO Outlook,” October 2025 (survey of 1,350 CEOs, August 5 to September 10, 2025). <a href="https://kpmg.com/kz/en/insights/2025/10/kpmg-2025-ceo-outlook.html">https://kpmg.com/kz/en/insights/2025/10/kpmg-2025-ceo-outlook.html</a></div>
+</div>
+<div id="ref-google-cloud-roi" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Oliver Parker, “How AI ROI leaders prioritize investments for real business outcomes,” Google Cloud, July 27, 2026 (survey of 2,403 executives by National Research Group). <a href="https://cloud.google.com/transform/ai-roi-report-token-efficiency-agentic-ai-ownership-workflows-fluency">https://cloud.google.com/transform/ai-roi-report-token-efficiency-agentic-ai-ownership-workflows-fluency</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div> ]]></description>
+  <category>CIO</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/articles/value-at-every-milestone/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/value-at-every-milestone/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Every AI claim is a statistical claim</title>
+  <link>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Every claim made for an AI system is a statistical claim. An accuracy rate, the savings from a pilot and the share of customers who would use a new agent are all estimates from a sample, and every estimate carries error. In my analysis of a national health survey, one model was 88.7% accurate and still found almost none of the people it was built to find,<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> which is the kind of number that statistics exists to catch.</p>
+<section id="what-the-plus-in-ai-stands-for" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-plus-in-ai-stands-for">What the plus in AI+ stands for</h2>
+<p>The site’s name reads as AI, plus the data science, math, statistics and Python behind it. The Visual Handbook’s second chapter sets out how those parts fit: statistics makes sense of data, machine learning learns patterns to predict, and data science combines the two with code and domain knowledge to deliver something useful.<span class="citation" data-cites="vb-ch2"><sup>2</sup></span> Statistics asks why a pattern exists, and machine learning asks what comes next.<span class="citation" data-cites="vb-ch2"><sup>2</sup></span></p>
+<p>Statistics runs through every stage of an AI system, from collecting the right data to measuring whether the system works once it is live.<span class="citation" data-cites="vb-ch2"><sup>2</sup></span> A large language model is the clearest case, because it writes by estimating the probability of each possible next word and choosing a likely one.<span class="citation" data-cites="vb-ch2"><sup>2</sup></span> When a vendor or a team reports a number about such a system, the number is a statistic, and it can be tested like one.</p>
+</section>
+<section id="questions-that-test-an-ai-number" class="level2">
+<h2 class="anchored" data-anchor-id="questions-that-test-an-ai-number">Questions that test an AI number</h2>
+<p>Three questions catch most of the ways a number misleads. The survey analysis shows each failure on real data, drawn from 134,897 adults in three years of the National Survey on Drug Use and Health.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span></p>
+<table class="caption-top table">
+<caption>Three questions to ask of any AI number, with the failure each one caught in a real analysis</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>What goes wrong without it</th>
+<th>What it looked like in the survey analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Compared with what?</td>
+<td>An accuracy rate can reflect how rare the outcome is more than how good the model is</td>
+<td>88.7% of adults reported no depressive episode, so a model that answered “no” to almost everyone scored 88.7% accuracy</td>
+</tr>
+<tr class="even">
+<td>Measured on whom?</td>
+<td>A sample that over-represents some groups misstates the population</td>
+<td>Unweighted, 11.29% reported a past-year depressive episode, and weighted to the population the figure was 8.44%</td>
+</tr>
+<tr class="odd">
+<td>How sure?</td>
+<td>Ignoring how the sample was drawn makes estimates look more precise than they are</td>
+<td>Standard errors that respect the survey design were 1.74 to 1.96 times larger, so naive intervals were about half as wide as they should be</td>
+</tr>
+</tbody>
+</table>
+<p>The same discipline applies to the model’s own scorecard. A model’s accuracy is a proportion, so it carries a margin of error exactly as a poll does.<span class="citation" data-cites="vb-ch74"><sup>3</sup></span> That margin shrinks with the square root of the test set, which means halving it takes four times as many labeled examples.<span class="citation" data-cites="vb-ch74"><sup>3</sup></span> A leaderboard number reported without its margin tells you less than it appears to.</p>
+<p>None of the three questions needs advanced mathematics. Each needs a habit of asking before a number goes into a decision, and each has a standard answer that a careful analyst can produce.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CIO.</strong> Ask for the baseline with every accuracy figure, meaning the score of a model that always gives the most common answer.</li>
+<li><strong>CTO.</strong> Require a margin of error, and the sample behind it, on any model metric that decides whether a system ships.</li>
+<li><strong>Analyst.</strong> When a sample over-represents some groups, report the figure weighted to the population and say which figure answers the question being asked.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html">Chapter 2 of <em>Statistics, Data Science and AI: A Visual Handbook</em></a> maps how statistics, machine learning and data science fit together, with a notebook you can run. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">The survey analysis</a> works through all three questions on one dataset, with the code behind every figure.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p><a href="../../guides/choose-the-right-statistical-test/index.html">Choose the right statistical test in four questions</a> puts two of the three questions into practice, “Compared with what?” and “How sure?”, with a decision map and a clinic dataset to test in Colab.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html">chapter 2 of the Visual Handbook</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/statistics-data-science-and-ai.ipynb">run its notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-nsduh-analysis" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
+</div>
+<div id="ref-vb-ch2" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Statistics, Data Science &amp; AI,” chapter 2 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html</a></div>
+</div>
+<div id="ref-vb-ch74" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “Margin of Error,” chapter 74 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>CIO</category>
+  <category>CTO</category>
+  <category>Analyst</category>
+  <category>Statistics</category>
+  <guid>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>The same survey says 11.29% or 8.44%</title>
+  <link>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>The National Survey on Drug Use and Health asked 134,897 adults across 2022 to 2024 about depression, among much else.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Counted as they answered, 11.29% reported a past-year major depressive episode. Weighted to represent the adult population, the figure is 8.44%.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Both numbers come from the same people, and only the weighted one describes the country.</p>
+<section id="why-the-weights-move-the-number" class="level2">
+<h2 class="anchored" data-anchor-id="why-the-weights-move-the-number">Why the weights move the number</h2>
+<p>The survey is a stratified multistage probability sample. Some groups are over-sampled on purpose, so that estimates for them are precise enough to publish, and every respondent carries a weight saying how many people they represent.<span class="citation" data-cites="nsduh-overview"><sup>2</sup></span> Young adults are among the over-sampled groups, and they report depression at much higher rates, so the unweighted figure overstates the national rate by about a third.<span class="citation" data-cites="nsduh-overview"><sup>2</sup></span> A weight undoes the over-sampling. Each young adult counts for fewer people in the population than an older respondent does, so the young adults together count for their true share.</p>
+<table class="caption-top table">
+<caption>Prevalence among adults, computed two ways from the same respondents<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span></caption>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Unweighted</th>
+<th>Weighted to the population</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Major depressive episode, past year</td>
+<td>11.29%</td>
+<td>8.44%</td>
+</tr>
+<tr class="even">
+<td>Marijuana, past month</td>
+<td>19.32%</td>
+<td>16.22%</td>
+</tr>
+<tr class="odd">
+<td>Alcohol, past month</td>
+<td>52.65%</td>
+<td>51.80%</td>
+</tr>
+<tr class="even">
+<td>Cigarettes, past month</td>
+<td>14.34%</td>
+<td>14.86%</td>
+</tr>
+</tbody>
+</table>
+<p>Depression and marijuana move most, and both are concentrated in younger adults, who are over-represented among respondents.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Cigarette use moves slightly the other way. The direction and the size of the shift depend on who was over-sampled and on how the measure varies across those groups, which is why no rule of thumb replaces computing both.</p>
+<p>Who is in the sample matters as much as how each person counts. The three survey years hold 174,407 respondents, and 34,875 of them are aged 12 to 17, who answer a different set of questions and were never asked the adult depression question.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> They are a restriction on the population, so every figure in the analysis describes adults 18 and over.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span></p>
+</section>
+<section id="the-margin-of-error-moves-too" class="level2">
+<h2 class="anchored" data-anchor-id="the-margin-of-error-moves-too">The margin of error moves too</h2>
+<p>The design changes the precision of an estimate as well as the estimate itself. In the same analysis, standard errors that respect the survey’s strata and replicates were 1.74 to 1.96 times larger than naive ones, so a confidence interval built without the design would be roughly half as wide as it should be.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> With a sample this large, no conclusion reversed, but the reported precision would have been wrong.</p>
+<p>A margin of error measures precision and nothing more. It can be small on a sample that describes the wrong population, because it says how much an estimate would vary across repeated samples drawn the same way.<span class="citation" data-cites="vb-ch74"><sup>3</sup></span> Weighting fixes who the estimate describes, and the design-based margin says how sure you can be.</p>
+<p>Survey numbers often lose this context on the way to a slide. A press release quotes one figure, a vendor deck repeats it, and by the time it supports a decision nobody can say whether it was weighted or how wide its interval was.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Analyst.</strong> Use the survey’s weights and design variables, meaning its strata and its clusters or replicates, for every estimate you publish, and report the design-based margin of error with it.</li>
+<li><strong>Analyst.</strong> When you show an unweighted figure while exploring the data, label it as describing respondents, and keep it out of any headline.</li>
+<li><strong>CIO.</strong> Before a survey figure goes into a board paper, ask whether it was weighted and how wide its margin of error is.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">The survey analysis</a> computes every descriptive figure both ways, with the R pipeline and a Python notebook behind it. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html">Chapter 74 of the Visual Handbook</a> explains the margin of error and the three things that drive it, and <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html">chapter 70</a> designs and analyzes a survey from start to finish.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>To weight a survey yourself and check the result against a known answer, open <a href="../../guides/survey-weights-and-margins-of-error/index.html">Quote a survey figure with its weights and margin of error</a>, whose notebook runs in Colab with nothing to install.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">the survey analysis</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/fisher-nsduh-analysis/blob/main/notebooks/nsduh_mde_analysis.ipynb">run its notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-nsduh-analysis" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
+</div>
+<div id="ref-nsduh-overview" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, <em>Depression and Substance Use in the NSDUH</em>, overview, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/">https://johnfisher-ai.github.io/fisher-nsduh-analysis/</a></div>
+</div>
+<div id="ref-vb-ch74" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “Margin of Error,” chapter 74 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>CIO</category>
+  <category>Statistics</category>
+  <guid>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>88.7% accurate and missing almost every case</title>
+  <link>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>A model built to predict depression from seven survey measures reached 88.7% accuracy on 134,897 adults. At its default setting it flagged 805 of them, although about one in nine had reported a depressive episode, so nearly all of its accuracy came from answering “no”.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Accuracy alone could not tell that model apart from a useful one.</p>
+<section id="accuracy-rewards-the-majority-answer" class="level2">
+<h2 class="anchored" data-anchor-id="accuracy-rewards-the-majority-answer">Accuracy rewards the majority answer</h2>
+<p>In the analysis sample, 119,664 adults reported no depressive episode and 15,233 did, so a model that always answers “no” is right 88.7% of the time.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> The penalised logistic regression in the analysis matched that score at the default cut-off of 0.50, and its Cohen’s kappa was 0.04, effectively zero.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Kappa measures agreement beyond what chance alone would produce, which is why it exposed what the accuracy figure hid. A kappa near zero means the model agreed with the truth about as often as chance would, given how rare the outcome is.</p>
+<p>The model itself carried real signal. Its AUC of 0.7406 means it ranked a randomly chosen person with depression above a randomly chosen person without it about three times in four.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> The failure was in the decision rule, because the default cut-off of 0.50 sat far above the probabilities the model gives for an outcome this rare. AUC judges the ranking across every possible cut-off, and accuracy judges a single one, which is how the two can disagree so sharply.</p>
+<table class="caption-top table">
+<caption>One model at five cut-offs, with the same AUC at every one<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span></caption>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cut-off</th>
+<th>Depressed adults found</th>
+<th>Precision</th>
+<th>Kappa</th>
+<th>Adults flagged</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.50</td>
+<td>2.7%</td>
+<td>50.8%</td>
+<td>0.040</td>
+<td>805 (1%)</td>
+</tr>
+<tr class="even">
+<td>0.30</td>
+<td>15.8%</td>
+<td>37.5%</td>
+<td>0.167</td>
+<td>6,421 (5%)</td>
+</tr>
+<tr class="odd">
+<td>0.20</td>
+<td>39.0%</td>
+<td>29.0%</td>
+<td>0.233</td>
+<td>20,496 (15%)</td>
+</tr>
+<tr class="even">
+<td>0.15</td>
+<td>54.2%</td>
+<td>24.2%</td>
+<td>0.212</td>
+<td>34,070 (25%)</td>
+</tr>
+<tr class="odd">
+<td>0.10</td>
+<td>73.5%</td>
+<td>19.6%</td>
+<td>0.160</td>
+<td>56,950 (42%)</td>
+</tr>
+</tbody>
+</table>
+<p>Lowering the cut-off to 0.20 finds 39% of the people with depression, at the cost of flagging 15% of everyone for a closer look.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> At that cut-off, 29% of the people flagged have depression, so about seven in ten flags are false alarms.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> That rate suits a quick follow-up question and would be far too high for anything costly or intrusive. Which row is right depends on what happens to a person the model flags, and a cheap follow-up justifies a lower threshold than a costly intervention does.</p>
+<p>The outcome is rare enough that people without depression outnumber those with it by 7.86 to 1. Class weighting and resampling, the other standard responses to imbalance, move the model along the same trade-off without adding information, so a team still has to choose where on the curve to sit.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span></p>
+<p>The Visual Handbook’s chapter on model evaluation shows the same pattern with fraud, where a model that labels every transaction legitimate is 87% accurate and catches no fraud at all.<span class="citation" data-cites="vb-ch115"><sup>2</sup></span> Any outcome that is rare enough produces the same illusion, from fraud and equipment failure to an agent’s request that needs a human to review it.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CIO.</strong> Ask for the base rate with every accuracy figure, and for the share of the cases that matter that the model actually finds.</li>
+<li><strong>Analyst.</strong> Report recall, precision and kappa beside accuracy for any classifier whose positive class is rare.</li>
+<li><strong>Data Scientist.</strong> Set the cut-off from the cost of each kind of error, and show the people who will use the model a table like the one above before they choose.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">The survey analysis</a> shows the classifier, every cut-off and the code behind them. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html">Chapter 115 of the Visual Handbook</a> covers the confusion matrix, precision and recall, the threshold and the precision-recall curve, with a notebook to run.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p><a href="../../guides/accuracy-and-the-base-rate/index.html">Catch a model that is 88.7% accurate and misses almost every case</a> works through the same checks on card-fraud data, in a visual guide and a notebook that runs in Colab.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html">chapter 115 of the Visual Handbook</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/model-evaluation.ipynb">run its notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-nsduh-analysis" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
+</div>
+<div id="ref-vb-ch115" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Model Evaluation,” chapter 115 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>CIO</category>
+  <category>Analyst</category>
+  <category>Data Scientist</category>
+  <category>Machine learning</category>
+  <guid>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>pandas groupby, merge and reshape without surprises</title>
+  <link>https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Most data analysis in Python runs through three pandas operations: grouping, merging and reshaping. The Visual Handbook’s chapter on Python for data analysis teaches all three on an online store’s order log.<span class="citation" data-cites="vb-ch151"><sup>1</sup></span> Each one has a default that can change a result without raising an error, and each has an argument that turns the surprise into a check.</p>
+<section id="defaults-that-change-your-numbers-silently" class="level2">
+<h2 class="anchored" data-anchor-id="defaults-that-change-your-numbers-silently">Defaults that change your numbers silently</h2>
+<p>The code below shows all three on tables small enough to check by eye. It runs as written on pandas 3.0.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 1. groupby leaves out rows whose key is missing</span></span>
+<span id="cb1-4">orders <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>: [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"East"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"West"</span>, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"revenue"</span>: [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">200</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">300</span>]})</span>
+<span id="cb1-5">orders.groupby(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"revenue"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># East 100, West 200, and the 300 is gone</span></span>
+<span id="cb1-6">orders.groupby(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>, dropna<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"revenue"</span>].<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># keeps a missing-region group of 300</span></span>
+<span id="cb1-7"></span>
+<span id="cb1-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 2. merge multiplies rows when a key repeats where you expected it once</span></span>
+<span id="cb1-9">rates <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>: [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"East"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"East"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"West"</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rate"</span>: [<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.10</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.20</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.30</span>]})</span>
+<span id="cb1-10">orders.merge(rates, on<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>, how<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"left"</span>)             <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 4 rows from 3 orders</span></span>
+<span id="cb1-11">orders.merge(rates, on<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"region"</span>, how<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"left"</span>, validate<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"many_to_one"</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># raises MergeError</span></span>
+<span id="cb1-12"></span>
+<span id="cb1-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 3. pivot_table averages duplicate cells unless you choose the function</span></span>
+<span id="cb1-14">sales <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"store"</span>: [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>], <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"month"</span>: [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jan"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"units"</span>: [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>]})</span>
+<span id="cb1-15">sales.pivot_table(index<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"store"</span>, columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"month"</span>, values<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"units"</span>)                 <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A shows 20.0</span></span>
+<span id="cb1-16">sales.pivot_table(index<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"store"</span>, columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"month"</span>, values<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"units"</span>, aggfunc<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sum"</span>)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A shows 40</span></span></code></pre></div></div>
+<p>Grouping drops rows whose key is missing by default, so the group totals stop adding up to the column total.<span class="citation" data-cites="pandas-groupby"><sup>2</sup></span> Pass <code>dropna=False</code> when a missing key should appear as a group of its own, which it usually should in a report.</p>
+<p>A merge returns one row for every matching pair of keys. When a lookup table repeats a key that should be unique, every order that matches it is duplicated, and every total built on the result grows with it. The <code>validate</code> argument states the relationship you expect, such as <code>"many_to_one"</code>, and raises an error when the data disagrees, while <code>indicator=True</code> adds a column that shows which rows found a match.<span class="citation" data-cites="pandas-merge"><sup>3</sup></span></p>
+<p><code>pivot_table</code> combines cells that share an index and a column with the mean by default, so two orders of 10 and 30 units appear as 20.<span class="citation" data-cites="pandas-pivot-table"><sup>4</sup></span> Name the function with <code>aggfunc</code>, or use <code>pivot</code>, which raises an error when it meets duplicates.</p>
+<p>None of the three raises a warning, because each behaves exactly as documented. The damage shows up later, as a total that no longer matches the source system or a dashboard that drifts after a supplier adds a duplicate row to a reference file.</p>
+<p>The pattern repeats across all three operations. pandas picks a reasonable default, the default hides a problem in the data, and one argument brings the problem into view, at the cost of a few characters. A plain check catches what the arguments miss, because comparing the row count and the column total before and after each step shows at once when a step has added or lost data.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Analyst.</strong> Check that group totals add back to the column total after every <code>groupby</code>, and pass <code>dropna=False</code> whenever missing keys matter.</li>
+<li><strong>Developer.</strong> Give every <code>merge</code> a <code>validate</code> argument, and use <code>indicator=True</code> while you develop to see which rows failed to match.</li>
+<li><strong>Analyst and Developer.</strong> Name <code>aggfunc</code> in every <code>pivot_table</code>, and count rows before and after each merge and reshape in your tests.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">Chapter 151 of the Visual Handbook</a> covers Python, NumPy, pandas, reshaping and charts across five notebooks, from a raw order log to a finished chart. Its fourth notebook works through groupby, merges, <code>pivot_table</code> and <code>melt</code> on real data.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">chapter 151 of the Visual Handbook</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/python-for-data-analysis--4-reshaping-and-aggregation.ipynb">run its reshaping notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-vb-ch151" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Python for Data Analysis,” chapter 151 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/python-for-data-analysis.html</a></div>
+</div>
+<div id="ref-pandas-groupby" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">pandas development team, “pandas.DataFrame.groupby,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html</a></div>
+</div>
+<div id="ref-pandas-merge" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">pandas development team, “pandas.merge,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html">https://pandas.pydata.org/docs/reference/api/pandas.merge.html</a></div>
+</div>
+<div id="ref-pandas-pivot-table" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">pandas development team, “pandas.pivot_table,” pandas documentation, accessed October 2026. <a href="https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html">https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Developer</category>
+  <category>Python</category>
+  <guid>https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 </channel>
 </rss>

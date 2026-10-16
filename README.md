@@ -56,7 +56,7 @@ Each article is `articles/<slug>/index.qmd`. The slug is the article's claim in 
 ---
 title: "Adoption is outrunning governance"   # the claim, 70 characters at most
 description: "Two sentences, 160 characters at most. This is the card text and the link preview."
-draft: true                                 # until the day of its first LinkedIn post
+draft: true                                 # while John reviews it; replaced by date when it is published
 date-modified: 2026-11-03                   # shown as "Last checked"
 categories: [CIO, CTO, AI control plane]    # one to three audiences, then the topic
 source: "AI Control Plane Handbook"         # shown on the card
@@ -93,19 +93,23 @@ Each guide ends with two buttons, followed by the articles it puts into practice
 :::
 ```
 
-Link to another article or guide through its `index.qmd`, for example `[Title](../../articles/<slug>/index.qmd)`. While that piece is a draft, Quarto prints the link text without the link, so no page sends a reader to a Draft banner, and the link appears once the piece goes live.
+Link to another article or guide through its `index.qmd`, for example `[Title](../../articles/<slug>/index.qmd)`. While that piece is a draft, Quarto prints the link text without the link, so no page sends a reader to a Draft banner, and the link appears once the piece is published.
 
-## When a piece goes live
+## Publishing a piece
 
-A finished article or guide waits with `draft: true` until the day of its first LinkedIn post. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines. On the day, delete `draft: true`, add `date` and set `date-modified` to that day, then render and run the checks. When a guide goes live, its partner articles that are already live get a "Try it" line linking to the guide.
+A new article or guide starts with `draft: true` while John reviews it. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
+
+A piece is published as soon as John approves it. Delete `draft: true`, add `date` and set `date-modified` to that day, and give it a `sequence`, its number in the plan, which orders pieces published on the same day. Then render and run the checks. When a guide is published, each partner article that is already published gets a "Try it" section linking to it.
+
+Promotion on LinkedIn and other social media follows later, on the piece's planned promotion date, and needs no change to the site.
 
 ## The home page's Start here row
 
-The row offers one first piece for each audience. `index.qmd` lists the pieces in order under the `start-here` listing, and its `labels` say who each one is for, for example `what-an-ai-control-plane-is: "For CTOs and architects"`. A piece still marked `draft: true` stays out of the row, so it fills in as pieces go live. To change a pick, edit both lists.
+The row offers one first piece for each audience. `index.qmd` lists the pieces in order under the `start-here` listing, and its `labels` say who each one is for, for example `what-an-ai-control-plane-is: "For CTOs and architects"`. A piece still marked `draft: true` stays out of the row until it is published. To change a pick, edit both lists.
 
 ## Audience and topic pages
 
-An audience or topic page is a pre-filtered card grid at `audience/<tag>/index.qmd` or `topics/<slug>/index.qmd`, where `<tag>` is the audience tag in lowercase with hyphens (`audience/ai-engineer/`). Each page is added once it has four live articles or guides:
+An audience or topic page is a pre-filtered card grid at `audience/<tag>/index.qmd` or `topics/<slug>/index.qmd`, where `<tag>` is the audience tag in lowercase with hyphens (`audience/ai-engineer/`). Each page is added once it has four published articles or guides:
 
 ```yaml
 ---

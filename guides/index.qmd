@@ -10,7 +10,7 @@ listing:
   template-params:
     heading: 2
     empty: "The first guide articles are on their way. The labs below are open now."
-  sort: "date desc"
+  sort: ["date desc", "sequence"]
   categories: true
   filter-ui: true
   sort-ui: false

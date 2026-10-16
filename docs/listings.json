@@ -1,14 +1,38 @@
 [
   {
-    "listing": "/articles/index.html",
-    "items": []
+    "listing": "/guides/index.html",
+    "items": [
+      "/guides/accuracy-and-the-base-rate/index.html",
+      "/guides/survey-weights-and-margins-of-error/index.html",
+      "/guides/choose-the-right-statistical-test/index.html"
+    ]
   },
   {
-    "listing": "/guides/index.html",
-    "items": []
+    "listing": "/articles/index.html",
+    "items": [
+      "/articles/adoption-is-outrunning-governance/index.html",
+      "/articles/what-an-ai-control-plane-is/index.html",
+      "/articles/plan-for-the-new-agent-protocols/index.html",
+      "/articles/map-agentic-threats-to-controls/index.html",
+      "/articles/value-at-every-milestone/index.html",
+      "/articles/every-ai-claim-is-statistical/index.html",
+      "/articles/ask-how-a-survey-was-weighted/index.html",
+      "/articles/accurate-and-missing-almost-every-case/index.html",
+      "/articles/pandas-groupby-merge-and-reshape/index.html"
+    ]
   },
   {
     "listing": "/index.html",
-    "items": []
+    "items": [
+      "/articles/adoption-is-outrunning-governance/index.html",
+      "/articles/what-an-ai-control-plane-is/index.html",
+      "/articles/plan-for-the-new-agent-protocols/index.html",
+      "/articles/map-agentic-threats-to-controls/index.html",
+      "/articles/value-at-every-milestone/index.html",
+      "/articles/every-ai-claim-is-statistical/index.html",
+      "/articles/ask-how-a-survey-was-weighted/index.html",
+      "/articles/accurate-and-missing-almost-every-case/index.html",
+      "/articles/pandas-groupby-merge-and-reshape/index.html"
+    ]
   }
 ]

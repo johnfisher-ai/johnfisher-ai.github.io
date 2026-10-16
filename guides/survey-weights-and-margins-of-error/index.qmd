@@ -1,8 +1,9 @@
 ---
 title: "Quote a survey figure with its weights and margin of error"
 description: "One survey gives 11.29% or 8.44% for the same measure, depending on its weights. Learn to weight a survey and state its margin of error, in Colab."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 2
 categories: [Analyst, CIO, CTO, Beginner, Statistics]
 lab-time: "About an hour"
 lab-format: "Visual guide and Colab lab"

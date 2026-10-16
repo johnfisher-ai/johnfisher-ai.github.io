@@ -1,8 +1,8 @@
 ```{=html}
 <%
 /* "Start here" row on the home page: one first piece per audience, in the order index.qmd lists them.
-   A piece still marked draft is left out by Quarto, so the row fills in as pieces go live.
-   template-params: labels (slug -> who the piece is the first read for), empty (text shown before any goes live). */
+   A piece still marked draft is left out by Quarto, so the row fills in as pieces are published.
+   template-params: labels (slug -> who the piece is the first read for), empty (text shown before any is published). */
 const p = (typeof templateParams !== 'undefined' && templateParams) ? templateParams : {};
 const labels = p.labels || {};
 const slugOf = (path) => { const m = String(path).match(/(?:articles|guides)\/([^\/]+)\//); return m ? m[1] : ''; };

@@ -1,8 +1,9 @@
 ---
 title: "Each OWASP agentic threat maps to a control you can test"
 description: "The OWASP Top 10 for Agentic Applications names ten risks. Each one maps to controls a team can put in place and test today."
-draft: true
-date-modified: 2026-10-15
+date: 2026-10-16
+date-modified: 2026-10-16
+sequence: 4
 categories: [Developer, AI Engineer, CISO, AI control plane]
 source: "AI Control Plane Handbook"
 image: card.png

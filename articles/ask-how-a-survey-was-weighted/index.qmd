@@ -1,8 +1,9 @@
 ---
 title: "The same survey says 11.29% or 8.44%"
 description: "A national survey puts depression at 11.29% or 8.44%, depending on whether its weights are used. Check both before you quote a survey number."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 57
 categories: [Analyst, CIO, Statistics]
 source: "NSDUH study"
 image: card.png
@@ -60,3 +61,7 @@ Survey numbers often lose this context on the way to a slide. A press release qu
 ## Go deeper
 
 [The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) computes every descriptive figure both ways, with the R pipeline and a Python notebook behind it. [Chapter 74 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html) explains the margin of error and the three things that drive it, and [chapter 70](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html) designs and analyzes a survey from start to finish.
+
+## Try it
+
+To weight a survey yourself and check the result against a known answer, open [Quote a survey figure with its weights and margin of error](../../guides/survey-weights-and-margins-of-error/index.qmd), whose notebook runs in Colab with nothing to install.

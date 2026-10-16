@@ -9,7 +9,7 @@ listing:
   template-params:
     heading: 2
     empty: "The first articles are on their way. Follow on LinkedIn to see each one as it's published."
-  sort: "date desc"
+  sort: ["date desc", "sequence"]
   categories: true
   filter-ui: true
   sort-ui: false

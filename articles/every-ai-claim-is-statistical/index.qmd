@@ -1,8 +1,9 @@
 ---
 title: "Every AI claim is a statistical claim"
 description: "A model's accuracy, a pilot's savings and a survey's headline are all estimates from a sample. Three questions show whether each one holds up."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 56
 categories: [CIO, CTO, Analyst, Statistics]
 source: "Visual Handbook"
 image: card.png
@@ -57,3 +58,7 @@ None of the three questions needs advanced mathematics. Each needs a habit of as
 ## Go deeper
 
 [Chapter 2 of *Statistics, Data Science and AI: A Visual Handbook*](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/statistics-data-science-and-ai.html) maps how statistics, machine learning and data science fit together, with a notebook you can run. [The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) works through all three questions on one dataset, with the code behind every figure.
+
+## Try it
+
+[Choose the right statistical test in four questions](../../guides/choose-the-right-statistical-test/index.qmd) puts two of the three questions into practice, "Compared with what?" and "How sure?", with a decision map and a clinic dataset to test in Colab.

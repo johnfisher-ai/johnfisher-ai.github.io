@@ -1,8 +1,9 @@
 ---
 title: "Builders need to plan for the 2026 changes to MCP and A2A"
 description: "A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production."
-draft: true
-date-modified: 2026-10-15
+date: 2026-10-16
+date-modified: 2026-10-16
+sequence: 3
 categories: [Developer, AI Engineer, AI control plane]
 source: "AI Control Plane Handbook"
 image: card.png

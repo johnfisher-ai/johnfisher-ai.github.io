@@ -1,8 +1,9 @@
 ---
 title: "Catch a model that is 88.7% accurate and misses almost every case"
 description: "A survey model was 88.7% accurate and found almost no one. Learn the checks that expose a model like it, then run them on card fraud data in Colab."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 1
 categories: [Analyst, Developer, Data Scientist, Beginner, Machine learning]
 lab-time: "About an hour"
 lab-format: "Visual guide and Colab lab"

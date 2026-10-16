@@ -1,8 +1,9 @@
 ---
 title: "Choose the right statistical test in four questions"
 description: "Four questions about your data pick the right test: outcome, groups, design and assumptions. Learn the map, then run it on clinic data in Colab."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 41
 categories: [Analyst, Beginner, Statistics]
 lab-time: "About 45 minutes"
 lab-format: "Visual guide and Colab lab"

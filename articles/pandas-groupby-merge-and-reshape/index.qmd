@@ -1,8 +1,9 @@
 ---
 title: "pandas groupby, merge and reshape without surprises"
 description: "Most analysis runs through three pandas operations. Each has a default that can change your numbers without an error, and an argument that prevents it."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 108
 categories: [Analyst, Developer, Python]
 source: "Visual Handbook"
 image: card.png

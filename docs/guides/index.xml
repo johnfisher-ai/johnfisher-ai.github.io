@@ -17,6 +17,208 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Fri, 16 Oct 2026 00:39:44 GMT</lastBuildDate>
+<lastBuildDate>Fri, 16 Oct 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Catch a model that is 88.7% accurate and misses almost every case</title>
+  <link>https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>In a published analysis of a national health survey, a model that was 88.7% accurate flagged 805 of 134,897 adults, although about one in nine of them had reported a depressive episode.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Before you approve a model that looks for something rare, ask for the base rate, the share of real cases it finds and what each kind of mistake costs.</p>
+<p>Rare outcomes break the usual defaults, because accuracy rewards a model that never raises an alarm, ROC-AUC flatters one when negatives vastly outnumber positives, and rebalancing the classes keeps the ranking while distorting the probabilities.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span> The lab replaces each default with a check you can repeat on your own models.</p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>The visual guide and its notebook follow one card issuer through four months of purchases, a scenario written for the book, with 318 frauds among 119,556 transactions.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></p>
+<ol type="1">
+<li>Price each error before fitting a model. A false alarm costs $16 of analyst time and customer annoyance, while a missed fraud costs the amount written off plus $25 of handling.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+<li>Measure the model that does nothing. Flagging no transaction at all scores 99.73% accuracy, which is why the lab never reports accuracy again.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+<li>Split the data by time, and catch a warehouse column that lifts PR-AUC from 0.30 to 0.98 although it is filed weeks after each purchase, too late to inform the decision.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+<li>Compare oversampling, class weights and leaving the data alone. All three rank transactions almost identically, and the first two predict a fraud rate about 36 times the one observed.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+<li>Set the threshold from the costs, and then test the review team’s capacity. The cheapest policy flags about five transactions a day for 31% less than flagging nothing, and working every case the team could costs 13 times as much as having no model.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/threshold-cost.png" class="img-fluid figure-img" alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, reaches its lowest point of $9,959 at 8.8 percent and rises gently after that. On the right, on a log scale, the cost-optimal threshold costs $9,959, flagging nothing costs $14,476 and filling the review team's capacity costs $190,667."></p>
+<figcaption>Total cost over 30 days at each threshold, and the cost of three policies on a log scale. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></figcaption>
+</figure>
+</div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>You need a free Google account to run the notebook in Colab. It loads its data from the book’s repository, and Colab already has pandas, scikit-learn and matplotlib, so there is nothing to install, no API key and no cost. Every cell runs as written, and a little pandas helps if you want to change the code.</p>
+<div class="ai-actions">
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html" class="btn btn-primary">Open the visual guide</a> <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/capstone-credit-card-fraud.ipynb" class="btn btn-outline-primary">Open in Colab</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<p><a href="../../articles/accurate-and-missing-almost-every-case/index.html">88.7% accurate and missing almost every case</a> reads the survey model at five cut-offs and lists the numbers to ask for beside accuracy.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-nsduh-analysis" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
+</div>
+<div id="ref-vb-ch191" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Developer</category>
+  <category>Data Scientist</category>
+  <category>Beginner</category>
+  <category>Machine learning</category>
+  <guid>https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Quote a survey figure with its weights and margin of error</title>
+  <link>https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>Strategy papers lean on survey figures about customers, staff and AI adoption, and one national health survey shows how far such a figure can move, from 11.29% of its respondents to 8.44% of adults once its weights are applied.<span class="citation" data-cites="nsduh-analysis"><sup>1</sup></span> Before a survey number supports a decision, ask whether it was weighted and how wide its margin of error is.</p>
+<p>Once you know a survey’s design, weighting it and stating an honest margin of error take a few lines of statsmodels.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span> The margin needs the most care, because unequal weights make it wider than the textbook formula gives, and it covers sampling error only, so it says nothing about a biased sample or a leading question.<span class="citation" data-cites="vb-ch70 vb-ch74"><sup>2,3</sup></span></p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>A simulated city wants to know whether a parks levy has majority support. Its survey of 1,200 households was written for the book, so the true answer is known and every estimate can be checked against it.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></p>
+<ol type="1">
+<li>Lay out the design. The four districts are sampled at different rates, so each household carries a weight equal to its district’s population divided by the number sampled there.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></li>
+<li>Plot support by district before averaging anything. Oldtown, the district least in favor, was over-sampled on purpose and supplies a third of the respondents from under a fifth of the city’s households.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></li>
+<li>Estimate support twice with <code>DescrStatsW</code> from statsmodels. The raw responses give about 55%, and the weighted estimate is 63%, close to the city’s true 62%.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></li>
+<li>Give the weighted figure a margin of error that allows for the weights. Unequal weights cut the effective sample from 932 respondents to about 660, and the margin comes to about 4 points either side.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></li>
+<li>Size the next survey. Holding the margin near 3 points takes roughly 1,000 respondents under simple random sampling and about 1,400 with this design.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/support-by-district.png" class="img-fluid figure-img" alt="Two bar charts. On the left, the share of respondents supporting the levy in each district, about 67 percent in Hillcrest, 59 percent in Lakeside, 30 percent in Oldtown and 74 percent in Riverside, with a dashed majority line at 50 percent. On the right, the number of respondents in each district, about 196 in Hillcrest, 203 in Lakeside, 302 in Oldtown and 231 in Riverside."></p>
+<figcaption>Support for the levy in each district, and the number of respondents in each. Oldtown, where support is lowest, has the most respondents because it was over-sampled. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch70"><sup>2</sup></span></figcaption>
+</figure>
+</div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>A free Google account is all you need to run the notebook in Colab. It reads the survey from the book’s repository and uses pandas, statsmodels and seaborn, which Colab already has, so there is nothing to install and nothing to pay. If margins of error are new to you, <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html">chapter 74 of the Visual Handbook</a> explains what sets their size.</p>
+<div class="ai-actions">
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html" class="btn btn-primary">Open the visual guide</a> <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/case-study-designing-and-analyzing-a-survey.ipynb" class="btn btn-outline-primary">Open in Colab</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<ul>
+<li><a href="../../articles/ask-how-a-survey-was-weighted/index.html">The same survey says 11.29% or 8.44%</a> applies weights and design-based standard errors to a national survey of 134,897 adults.</li>
+<li><a href="../../articles/adoption-is-outrunning-governance/index.html">Adoption is outrunning governance</a> reads four recent surveys about AI agents one at a time, because their samples and measures differ.</li>
+</ul>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-nsduh-analysis" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
+</div>
+<div id="ref-vb-ch70" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Case Study: Designing and Analyzing a Survey,” chapter 70 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-designing-and-analyzing-a-survey.html</a></div>
+</div>
+<div id="ref-vb-ch74" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “Margin of Error,” chapter 74 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/margin-of-error.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>CIO</category>
+  <category>CTO</category>
+  <category>Beginner</category>
+  <category>Statistics</category>
+  <guid>https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Choose the right statistical test in four questions</title>
+  <link>https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>Results from pilots, A/B tests and model comparisons often reach a decision as a single p-value, and if the wrong test produced it, even a perfect calculation gives a meaningless answer.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span> Ask which test was used, and ask for the size of the effect and its confidence interval beside the p-value, because with enough data a trivial effect is significant.<span class="citation" data-cites="vb-ch85"><sup>2</sup></span></p>
+<p>Four questions about the data almost force the choice of test, and the discipline lies in asking them before running anything.<span class="citation" data-cites="vb-ch83 vb-ch85"><sup>1,2</sup></span> A classic slip is treating paired measurements as independent, as when two models are scored on the same cross-validation folds, and it can erase a real improvement or manufacture a false one.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>The lab runs on a clinic dataset written for the book, with 200 patients, their blood pressure before and after treatment, their wait times at three clinics and whether they were satisfied.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></p>
+<ol type="1">
+<li>Ask the four questions in order. Is the outcome numeric or categorical, how many groups are there, are the groups independent or paired, and do the test’s assumptions hold?<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
+<li>Read the test off the decision map. Switch to its rank-based twin when the data are skewed or have outliers, and to Fisher’s exact test when a cell’s expected count falls below about 5.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
+<li>Route four questions about the clinic through the map. Blood pressure fell by about 9 mmHg within patients (a paired t-test), and the new treatment lowered it more than the standard one did, by 11.6 mmHg against 6.3 (a Welch t-test).<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
+<li>Report the other two answers with the same care, although neither is significant. Satisfaction shows no clear link to treatment (a p-value of about 0.27), and wait times do not differ by clinic under ANOVA or under its rank-based twin.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
+<li>Close each result with its p-value, effect size and confidence interval, as the review chapter does for the five case studies that follow it.<span class="citation" data-cites="vb-ch85"><sup>2</sup></span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/decision-map.png" class="img-fluid figure-img" alt="A decision tree that starts by asking what the outcome is. For a numeric outcome, two paired groups lead to the paired t-test or Wilcoxon, two independent groups to the Welch t-test or Mann-Whitney, and three or more groups to ANOVA or Kruskal-Wallis. For a categorical outcome, a rate leads to the z-test for proportions, and two variables lead to the chi-square test."></p>
+<figcaption>The decision map from the visual guide. Start from the outcome, follow the number of groups and the design, and read off the test, with its rank-based fallback after the slash.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></figcaption>
+</figure>
+</div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>All the notebook needs is a free Google account for Colab, which already has SciPy and statsmodels. The notebook fetches the clinic data from the book’s repository, so it runs free with no setup. It helps to have met the t-test and the chi-square test, and the <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html">review chapter</a> turns the whole map into a <code>choose_test()</code> helper with the assumption checks in code.</p>
+<div class="ai-actions">
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html" class="btn btn-primary">Open the visual guide</a> <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/choosing-the-right-test.ipynb" class="btn btn-outline-primary">Open in Colab</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<p><a href="../../articles/every-ai-claim-is-statistical/index.html">Every AI claim is a statistical claim</a> sets out three questions to ask of any AI number. The right test is how an analyst answers two of them, “Compared with what?” and “How sure?”</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-vb-ch83" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Choosing the Right Test,” chapter 83 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html</a></div>
+</div>
+<div id="ref-vb-ch85" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Review &amp; Choosing the Right Test,” chapter 85 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Beginner</category>
+  <category>Statistics</category>
+  <guid>https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/</guid>
+  <pubDate>Fri, 16 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 </channel>
 </rss>

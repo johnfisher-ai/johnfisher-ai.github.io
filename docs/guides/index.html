@@ -71,9 +71,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
+      valueNames: ['listing-project','listing-website','listing-language','listing-format','listing-execute','listing-engines','listing-draft-mode','listing-reading-time','listing-template-partials','listing-filters','listing-title','listing-description','listing-date','listing-date-modified','listing-sequence','listing-categories','listing-lab-time','listing-lab-format','listing-source','listing-image','listing-image-alt','listing-license','listing-references','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: [],
+      searchColumns: ["listing-project","listing-website","listing-language","listing-format","listing-execute","listing-engines","listing-draft-mode","listing-reading-time","listing-template-partials","listing-filters","listing-title","listing-description","listing-date","listing-date-modified","listing-sequence","listing-categories","listing-lab-time","listing-lab-format","listing-source","listing-image","listing-image-alt","listing-license","listing-references","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -101,11 +101,17 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../assets/css/fonts.css">
 <link rel="alternate" type="application/rss+xml" title="AI+ by John Fisher: guides" href="index.xml" data-external="1"><meta property="og:title" content="Guides &amp; Labs">
 <meta property="og:description" content="Short guides say why a skill matters, then send you to a visual guide or a notebook you can run in Colab.">
-<meta property="og:image" content="https://johnfisher-ai.github.io/guides/assets/img/social-card.png">
+<meta property="og:image" content="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/card.png">
 <meta property="og:site_name" content="AI+ by John Fisher">
+<meta property="og:image:alt" content="">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="Guides &amp; Labs">
 <meta name="twitter:description" content="Short guides say why a skill matters, then send you to a visual guide or a notebook you can run in Colab.">
-<meta name="twitter:image" content="https://johnfisher-ai.github.io/guides/assets/img/social-card.png">
+<meta name="twitter:image" content="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/card.png">
+<meta name="twitter:image:alt" content="">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://johnfisher-ai.github.io/guides/">
 <meta property="og:url" content="https://johnfisher-ai.github.io/guides/">
@@ -175,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar" role="complementary" aria-label="Filter by category">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QW5hbHlzdA==">Analyst <span class="quarto-category-count">(3)</span></div><div class="category" data-category="QmVnaW5uZXI=">Beginner <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q0lP">CIO <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q1RP">CTO <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVudGlzdA==">Data Scientist <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGV2ZWxvcGVy">Developer <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TWFjaGluZSUyMGxlYXJuaW5n">Machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RhdGlzdGljcw==">Statistics <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content" data-pagefind-body>
 
@@ -217,9 +223,46 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </div>
 
-<div class="ai-empty"><p>The first guide articles are on their way. The labs below are open now.</p></div>
-
 <ul class="list ai-cards">
+
+<li class="ai-card" data-index="0" data-categories="QW5hbHlzdCUyQ0RldmVsb3BlciUyQ0RhdGElMjBTY2llbnRpc3QlMkNCZWdpbm5lciUyQ01hY2hpbmUlMjBsZWFybmluZw==" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792151123401" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="489">
+<a class="ai-card-link" href="../guides/accuracy-and-the-base-rate/">
+<img src="../guides/accuracy-and-the-base-rate/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-card-body">
+<h2 class="listing-title anchored">Catch a model that is 88.7% accurate and misses almost every case</h2>
+<p class="listing-description">A survey model was 88.7% accurate and found almost no one. Learn the checks that expose a model like it, then run them on card fraud data in Colab.</p>
+<p class="ai-meta"><span class="listing-date">Oct 16, 2026</span> · <span class="ai-lab-time">About an hour</span></p>
+<p class="ai-source">Source: Visual Handbook</p>
+<p class="ai-chips"><span class="ai-chip">Analyst</span><span class="ai-chip">Developer</span><span class="ai-chip">Data Scientist</span><span class="ai-chip ai-chip-level">Beginner</span><span class="ai-chip ai-chip-topic">Machine learning</span></p>
+</div>
+</a>
+</li>
+
+<li class="ai-card" data-index="1" data-categories="QW5hbHlzdCUyQ0NJTyUyQ0NUTyUyQ0JlZ2lubmVyJTJDU3RhdGlzdGljcw==" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792151123402" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="518">
+<a class="ai-card-link" href="../guides/survey-weights-and-margins-of-error/">
+<img src="../guides/survey-weights-and-margins-of-error/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-card-body">
+<h2 class="listing-title anchored">Quote a survey figure with its weights and margin of error</h2>
+<p class="listing-description">One survey gives 11.29% or 8.44% for the same measure, depending on its weights. Learn to weight a survey and state its margin of error, in Colab.</p>
+<p class="ai-meta"><span class="listing-date">Oct 16, 2026</span> · <span class="ai-lab-time">About an hour</span></p>
+<p class="ai-source">Source: Visual Handbook</p>
+<p class="ai-chips"><span class="ai-chip">Analyst</span><span class="ai-chip">CIO</span><span class="ai-chip">CTO</span><span class="ai-chip ai-chip-level">Beginner</span><span class="ai-chip ai-chip-topic">Statistics</span></p>
+</div>
+</a>
+</li>
+
+<li class="ai-card" data-index="2" data-categories="QW5hbHlzdCUyQ0JlZ2lubmVyJTJDU3RhdGlzdGljcw==" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792151123402" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="519">
+<a class="ai-card-link" href="../guides/choose-the-right-statistical-test/">
+<img src="../guides/choose-the-right-statistical-test/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-card-body">
+<h2 class="listing-title anchored">Choose the right statistical test in four questions</h2>
+<p class="listing-description">Four questions about your data pick the right test: outcome, groups, design and assumptions. Learn the map, then run it on clinic data in Colab.</p>
+<p class="ai-meta"><span class="listing-date">Oct 16, 2026</span> · <span class="ai-lab-time">About 45 minutes</span></p>
+<p class="ai-source">Source: Visual Handbook</p>
+<p class="ai-chips"><span class="ai-chip">Analyst</span><span class="ai-chip ai-chip-level">Beginner</span><span class="ai-chip ai-chip-topic">Statistics</span></p>
+</div>
+</a>
+</li>
 
 </ul>
 <div class="listing-no-matching d-none" data-pagefind-ignore>No matching items</div>

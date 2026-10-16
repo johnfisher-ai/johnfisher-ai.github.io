@@ -1,8 +1,9 @@
 ---
 title: "88.7% accurate and missing almost every case"
 description: "A survey model scored 88.7% accuracy by answering no to almost everyone. Judge a classifier against its base rate, and read recall and kappa too."
-draft: true
+date: 2026-10-16
 date-modified: 2026-10-16
+sequence: 81
 categories: [CIO, Analyst, Data Scientist, Machine learning]
 source: "NSDUH study"
 image: card.png
@@ -53,3 +54,7 @@ The Visual Handbook's chapter on model evaluation shows the same pattern with fr
 ## Go deeper
 
 [The survey analysis](https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html) shows the classifier, every cut-off and the code behind them. [Chapter 115 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/model-evaluation.html) covers the confusion matrix, precision and recall, the threshold and the precision-recall curve, with a notebook to run.
+
+## Try it
+
+[Catch a model that is 88.7% accurate and misses almost every case](../../guides/accuracy-and-the-base-rate/index.qmd) works through the same checks on card-fraud data, in a visual guide and a notebook that runs in Colab.

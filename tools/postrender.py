@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Post-render fixes for AI+. Quarto runs this after every render (project.post-render in _quarto.yml).
 
-Quarto writes the site into docs/. A piece marked `draft: true` waits for the day of its first post. With
+Quarto writes the site into docs/. A piece marked `draft: true` waits for John's review before it is published. With
 draft-mode set to unlinked, Quarto renders it at its own address but leaves it out of listings, feeds and the
 sitemap, and shows a Draft banner at the top. This script marks each draft noindex and keeps it out of the
 search index (with draft-mode set to gone, it removes the empty pages Quarto writes instead). It then makes

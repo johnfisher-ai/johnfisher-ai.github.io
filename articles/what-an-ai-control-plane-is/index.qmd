@@ -1,8 +1,9 @@
 ---
 title: "What an enterprise AI control plane is"
 description: "Three capabilities define an enterprise AI control plane. Each one becomes a question you can put to any vendor that says it sells one."
-draft: true
-date-modified: 2026-10-15
+date: 2026-10-16
+date-modified: 2026-10-16
+sequence: 2
 categories: [CIO, CTO, Architect, AI control plane]
 source: "AI Control Plane Handbook"
 image: card.png

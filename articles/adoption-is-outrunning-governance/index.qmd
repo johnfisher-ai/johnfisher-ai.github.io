@@ -1,8 +1,9 @@
 ---
 title: "Adoption is outrunning governance"
 description: "Four recent surveys find AI agents spreading faster than the controls around them. Each measures something different, so read each one on its own terms."
-draft: true
-date-modified: 2026-10-15
+date: 2026-10-16
+date-modified: 2026-10-16
+sequence: 1
 categories: [CIO, CTO, AI control plane]
 source: "AI Control Plane Handbook"
 image: card.png
@@ -66,3 +67,7 @@ Companies sense the gap in their own operations. In Deloitte's 2026 technology p
 ## Go deeper
 
 [Section 1 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-01.html#agents-are-outrunning-integration-and-governance) sets these surveys beside an integration benchmark and an analyst forecast, and explains why coordinating models and agents has become an infrastructure problem. [Slide 4 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-4) puts the four results on one page, with speaker notes you can present from.
+
+## Try it
+
+Before you quote figures like these, [Quote a survey figure with its weights and margin of error](../../guides/survey-weights-and-margins-of-error/index.qmd) shows what to check first, with a notebook you can run in Colab.
