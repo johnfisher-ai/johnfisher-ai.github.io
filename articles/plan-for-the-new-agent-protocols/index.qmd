@@ -1,0 +1,59 @@
+---
+title: "Builders need to plan for the 2026 changes to MCP and A2A"
+description: "A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production."
+draft: true
+date-modified: 2026-10-15
+categories: [Developer, AI Engineer, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 13 of the AI Control Plane executive deck, headed Context engineering and open interoperability, with cards for context engineering, capability discovery and open protocols."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: connectivity-benchmark
+    type: webpage
+    title: "Ryan Yeager, “Agentic transformation reaches new heights: 2026 Connectivity Benchmark Report insights,” MuleSoft Blog, February 5, 2026."
+    URL: https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/
+  - id: mcp-spec
+    type: webpage
+    title: "Model Context Protocol, specification (revision 2026-07-28), including “Authorization” for MCP servers and “Key changes” for that revision, Agentic AI Foundation (Linux Foundation). <https://modelcontextprotocol.io/specification>"
+    URL: https://modelcontextprotocol.io/specification/2026-07-28/changelog
+  - id: a2a-spec
+    type: webpage
+    title: "Agent2Agent (A2A) Protocol, specification and project repository, Agentic AI Foundation (Linux Foundation); version 1.0, March 2026; see also Agentic AI Foundation, “A2A joins AAIF’s open agentic stack,” August 17, 2026. <https://github.com/a2aproject/A2A>"
+    URL: https://aaif.io/blog/a2a-joins-aaif
+  - id: fido-agents
+    type: webpage
+    title: "FIDO Alliance, “FIDO Alliance to develop standards for trusted AI agent interactions,” April 28, 2026."
+    URL: https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/
+---
+
+Agents reach tools through the Model Context Protocol (MCP) and reach other agents through the Agent2Agent protocol (A2A), and both changed substantially in 2026. The pace is already a problem for the people who build on them, and in the 2026 Connectivity Benchmark, 68% of IT leaders said they find it hard to keep up with emerging agent standards and protocols.[@connectivity-benchmark]
+
+## Where each change lands
+
+MCP standardizes how agents reach tools and data,[@mcp-spec] and A2A standardizes how agents collaborate.[@a2a-spec] Both are now projects of the Agentic AI Foundation, hosted by the Linux Foundation.[@mcp-spec; @a2a-spec] A third protocol, for agent payments, is moving the same way.
+
+| Protocol | What changed in 2026 | Where it lands |
+|---|---|---|
+| A2A | Version 1.0, the first stable release, arrived in March 2026 with version negotiation, multi-tenancy and signed agent cards that let one agent verify another's identity[@a2a-spec] | Any agent that accepts work from another agent |
+| MCP | The July 2026 revision made the protocol stateless, removing sessions and the initialization handshake, and requires headers that name the method and tool on every HTTP request[@mcp-spec] | Every MCP server that held session state, and every gateway that reads MCP traffic |
+| AP2 | Google contributed its Agent Payments Protocol to the FIDO Alliance in April 2026, where new working groups are developing standards for agent authentication and agent-initiated payments[@fido-agents] | Any agent that can start a payment |
+
+: Three agent protocols that changed in 2026
+
+The MCP revision did more than remove state. It documents how OpenTelemetry trace context travels with each call, tightens authorization checks and deprecates several features with a minimum 12-month window.[@mcp-spec] That window is the deadline for any tool that still relies on a deprecated feature. Agent payments are at an earlier stage, and until the new standards are settled, AP2 is best treated as pre-standard.
+
+For MCP, statelessness means every request carries what the server needs, and no server keeps a session between calls. A server can then run behind an ordinary load balancer, since no request depends on an earlier one. For A2A, an agent card is the description an agent publishes of itself, and a signature lets another agent check who published it before it trusts the work on offer.
+
+The cost of each change depends on how agent traffic is wired. Where every agent connects to every tool on its own, each team re-implements each change in its own code and on its own schedule, and the slowest team sets the pace for everyone. A control plane absorbs much of that work in one place. Its registry can check signed agent cards before one agent trusts another, and its gateway can apply policy to MCP's standard headers and join every call to its trace, so a change to the protocol becomes a change to one policy, and the same traces show which tools still call a deprecated feature as the window closes.
+
+## What to do next
+
+1. **Developer.** List every MCP server you run, and check which ones still hold session state or leave out the method and tool headers, starting with the servers your production agents call most.
+2. **AI Engineer.** Require a signed agent card before an agent accepts work from another agent, and give no privilege to roles an agent asserts about itself.
+3. **Developer and AI Engineer.** Track the MCP deprecations against their 12-month window, and keep any payment flow built on AP2 behind a person's approval while the standards work continues.
+
+## Go deeper
+
+[Section 4 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-04.html#open-protocols-for-tools-agents-and-payments) places the protocols inside a control plane's routing, context engineering and delegation. [Slide 13 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-2.html#slide-13) sets the protocols beside context engineering and capability discovery.

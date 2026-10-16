@@ -1,0 +1,68 @@
+---
+title: "Adoption is outrunning governance"
+description: "Four recent surveys find AI agents spreading faster than the controls around them. Each measures something different, so read each one on its own terms."
+draft: true
+date-modified: 2026-10-15
+categories: [CIO, CTO, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 4 of the AI Control Plane executive deck, headed Adoption is outrunning governance, with results from four surveys and the maturity gap in AI agents."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: ms-cyber-pulse
+    type: webpage
+    title: "Vasu Jakkal, “80% of Fortune 500 use active AI agents: Observability, governance, and security shape the new frontier,” Microsoft Security Blog, February 10, 2026 (Cyber Pulse, issue 1; Microsoft telemetry for November 2025 and a Microsoft-commissioned survey of more than 1,700 data security professionals, July 2025)."
+    URL: https://www.microsoft.com/en-us/security/blog/2026/02/10/80-of-fortune-500-use-active-ai-agents-observability-governance-and-security-shape-the-new-frontier/
+  - id: deloitte-state-of-ai
+    type: webpage
+    title: "Deloitte, “From ambition to activation: Organizations stand at the untapped edge of AI’s potential, reveals Deloitte survey,” press release, January 21, 2026 (State of AI in the Enterprise 2026; survey of 3,235 business and IT leaders in 24 countries, August–September 2025)."
+    URL: https://www.deloitte.com/us/en/about/press-room/state-of-ai-report-2026.html
+  - id: kpmg-pulse
+    type: webpage
+    title: "KPMG, “Investment and AI agent deployment surge as execution becomes the differentiator,” March 31, 2026 (AI Quarterly Pulse Survey, Q1 2026; 237 US leaders); “AI investment and agent deployment hold steady amid growing focus on pragmatism,” June 24, 2026 (Q2 2026; 204 US leaders); and “AI’s value story sharpens as organizations gain confidence in governance, accountability and workforce adoption,” September 24, 2026 (Q3 2026; 314 US leaders, July–August 2026). <https://kpmg.com/us/en/media/news/q1-ai-pulse2026.html> <https://kpmg.com/us/en/media/news/q2-ai-pulse-2026.html>"
+    URL: https://kpmg.com/us/en/media/news/q3-ai-pulse-2026.html
+  - id: bcg-value-gap
+    type: webpage
+    title: "Jessica Apotheker et al., “Are you generating value from AI? The widening gap,” Boston Consulting Group, September 30, 2025."
+    URL: https://www.bcg.com/publications/2025/are-you-generating-value-from-ai-the-widening-gap
+  - id: deloitte-orchestration
+    type: webpage
+    title: "Sayantani Mazumder, China Widener, Gillian Crossan, Girija Krishnamurthy, Baris Sarer, and Diana Kearns-Manolatos, “Unlocking exponential value with AI agent orchestration,” Deloitte Insights (Technology, Media & Telecommunications Predictions 2026), November 18, 2025."
+    URL: https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2026/ai-agent-orchestration.html
+  - id: gartner-cancel
+    type: webpage
+    title: "Gartner, “Gartner predicts over 40% of agentic AI projects will be canceled by end of 2027,” press release, June 25, 2025."
+    URL: https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027
+---
+
+AI agents have reached the largest companies faster than the rules for running them. By Microsoft's own telemetry, more than 80% of Fortune 500 companies use active AI agents built with low-code or no-code tools.[@ms-cyber-pulse] Four recent surveys measure how far governance trails that spread. They ask different questions of different people, so each one needs to be read on its own terms.
+
+## Each survey measures something different
+
+In the table below, the middle column shows how far agents have spread in each study, and the last column shows what has not kept pace with them.
+
+| Study | How far agents have spread | What lags behind |
+|---|---|---|
+| Deloitte, State of AI in the Enterprise 2026, a survey of 3,235 business and IT leaders in 24 countries[@deloitte-state-of-ai] | Close to three-quarters of companies plan to deploy agentic AI within two years | Only 21% of the companies planning to deploy report a mature model for agent governance |
+| KPMG AI Quarterly Pulse, third quarter of 2026, a survey of 314 US leaders at companies with revenue of $1 billion or more[@kpmg-pulse] | 62% of organizations are building, deploying or developing AI agents | 49% have set boundaries where agents may not make decisions on their own |
+| Microsoft Cyber Pulse, February 2026, from Microsoft's telemetry and a survey it commissioned of more than 1,700 data security professionals[@ms-cyber-pulse] | More than 80% of Fortune 500 companies use active AI agents built with low-code or no-code tools | 29% of employees have turned to unsanctioned AI agents for work tasks |
+| BCG, The Widening AI Value Gap, September 2025[@bcg-value-gap] | AI agents' share of the value AI creates is expected to rise from about 17% in 2025 to 29% by 2028 | Only 5% of companies are "future-built" for AI, and 60% report hardly any material value |
+
+: Four studies of AI agents, each read on its own terms
+
+The four results can't be added up or charted as one trend, because their samples differ in country, company size and date, and each study counts something different. Deloitte counted plans to deploy,[@deloitte-state-of-ai] KPMG counted organizations building or running agents,[@kpmg-pulse] Microsoft measured agents in active use,[@ms-cyber-pulse] and BCG estimated where the value of AI will come from.[@bcg-value-gap]
+
+Read one at a time, the studies still point the same way. In each one, the measure of adoption runs ahead of the measure of control, whether that control is a governance model, a boundary on what agents may decide alone, or a rule against tools nobody approved.
+
+Companies sense the gap in their own operations. In Deloitte's 2026 technology predictions, 80% of organizations consider their basic automation mature, but only 28% say so once AI agents are included.[@deloitte-orchestration] The cost of leaving the gap open shows up in forecasts. Gartner expects more than 40% of agentic AI projects to be canceled by the end of 2027 because of escalating costs, unclear business value or inadequate risk controls.[@gartner-cancel] Each of those causes is something a control plane exists to manage, which is why the controls need to be in place before the next wave of agents arrives.
+
+## What to do next
+
+1. **CIO.** Ask for a list of every agent in use, including those built with low-code tools, with a named owner for each.
+2. **CTO.** Route agent actions through one policy enforcement point, so each rule is written once and applied to every agent, whichever vendor built it.
+3. **CIO and CTO.** Agree autonomy tiers before the next rollout. Each agent's tier should set what it may do alone and what needs a person's approval.
+
+## Go deeper
+
+[Section 1 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-01.html#agents-are-outrunning-integration-and-governance) sets these surveys beside an integration benchmark and an analyst forecast, and explains why coordinating models and agents has become an infrastructure problem. [Slide 4 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-4) puts the four results on one page, with speaker notes you can present from.

@@ -22,6 +22,10 @@ website:
   open-graph: true
   twitter-card: true
   search: false
+  # A piece marked `draft: true` is rendered at its own address so John can proofread it on the site,
+  # but stays out of listings, feeds, the sitemap and search until the day of its first post.
+  # Quarto shows a Draft banner on it, and tools/postrender.py marks it noindex and keeps it out of search.
+  draft-mode: unlinked
   navbar:
     logo: assets/img/mark.svg
     logo-alt: "AI+ by John Fisher, home"

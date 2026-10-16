@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Post-render fixes for AI+. Quarto runs this after every render (project.post-render in _quarto.yml).
 
-Quarto writes the site into docs/. This script then makes five kinds of change:
+Quarto writes the site into docs/. A piece marked `draft: true` waits for the day of its first post. With
+draft-mode set to unlinked, Quarto renders it at its own address but leaves it out of listings, feeds and the
+sitemap, and shows a Draft banner at the top. This script marks each draft noindex and keeps it out of the
+search index (with draft-mode set to gone, it removes the empty pages Quarto writes instead). It then makes
+these changes:
 
 1. Titles: "Title · AI+ by John Fisher" in <title>, and the bare title in og:title and twitter:title,
    so link previews show the article's own title.
@@ -21,6 +25,7 @@ import json
 import math
 import os
 import re
+import shutil
 import subprocess
 from html.parser import HTMLParser
 from pathlib import Path
@@ -62,6 +67,7 @@ class MainText(HTMLParser):
     (endnotes, license) or the call-to-action box."""
 
     SKIP_IDS = {"title-block-header", "quarto-appendix"}
+    SKIP_CLASSES = {"cta"}
     VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
     def __init__(self):
@@ -80,7 +86,7 @@ class MainText(HTMLParser):
             self.skip += 1
             return
         classes = (a.get("class") or "").split()
-        if tag in ("script", "style") or a.get("id") in self.SKIP_IDS or "cta" in classes:
+        if tag in ("script", "style") or a.get("id") in self.SKIP_IDS or self.SKIP_CLASSES & set(classes):
             self.skip = 1
 
     def handle_endtag(self, tag):
@@ -128,6 +134,7 @@ def resolve_item_path(page: Path, path: str) -> str:
 
 def fix_page(f: Path, s: str, minutes: dict) -> str:
     address = page_address(f)
+    draft = '<meta name="quarto:status" content="draft">' in s
 
     # 1. Titles
     s = re.sub(r"<title>(.*?) – " + re.escape(SITE) + r"</title>", r"<title>\1 · " + SITE + "</title>", s)
@@ -153,6 +160,20 @@ def fix_page(f: Path, s: str, minutes: dict) -> str:
     s = s.replace(' append-hash="true"', "")
     s = re.sub(r'<div class="sourceCode([^"]*)" id="(cb\d+)">',
                r'<div class="sourceCode\1" id="\2" tabindex="0" role="region" aria-label="Code">', s)
+    # Tables scroll inside their own box on narrow screens (see .ai-table-scroll in the theme). The box
+    # can scroll, so it takes keyboard focus and a name, from the table's caption where it has one.
+    def wrap_table(m):
+        cap = re.search(r"<caption[^>]*>(.*?)</caption>", m.group(0), re.S)
+        name = html.unescape(re.sub(r"<[^>]+>", "", cap.group(1))).strip() if cap else ""
+        label = html.escape("Table: " + name if name else "Table", quote=True)
+        return f'<div class="ai-table-scroll" tabindex="0" role="region" aria-label="{label}">{m.group(0)}</div>'
+    if "<main" in s:
+        head, main = s.split("<main", 1)
+        # Split out tables already wrapped (a second run), and wrap the rest
+        parts = re.split(r'(<div class="ai-table-scroll"[^>]*><table\b.*?</table></div>)', main, flags=re.S)
+        for i in range(0, len(parts), 2):
+            parts[i] = re.sub(r"<table\b.*?</table>", wrap_table, parts[i], flags=re.S)
+        s = head + "<main" + "".join(parts)
     # List.js throws on a listing with no items yet; skip starting it until the first item exists
     s = s.replace("if (!listingTargetEl) {", "if (!listingTargetEl || !listingTargetEl.children.length) {")
     # Quarto writes the site-root offset only when its own search is on; its scripts need it to find
@@ -188,8 +209,13 @@ def fix_page(f: Path, s: str, minutes: dict) -> str:
                     f'{m.group(1)}</a></div>')
         s = re.sub(r'<div class="quarto-category">([^<]*)</div>', chip, s)
 
+    # Drafts: rendered for review at their own address, kept out of search engines and the site's search
+    if draft:
+        if 'name="robots"' not in s:
+            s = s.replace("</head>", '<meta name="robots" content="noindex">\n</head>', 1)
+
     # 6. Search: Pagefind indexes each page's main content, without the endnotes or the call-to-action box
-    if address not in ("/404.html", "/search/"):
+    if address not in ("/404.html", "/search/") and not draft:
         s = re.sub(r'<main class="content" id="quarto-document-content"(?![^>]*data-pagefind-body)',
                    '<main class="content" id="quarto-document-content" data-pagefind-body', s, count=1)
         s = re.sub(r'<div id="quarto-appendix" class="([^"]*)"(?! data-pagefind-ignore)',
@@ -198,6 +224,23 @@ def fix_page(f: Path, s: str, minutes: dict) -> str:
         s = re.sub(r'<div class="listing-no-matching d-none"(?! data-pagefind-ignore)',
                    '<div class="listing-no-matching d-none" data-pagefind-ignore', s)
     return s
+
+
+def remove_draft_placeholders():
+    """A piece marked `draft: true` waits for the day of its first post. Quarto leaves it out of listings,
+    feeds, the sitemap and its own search, but still writes an empty page at its address and copies its
+    images. Remove both, so nothing of a waiting piece is published."""
+    held = []
+    for f in sorted(OUT.rglob("*.html")):
+        s = f.read_text(encoding="utf-8")
+        if re.fullmatch(r"\s*<!DOCTYPE html>\s*<html[^>]*>\s*</html>\s*", s, re.I):
+            folder = f.parent
+            held.append(page_address(f))
+            f.unlink()
+            if folder != OUT and not any(folder.rglob("*.html")):
+                shutil.rmtree(folder)
+    if held:
+        print("post-render: drafts held back: " + ", ".join(held))
 
 
 def build_search_index():
@@ -212,6 +255,7 @@ def build_search_index():
 def main():
     if not OUT.is_dir():
         raise SystemExit(f"post-render: no output folder at {OUT}")
+    remove_draft_placeholders()
     pages = sorted(OUT.rglob("*.html"))
 
     minutes = {}

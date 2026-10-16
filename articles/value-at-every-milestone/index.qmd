@@ -1,0 +1,56 @@
+---
+title: "Phase the work so value shows at every milestone"
+description: "A phased program shows value at months 3, 8, 14 and 24, with evidence for each milestone. It gives finance something to judge long before full payback."
+draft: true
+date-modified: 2026-10-15
+categories: [CIO, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 26 of the AI Control Plane executive deck, headed A 12- to 24-month plan with value in every phase, showing four phases from inventory and gateway to a federated control plane."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: deloitte-ai-roi
+    type: webpage
+    title: "Deloitte, “AI ROI: The paradox of rising investment and elusive returns,” 2025 (survey of 1,854 executives in Europe and the Middle East, August–September 2025)."
+    URL: https://www.deloitte.com/global/en/what-we-do/capabilities/ai/research/ai-roi-the-paradox-of-rising-investment-and-elusive-returns.html
+  - id: kpmg-ceo-outlook
+    type: webpage
+    title: "KPMG International, “KPMG 2025 Global CEO Outlook,” October 2025 (survey of 1,350 CEOs, August 5 to September 10, 2025)."
+    URL: https://kpmg.com/kz/en/insights/2025/10/kpmg-2025-ceo-outlook.html
+  - id: google-cloud-roi
+    type: webpage
+    title: "Oliver Parker, “How AI ROI leaders prioritize investments for real business outcomes,” Google Cloud, July 27, 2026 (survey of 2,403 executives by National Research Group)."
+    URL: https://cloud.google.com/transform/ai-roi-report-token-efficiency-agentic-ai-ownership-workflows-fluency
+---
+
+Finance will judge an AI control plane program against published payback data, and that data sets a long horizon. In Deloitte's 2025 survey of 1,854 executives in Europe and the Middle East, most achieved satisfactory ROI on a typical AI use case within two to four years, against the seven to 12 months expected of technology investments.[@deloitte-ai-roi] A program that phases its work can show value well inside that horizon, one milestone at a time.
+
+## Each milestone has value and evidence
+
+The handbook's plan runs for 24 months in four phases. Each phase ends in a milestone the business can see, with evidence to report at every steering review.
+
+| Milestone | Value delivered | Evidence to report |
+|---|---|---|
+| Month 3, one front door | Every known agent registered with an owner and a tier<br>Model and tool spend visible by use case<br>Duplicate and unused agents retired<br>The first use-case slice live in assist mode | Agent coverage<br>Governed traffic<br>Baseline cost per outcome<br>The first slice's KPIs against baseline |
+| Month 8, reusable capabilities | New agents reuse governed APIs and MCP tools in place of new integrations<br>Routine tasks move to lower-cost models within token limits<br>Use cases scale beyond the pilot | Reuse of published capabilities<br>Cost per outcome trend<br>Run-rate value of live slices against plan |
+| Month 14, trusted autonomy | Agents act in systems of record under approvals bound to each action, which is where most of each business case sits<br>Use-case KPI targets met by month 12<br>Incidents contained in minutes | Oversight coverage and effectiveness<br>Time to contain<br>Evaluation pass rate<br>Use-case KPIs at target |
+| Month 24, north star reached | All goals met<br>Use cases at full run rate and sustained<br>New use cases start on shared controls at lower cost and risk<br>Models swappable without application changes<br>Post-quantum migration on track | The full scorecard at target<br>Cumulative value against each business case |
+
+: Value delivered and evidence to report at each milestone of a 24-month plan
+
+The architecture delivers value of its own before any use case reaches full scale, from spend visibility at month 3 to faster delivery of every new agent at month 8. Each milestone also brings more of a real use case into production, starting with a first slice that works in assist mode and moving to agents that act in systems of record once the controls are in place.
+
+Expectations of AI payback are shortening. In KPMG's 2025 Global CEO Outlook, 67% of 1,350 CEOs expected returns on AI within one to three years, where a year earlier most expected three to five.[@kpmg-ceo-outlook] Google Cloud's 2026 survey of 2,403 executives found 84% seeing increasing financial returns from AI and 26% seeing returns accelerate year over year.[@google-cloud-roi] Phasing lets a program beat the two-to-four-year benchmark, because read-only and propose-only slices release capacity within months and help fund the controls that the larger gains depend on.
+
+Deloitte's survey also found that 85% of the leaders it studied use different frameworks or timeframes for generative and agentic AI.[@deloitte-ai-roi] A program can do the same, judging its early slices over months and the agents that act in systems of record over a longer horizon.
+
+## What to do next
+
+1. Agree the four milestones and the evidence for each with finance before the first phase starts, so every steering review reports against them.
+2. Pick a first use-case slice that can run in assist mode by month 3, so the program shows value while the larger controls are still being built.
+3. Set one horizon for read-only and propose-only slices and a longer one for agents that act in systems of record, and report each against its own.
+
+## Go deeper
+
+[Section 8 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-08.html#value-at-every-milestone) sets out the four phases, how three reference use cases phase in, and the first 90 days. [Slides 26 and 27 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-3.html#slide-26) show the plan and the value at each milestone.

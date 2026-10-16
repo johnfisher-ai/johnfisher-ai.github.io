@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production.">
+
+<title>Builders need to plan for the 2026 changes to MCP and A2A · AI+ by John Fisher</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cb0762543bd03567435a5b4b066978c6.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<meta name="theme-color" content="#0F172A">
+<meta name="author" content="John Fisher">
+<meta name="quarto:status" content="draft">
+
+
+<link rel="stylesheet" href="../../assets/css/fonts.css">
+<meta property="og:title" content="Builders need to plan for the 2026 changes to MCP and A2A">
+<meta property="og:description" content="A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production.">
+<meta property="og:image" content="https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/card.png">
+<meta property="og:site_name" content="AI+ by John Fisher">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:alt" content="Slide 13 of the AI Control Plane executive deck, headed Context engineering and open interoperability, with cards for context engineering, capability discovery and open protocols.">
+<meta name="twitter:title" content="Builders need to plan for the 2026 changes to MCP and A2A">
+<meta name="twitter:description" content="A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production.">
+<meta name="twitter:image" content="https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/card.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:image:alt" content="Slide 13 of the AI Control Plane executive deck, headed Context engineering and open interoperability, with cards for context engineering, capability discovery and open protocols.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/">
+<meta property="og:url" content="https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/">
+<meta property="og:type" content="article">
+<meta name="quarto:offset" content="../../">
+<meta name="robots" content="noindex">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+<a class="skip-link" href="#quarto-document-content">Skip to content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo light-content">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../handbooks/"> 
+<span class="menu-text">Handbooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../articles/"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guides/"> 
+<span class="menu-text">Guides &amp; Labs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../search/"> <i class="bi bi-search" aria-hidden="true">
+</i> 
+<span class="menu-text">Search</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/johnrfisher"> <i class="bi bi-linkedin" aria-hidden="true">
+</i> 
+<span class="menu-text">Follow on LinkedIn</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Builders need to plan for the 2026 changes to MCP and A2A</h1>
+  <div class="quarto-categories">
+    <div class="ai-title-category"><a href="/articles/#category=Developer">Developer</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=AI%20Engineer">AI Engineer</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=AI%20control%20plane">AI control plane</a></div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A2A reached version 1.0, MCP became stateless and agent payments moved toward a standard in 2026. Each change reaches code already in production.
+  </div>
+</div>
+
+<!-- Quarto 1.10.19 title-metadata.html, with a reading-time field filled in by tools/postrender.py -->
+
+<div class="quarto-title-meta">
+
+    
+  
+    <div>
+    <div class="quarto-title-meta-heading">Last checked</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 15, 2026</p>
+    </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Reading time</div>
+    <div class="quarto-title-meta-contents">
+      <p class="ai-reading">4 min</p>
+    </div>
+  </div>
+  
+  </div>
+  
+
+
+</header>
+
+
+<p>Agents reach tools through the Model Context Protocol (MCP) and reach other agents through the Agent2Agent protocol (A2A), and both changed substantially in 2026. The pace is already a problem for the people who build on them, and in the 2026 Connectivity Benchmark, 68% of IT leaders said they find it hard to keep up with emerging agent standards and protocols.<span class="citation" data-cites="connectivity-benchmark"><sup><a href="#ref-connectivity-benchmark" role="doc-biblioref">1</a></sup></span></p>
+<section id="where-each-change-lands" class="level2">
+<h2 class="anchored" data-anchor-id="where-each-change-lands">Where each change lands</h2>
+<p>MCP standardizes how agents reach tools and data,<span class="citation" data-cites="mcp-spec"><sup><a href="#ref-mcp-spec" role="doc-biblioref">2</a></sup></span> and A2A standardizes how agents collaborate.<span class="citation" data-cites="a2a-spec"><sup><a href="#ref-a2a-spec" role="doc-biblioref">3</a></sup></span> Both are now projects of the Agentic AI Foundation, hosted by the Linux Foundation.<span class="citation" data-cites="mcp-spec a2a-spec"><sup><a href="#ref-mcp-spec" role="doc-biblioref">2</a>,<a href="#ref-a2a-spec" role="doc-biblioref">3</a></sup></span> A third protocol, for agent payments, is moving the same way.</p>
+<div class="ai-table-scroll" tabindex="0" role="region" aria-label="Table: Three agent protocols that changed in 2026"><table class="caption-top table">
+<caption>Three agent protocols that changed in 2026</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Protocol</th>
+<th>What changed in 2026</th>
+<th>Where it lands</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A2A</td>
+<td>Version 1.0, the first stable release, arrived in March 2026 with version negotiation, multi-tenancy and signed agent cards that let one agent verify another’s identity<span class="citation" data-cites="a2a-spec"><sup><a href="#ref-a2a-spec" role="doc-biblioref">3</a></sup></span></td>
+<td>Any agent that accepts work from another agent</td>
+</tr>
+<tr class="even">
+<td>MCP</td>
+<td>The July 2026 revision made the protocol stateless, removing sessions and the initialization handshake, and requires headers that name the method and tool on every HTTP request<span class="citation" data-cites="mcp-spec"><sup><a href="#ref-mcp-spec" role="doc-biblioref">2</a></sup></span></td>
+<td>Every MCP server that held session state, and every gateway that reads MCP traffic</td>
+</tr>
+<tr class="odd">
+<td>AP2</td>
+<td>Google contributed its Agent Payments Protocol to the FIDO Alliance in April 2026, where new working groups are developing standards for agent authentication and agent-initiated payments<span class="citation" data-cites="fido-agents"><sup><a href="#ref-fido-agents" role="doc-biblioref">4</a></sup></span></td>
+<td>Any agent that can start a payment</td>
+</tr>
+</tbody>
+</table></div>
+<p>The MCP revision did more than remove state. It documents how OpenTelemetry trace context travels with each call, tightens authorization checks and deprecates several features with a minimum 12-month window.<span class="citation" data-cites="mcp-spec"><sup><a href="#ref-mcp-spec" role="doc-biblioref">2</a></sup></span> That window is the deadline for any tool that still relies on a deprecated feature. Agent payments are at an earlier stage, and until the new standards are settled, AP2 is best treated as pre-standard.</p>
+<p>For MCP, statelessness means every request carries what the server needs, and no server keeps a session between calls. A server can then run behind an ordinary load balancer, since no request depends on an earlier one. For A2A, an agent card is the description an agent publishes of itself, and a signature lets another agent check who published it before it trusts the work on offer.</p>
+<p>The cost of each change depends on how agent traffic is wired. Where every agent connects to every tool on its own, each team re-implements each change in its own code and on its own schedule, and the slowest team sets the pace for everyone. A control plane absorbs much of that work in one place. Its registry can check signed agent cards before one agent trusts another, and its gateway can apply policy to MCP’s standard headers and join every call to its trace, so a change to the protocol becomes a change to one policy, and the same traces show which tools still call a deprecated feature as the window closes.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Developer.</strong> List every MCP server you run, and check which ones still hold session state or leave out the method and tool headers, starting with the servers your production agents call most.</li>
+<li><strong>AI Engineer.</strong> Require a signed agent card before an agent accepts work from another agent, and give no privilege to roles an agent asserts about itself.</li>
+<li><strong>Developer and AI Engineer.</strong> Track the MCP deprecations against their 12-month window, and keep any payment flow built on AP2 behind a person’s approval while the standards work continues.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-04.html#open-protocols-for-tools-agents-and-payments">Section 4 of <em>The AI Control Plane Handbook</em></a> places the protocols inside a control plane’s routing, context engineering and delegation. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-2.html#slide-13">Slide 13 of the executive deck</a> sets the protocols beside context engineering and capability discovery.</p>
+
+
+<div class="cta" role="note" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-connectivity-benchmark" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Ryan Yeager, “Agentic transformation reaches new heights: 2026 Connectivity Benchmark Report insights,” MuleSoft Blog, February 5, 2026. <a href="https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/">https://blogs.mulesoft.com/agentic-perspectives/connectivity-benchmark-report/</a></div>
+</div>
+<div id="ref-mcp-spec" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Model Context Protocol, specification (revision 2026-07-28), including “Authorization” for MCP servers and “Key changes” for that revision, Agentic AI Foundation (Linux Foundation). <a href="https://modelcontextprotocol.io/specification" class="uri">https://modelcontextprotocol.io/specification</a> <a href="https://modelcontextprotocol.io/specification/2026-07-28/changelog">https://modelcontextprotocol.io/specification/2026-07-28/changelog</a></div>
+</div>
+<div id="ref-a2a-spec" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Agent2Agent (A2A) Protocol, specification and project repository, Agentic AI Foundation (Linux Foundation); version 1.0, March 2026; see also Agentic AI Foundation, “A2A joins AAIF’s open agentic stack,” August 17, 2026. <a href="https://github.com/a2aproject/A2A" class="uri">https://github.com/a2aproject/A2A</a> <a href="https://aaif.io/blog/a2a-joins-aaif">https://aaif.io/blog/a2a-joins-aaif</a></div>
+</div>
+<div id="ref-fido-agents" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">FIDO Alliance, “FIDO Alliance to develop standards for trusted AI agent interactions,” April 28, 2026. <a href="https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/">https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/johnfisher-ai\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>John Fisher works for Salesforce. The views here are his own, not Salesforce’s, and are drawn from public information; this site is not affiliated with or endorsed by Salesforce. Product names are trademarks of their owners.</p>
+<p>Writing is licensed CC BY 4.0 unless an article says otherwise; code is MIT. <a href="../../about/#licenses">Licenses</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../articles/index.xml">
+<p>Articles feed</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../guides/index.xml">
+<p>Guides feed</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

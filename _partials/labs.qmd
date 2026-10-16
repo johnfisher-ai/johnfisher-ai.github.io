@@ -17,7 +17,7 @@ A library of Python guides, each a set of numbered notebooks that open in Colab 
 
 ### A config-driven agent network
 
-A broker sends each question to specialist agents and holds risky answers at a human approval gate. The roster, the prompts and every agent's reply live in one XML file, so the network is data, not code.
+A broker sends each question to specialist agents and holds risky answers at a human approval gate. The roster, the prompts and every agent's reply live in one XML file, so you change the network by editing that file.
 
 A live run needs your own OpenAI API key and costs a fraction of a cent a question. Its 19 tests run against a stub model, with no key and no cost.
 

@@ -1,0 +1,64 @@
+---
+title: "Each OWASP agentic threat maps to a control you can test"
+description: "The OWASP Top 10 for Agentic Applications names ten risks. Each one maps to controls a team can put in place and test today."
+draft: true
+date-modified: 2026-10-15
+categories: [Developer, AI Engineer, CISO, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 17 of the AI Control Plane executive deck, headed Map every agentic threat to a control, with a table of the ten OWASP agentic risks and their controls."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: owasp-agentic
+    type: webpage
+    title: "OWASP GenAI Security Project, “OWASP Top 10 for Agentic Applications: The benchmark for agentic security in the age of autonomous AI,” December 9, 2025."
+    URL: https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/
+  - id: bcg-mcp
+    type: webpage
+    title: "Tom Martin, Daniel Sack, Djon Kleine, Niels Degrande, and Nicolas de Bellefonds, “Put AI agents to work faster using MCP,” Boston Consulting Group, August 1, 2025."
+    URL: https://web-assets.bcg.com/pdf-src/prod-live/put-ai-to-work-faster-using-model-context-protocol.pdf
+  - id: ms-red-team
+    type: webpage
+    title: "Microsoft AI Red Team, “Updating the taxonomy of failure modes in agentic AI systems: What a year of red teaming taught us,” Microsoft Security Blog, June 4, 2026."
+    URL: https://www.microsoft.com/en-us/security/blog/2026/06/04/updating-taxonomy-failure-modes-agentic-ai-systems-year-red-teaming-taught-us/
+  - id: mitre-atlas
+    type: webpage
+    title: "MITRE, ATLAS data release notes (CHANGELOG), versions 5.2.0 (December 24, 2025) to 2026.06 (June 30, 2026)."
+    URL: https://github.com/mitre-atlas/atlas-data/blob/main/CHANGELOG.md
+---
+
+Security teams judge any agent platform against the threat lists they already use. For agents, the list is the OWASP Top 10 for Agentic Applications, published in December 2025, which names ten risks specific to AI agents.[@owasp-agentic] Every one of the ten maps to controls a team can put in place and test now.
+
+## Every risk on the list has a control
+
+The table maps each risk to the controls that address it in an AI control plane.
+
+| Agentic risk | What it looks like | Controls |
+|---|---|---|
+| ASI01 Agent Goal Hijack | Hidden instructions in content, documents or tool results redirect the agent's goal | Input and tool-result screening at the gateway<br>Allow-listed tools per agent<br>Approvals bound to the exact action |
+| ASI02 Tool Misuse | A legitimate tool is used in a harmful way | Per-agent tool allow-lists<br>Schema validation<br>Rate, spend and exposure limits |
+| ASI03 Identity & Privilege Abuse | Leaked or inherited credentials let an agent act beyond its scope | One identity per agent<br>Short-lived, task-scoped tokens<br>Delegation that narrows<br>Real-time revocation |
+| ASI04 Agentic Supply Chain Vulnerabilities | Poisoned tools, MCP servers, plugins or models enter at runtime | Only registered, signed and version-pinned MCP servers are callable<br>A private registry of trusted servers<br>An agent bill of materials[@bcg-mcp] |
+| ASI05 Unexpected Code Execution | Natural-language paths trigger code or commands | Sandboxed execution<br>Code and shell tools only at an explicit tier<br>Limits on outbound connections |
+| ASI06 Memory & Context Poisoning | Poisoned memory or context shapes later decisions | Context only from governed sources (master data, catalog, lineage)<br>Provenance checks<br>Session integrity monitoring |
+| ASI07 Insecure Inter-Agent Communication | Spoofed or altered messages between agents | Signed agent cards<br>Mutual authentication<br>A2A traffic through the gateway<br>No privilege from self-asserted roles |
+| ASI08 Cascading Failures | Errors spread through automated pipelines | Circuit breakers<br>Cumulative exposure limits across agents and sessions<br>Propose-only on stale data |
+| ASI09 Human-Agent Trust Exploitation | Confident, polished output leads people to approve harmful actions | Approvals bound to the exact action and showing the facts behind it<br>Approver drills<br>Limits that guard against consent fatigue |
+| ASI10 Rogue Agents | Agents act outside their mandate or hide what they do | Registry and scanners<br>Honeytokens and decoy tools<br>Behavioral monitoring<br>The kill switch |
+
+: Ten agentic risks from OWASP, with the controls that address each in the author's mapping[@owasp-agentic]
+
+Several controls appear in more than one row, and they are the place to start. Approvals bound to the exact action defend against goal hijack and against people trusting a confident draft. One identity per agent, with delegation that narrows at each hop, closes off privilege abuse and limits what a spoofed message between agents can do. Exposure limits that add up across agents and sessions contain both tool misuse and cascading failures.
+
+The threat lists keep growing. Microsoft's AI Red Team added seven agentic failure modes to its taxonomy in June 2026, among them agentic supply chain compromise, inter-agent trust escalation, session context contamination and MCP and plugin abuse.[@ms-red-team] MITRE ATLAS has added agent-specific techniques since December 2025, such as AI Agent Tool Credential Harvesting and Publish Poisoned AI Agent Tool.[@mitre-atlas] Tagging red-team scenarios with these names lets a team's results map to the vocabulary other teams use.
+
+## What to do next
+
+1. **Developer.** Allow-list the tools each agent may call, validate every call against the tool's schema, and accept only registered, signed and version-pinned MCP servers.
+2. **AI Engineer.** Bind each approval to the exact action and show the approver the facts behind it, so a polished draft can't carry a harmful change through.
+3. **CISO.** Name an owner for what enters the agent registry and another for what approvers are shown, because no gateway closes either risk alone, and tag red-team scenarios with the risk names in the table.
+
+## Go deeper
+
+[Section 5 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-05.html#map-threats-to-controls) covers identity for agents, runtime controls, cryptography and human takeover after the kill switch. [Slide 17 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-2.html#slide-17) puts the ten risks and their controls on one page.

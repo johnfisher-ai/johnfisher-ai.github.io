@@ -1,0 +1,65 @@
+---
+title: "What an enterprise AI control plane is"
+description: "Three capabilities define an enterprise AI control plane. Each one becomes a question you can put to any vendor that says it sells one."
+draft: true
+date-modified: 2026-10-15
+categories: [CIO, CTO, Architect, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 7 of the AI Control Plane executive deck, headed What an enterprise AI control plane does, with three cards for architecture, orchestration, and trust and resilience."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: ms-frontier
+    type: webpage
+    title: "Microsoft, “Introducing the First Frontier Suite built on Intelligence + Trust,” Official Microsoft Blog, March 9, 2026; see also Microsoft, “What’s new in Microsoft Entra Agent ID,” Microsoft Learn, updated May 1, 2026, and Microsoft, “Microsoft Agent Framework overview,” Microsoft Learn, updated August 25, 2026. <https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/> <https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id>"
+    URL: https://learn.microsoft.com/en-us/agent-framework/overview/
+  - id: deloitte-orchestration-advantage
+    type: webpage
+    title: "Chris Thomas, Parth Patwari, Ram Ravi, Oniel Cross, Diana Kearns-Manolatos, and Iram Parveen, “The next tech infrastructure advantage is intelligence orchestration,” Deloitte Insights, August 21, 2026 (based on more than 30 expert interviews conducted March–May 2026)."
+    URL: https://www.deloitte.com/us/en/insights/topics/technology-management/enterprise-ai-control-plane.html
+  - id: hcltech-control-planes
+    type: webpage
+    title: "Andy Packham, “Control planes: A strategic lens for enterprise platform decisions,” HCLTech, April 21, 2026."
+    URL: https://www.hcltech.com/blogs/enterprise-control-planes-platform-strategy
+---
+
+The hyperscalers now describe their agent platforms as control planes, and Microsoft calls Agent 365 "the control-plane for AI agents."[@ms-frontier] A label that every vendor can claim helps a buyer only when it means something that can be tested. A short definition and three capabilities give it that meaning, and each capability turns into a question to ask before anyone signs a contract.
+
+## A definition with edges
+
+A Deloitte Insights analysis from August 2026 defines an enterprise control plane as a governed, intelligent layer that mediates decisions across systems, deciding who can act, what data can be accessed, how workloads execute and how AI agents operate within defined cost, latency and regulatory boundaries.[@deloitte-orchestration-advantage] It resembles service-oriented architecture, but it is event-driven and does more than expose reusable services, because it coordinates workflows as conditions change.
+
+HCLTech's April 2026 analysis suggests judging a platform by what it governs as well as by what it does, since control planes compete for authority more than for attention.[@hcltech-control-planes] The same analysis observes that an agent without identity constraints is automation without accountability.[@hcltech-control-planes]
+
+## Three capabilities turn the definition into questions
+
+Deloitte's analysis rests the control plane on three capabilities.[@deloitte-orchestration-advantage] Each decides something different, and each can be put to a vendor as a single question.
+
+| Capability | What it decides | The question to ask |
+|---|---|---|
+| Architecture | Whether enterprise capabilities can be exposed securely and flexibly across channels, agents, clouds, edge and on-premises systems | Can agents safely reach what the business can do? |
+| Orchestration | Which model and agent handle a task, where it runs and under which constraints | Which model and agent should handle this task, and where? |
+| Trust, security and resilience | Identity, authority, integrity and control across every human and machine interaction | Can we prove who acted, on whose authority, and why? |
+
+: The three capabilities of an AI control plane, with the question each one answers
+
+A product that answers one question well can still leave the other two open. A catalog of connectors speaks to architecture, a model router speaks to orchestration, and an audit dashboard speaks to trust, yet none of them alone decides who may act on what, which is why the definition asks for all three in one governed layer.
+
+A good answer to each question is something a vendor can show on your own systems:
+
+- **Architecture.** One real business capability, such as checking an order's status, exposed as a governed API or tool that an agent reaches with its own identity and its own limits.
+- **Orchestration.** One task routed to a model and an agent by rules you can read, covering cost, latency and where the data may go.
+- **Trust.** The record of one completed action, naming the agent, the person it acted for, the policy that allowed it and the approval, if one was needed.
+
+Most enterprises span several ecosystems, so the harder task is coordinating control planes across them. That is the case for a vendor-neutral control plane, one that keeps identity, policy and audit in a layer the enterprise owns while models and agents come from many sources.
+
+## What to do next
+
+1. **CIO.** Put the three questions into your next platform review, and ask each vendor to answer them on one of your own use cases.
+2. **CTO.** Map today's stack against the three capabilities, product by product, and mark each question that no product answers yet.
+3. **Architect.** Check that identity, policy and audit records sit in a layer you would keep if you changed model or agent vendors.
+
+## Go deeper
+
+[Section 2 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-02.html) sets out the definition and the lifecycle a control plane enforces for every agent, from proposal to retirement. [Slide 7 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-7) puts the three capabilities and their questions on one page.
