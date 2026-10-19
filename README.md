@@ -28,8 +28,11 @@ quarto render
 Run before every change is published:
 
 ```bash
+(cd tools/checks && npm install)   # once, for the validator, axe and the browser driver
 bash tools/checks/run.sh
 ```
+
+Set `CHROMIUM` to the path of a Chromium or Chrome binary if the checks can't find one.
 
 It runs the Nu HTML validator, checks every internal link and anchor, checks each page's title, language and footer, checks each article's title, teaser, preview image and license, and runs axe on every page at 1280 px in light mode and 375 px in dark mode. It fails on any sideways scroll, script error or failed request. Links to other sites are checked at each release with the [W3C Link Checker](https://validator.w3.org/checklink).
 
@@ -95,11 +98,15 @@ Each guide ends with two buttons, followed by the articles it puts into practice
 
 Link to another article or guide through its `index.qmd`, for example `[Title](../../articles/<slug>/index.qmd)`. While that piece is a draft, Quarto prints the link text without the link, so no page sends a reader to a Draft banner, and the link appears once the piece is published.
 
+## How changes reach the site
+
+Every change reaches `main` through a pull request. Each round of work is committed on its own branch, with the sources and the rendered `docs/` together, and the checks pass before it is pushed. John reviews the pull request on GitHub and merges it, and GitHub Pages then serves the new `docs/` from `main`. Nothing is pushed to `main` directly.
+
 ## Publishing a piece
 
-A new article or guide starts with `draft: true` while John reviews it. Quarto renders a draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
+A new article or guide starts with `draft: true` while John reviews it. Once its pull request is merged, Quarto renders the draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
 
-A piece is published as soon as John approves it. Delete `draft: true`, add `date` and set `date-modified` to that day, and give it a `sequence`, its number in the plan, which orders pieces published on the same day. Then render and run the checks. When a guide is published, each partner article that is already published gets a "Try it" section linking to it.
+A piece is published as soon as John approves it. Delete `draft: true`, add `date` and set `date-modified` to that day, and give it a `sequence`, its number in the plan, which orders pieces published on the same day. Then render, run the checks and open the pull request, and the piece is live when John merges it. When a guide is published, each partner article that is already published gets a "Try it" section linking to it.
 
 Promotion on LinkedIn and other social media follows later, on the piece's planned promotion date, and needs no change to the site.
 
