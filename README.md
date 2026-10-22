@@ -102,13 +102,13 @@ Link to another article or guide through its `index.qmd`, for example `[Title](.
 
 ## How changes reach the site
 
-Every change reaches `main` through a pull request. Each round of work is committed on its own branch, with the sources and the rendered `docs/` together, and the checks pass before it is pushed. John reviews the pull request on GitHub and merges it, and GitHub Pages then serves the new `docs/` from `main`. Nothing is pushed to `main` directly.
+Claude commits each piece or round of edits to `main` and pushes it once the checks pass, with the sources and the rendered `docs/` together. GitHub Pages then serves the new `docs/` from `main`, and John reads the result on the live site. A change that needs undoing is reverted with one commit, and nothing is force-pushed.
 
 ## Publishing a piece
 
-A new article or guide starts with `draft: true` while John reviews it. Once its pull request is merged, Quarto renders the draft at its own address, so it can be proofread on the site, and leaves it out of the listings, the feeds and the sitemap. Quarto shows a Draft banner at the top of the page, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
+A new article or guide is published the day it is written and checked. In its `index.qmd`, set `date` and `date-modified` to that day and give it a `sequence`, its number in the plan, which orders pieces published on the same day. Then render, run the checks and push. When a guide is published, each partner article that is already published gets a "Try it" section linking to it.
 
-A piece is published as soon as John approves it. Delete `draft: true`, add `date` and set `date-modified` to that day, and give it a `sequence`, its number in the plan, which orders pieces published on the same day. Then render, run the checks and open the pull request, and the piece is live when John merges it. When a guide is published, each partner article that is already published gets a "Try it" section linking to it.
+A piece can still start with `draft: true` when John wants to see it before it is listed. Quarto then renders it at its own address with a Draft banner and leaves it out of the listings, the feeds and the sitemap, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
 
 Promotion on LinkedIn and other social media follows later, on the piece's planned promotion date, and needs no change to the site.
 
