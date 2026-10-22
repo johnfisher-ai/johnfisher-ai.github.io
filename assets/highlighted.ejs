@@ -1,0 +1,30 @@
+```{=html}
+<%
+/* "Highlighted articles" row on the home page: up to three pieces John is sharing now, newest first, in the
+   order index.qmd lists them. To highlight a piece, put it first in the listing's contents with its date in
+   template-params, and drop the last one so three remain. A guide gets the violet edge of Guides & Labs.
+   template-params: dates (slug -> YYYY-MM-DD the piece was highlighted), empty (text shown before any). */
+const p = (typeof templateParams !== 'undefined' && templateParams) ? templateParams : {};
+const dates = p.dates || {};
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const slugOf = (path) => { const m = String(path).match(/(?:articles|guides)\/([^\/]+)\//); return m ? m[1] : ''; };
+const shown = (iso) => { const m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? `${MON[+m[2] - 1]} ${+m[3]}` : ''; };
+%>
+<% if (items.length === 0) { %>
+<div class="ai-empty"><p><%= p.empty || 'Nothing here yet.' %></p></div>
+<% } %>
+<ul class="list ai-highlights">
+<% for (const item of items) { const d = shown(dates[slugOf(item.path)]); %>
+<li class="ai-highlight<%= /guides\//.test(item.path) ? ' ai-highlight-guide' : '' %>" <%= metadataAttrs(item) %>>
+<a class="ai-highlight-link" href="<%- item.path %>">
+<% if (item.image) { %><img src="<%- item.image %>" alt="" loading="lazy" width="1200" height="630"><% } %>
+<div class="ai-highlight-body">
+<% if (d) { %><p class="ai-highlight-when">Highlighted · <%= d %></p><% } %>
+<h3 class="listing-title"><%= item.title %></h3>
+<p class="ai-meta"><% if (item['lab-time']) { %><span class="ai-lab-time"><%= item['lab-time'] %></span><% } else if (item['reading-time']) { %><span class="ai-reading" data-path="<%- item.path %>"><%= item['reading-time'] %></span><% } %></p>
+</div>
+</a>
+</li>
+<% } %>
+</ul>
+```

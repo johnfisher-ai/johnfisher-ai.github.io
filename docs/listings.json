@@ -27,17 +27,17 @@
   {
     "listing": "/index.html",
     "items": [
+      "/articles/ask-how-a-survey-was-weighted/index.html",
+      "/articles/pandas-groupby-merge-and-reshape/index.html",
+      "/articles/value-at-every-milestone/index.html",
       "/articles/decide-which-control-plane-owns-what/index.html",
       "/articles/cleaning-is-the-analysis/index.html",
       "/articles/adoption-is-outrunning-governance/index.html",
       "/articles/what-an-ai-control-plane-is/index.html",
       "/articles/plan-for-the-new-agent-protocols/index.html",
       "/articles/map-agentic-threats-to-controls/index.html",
-      "/articles/value-at-every-milestone/index.html",
       "/articles/every-ai-claim-is-statistical/index.html",
-      "/articles/ask-how-a-survey-was-weighted/index.html",
-      "/articles/accurate-and-missing-almost-every-case/index.html",
-      "/articles/pandas-groupby-merge-and-reshape/index.html"
+      "/articles/accurate-and-missing-almost-every-case/index.html"
     ]
   }
 ]

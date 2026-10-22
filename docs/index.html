@@ -45,7 +45,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ee4103398c8904488574c28388612f7d.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c6286048f3f09db57b531d5cc64c8fc6.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -62,6 +62,34 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-highlighted-articles .list');
+    if (!listingTargetEl || !listingTargetEl.children.length) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-website','listing-language','listing-format','listing-execute','listing-engines','listing-draft-mode','listing-reading-time','listing-template-partials','listing-filters','listing-title','listing-description','listing-date','listing-date-modified','listing-sequence','listing-categories','listing-source','listing-image','listing-image-alt','listing-license','listing-cta-source','listing-references','listing-path','listing-outputHref','listing-author','listing-filename','listing-file-modified','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-website","listing-language","listing-format","listing-execute","listing-engines","listing-draft-mode","listing-reading-time","listing-template-partials","listing-filters","listing-title","listing-description","listing-date","listing-date-modified","listing-sequence","listing-categories","listing-source","listing-image","listing-image-alt","listing-license","listing-cta-source","listing-references","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-highlighted-articles'] = new List('listing-highlighted-articles', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-newest-articles .list');
@@ -129,14 +157,14 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="assets/css/fonts.css">
 <meta property="og:title" content="AI+ by John Fisher">
 <meta property="og:description" content="Articles, handbooks, guides and labs by John Fisher on AI, data science, statistics and Python.">
-<meta property="og:image" content="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/card.png">
+<meta property="og:image" content="https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/card.png">
 <meta property="og:site_name" content="AI+ by John Fisher">
 <meta property="og:image:alt" content="">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
 <meta name="twitter:title" content="AI+ by John Fisher">
 <meta name="twitter:description" content="Articles, handbooks, guides and labs by John Fisher on AI, data science, statistics and Python.">
-<meta name="twitter:image" content="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/card.png">
+<meta name="twitter:image" content="https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/card.png">
 <meta name="twitter:image:alt" content="">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
@@ -243,6 +271,50 @@ ul.task-list li input[type="checkbox"] {
 <div class="ai-actions">
 <p><a href="https://www.linkedin.com/in/johnrfisher" class="btn btn-primary">Follow on LinkedIn</a> <a href="https://www.linkedin.com/in/johnrfisher" class="btn btn-outline-primary">Connect on LinkedIn</a></p>
 </div>
+<section id="highlighted-articles" class="level2">
+<h2 class="anchored" data-anchor-id="highlighted-articles">Highlighted articles</h2>
+<p><span class="ai-highlight-note">The pieces I’m sharing now, newest first.</span></p>
+<div id="listing-highlighted-articles" class="quarto-listing quarto-listing-container-custom">
+
+<ul class="list ai-highlights">
+
+<li class="ai-highlight" data-index="0" data-categories="QW5hbHlzdCUyQ0NJTyUyQ1N0YXRpc3RpY3M=" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792689960029" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="4" data-listing-word-count-sort="652">
+<a class="ai-highlight-link" href="./articles/ask-how-a-survey-was-weighted/">
+<img src="./articles/ask-how-a-survey-was-weighted/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-highlight-body">
+<p class="ai-highlight-when">Highlighted · Oct 22</p>
+<h3 class="listing-title anchored">The same survey says 11.29% or 8.44%</h3>
+<p class="ai-meta"><span class="ai-reading" data-path="/articles/ask-how-a-survey-was-weighted/index.qmd">4 min read</span></p>
+</div>
+</a>
+</li>
+
+<li class="ai-highlight" data-index="1" data-categories="QW5hbHlzdCUyQ0RldmVsb3BlciUyQ1B5dGhvbg==" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792689960037" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="600">
+<a class="ai-highlight-link" href="./articles/pandas-groupby-merge-and-reshape/">
+<img src="./articles/pandas-groupby-merge-and-reshape/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-highlight-body">
+<p class="ai-highlight-when">Highlighted · Oct 22</p>
+<h3 class="listing-title anchored">pandas groupby, merge and reshape without surprises</h3>
+<p class="ai-meta"><span class="ai-reading" data-path="/articles/pandas-groupby-merge-and-reshape/index.qmd">4 min read</span></p>
+</div>
+</a>
+</li>
+
+<li class="ai-highlight" data-index="2" data-categories="Q0lPJTJDQUklMjBjb250cm9sJTIwcGxhbmU=" data-listing-date-sort="1792123200000" data-listing-file-modified-sort="1792689960040" data-listing-date-modified-sort="1792123200000" data-listing-reading-time-sort="4" data-listing-word-count-sort="630">
+<a class="ai-highlight-link" href="./articles/value-at-every-milestone/">
+<img src="./articles/value-at-every-milestone/card.png" alt="" loading="lazy" width="1200" height="630">
+<div class="ai-highlight-body">
+<p class="ai-highlight-when">Highlighted · Oct 22</p>
+<h3 class="listing-title anchored">Phase the work so value shows at every milestone</h3>
+<p class="ai-meta"><span class="ai-reading" data-path="/articles/value-at-every-milestone/index.qmd">4 min read</span></p>
+</div>
+</a>
+</li>
+
+</ul>
+<div class="listing-no-matching d-none" data-pagefind-ignore>No matching items</div>
+</div>
+</section>
 <section id="newest-articles" class="level2">
 <h2 class="anchored" data-anchor-id="newest-articles">Newest articles</h2>
 <div id="listing-newest-articles" class="quarto-listing quarto-listing-container-custom">

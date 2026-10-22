@@ -49,7 +49,7 @@ It runs the Nu HTML validator, checks every internal link and anchor, checks eac
 | `handbooks/` | The Handbooks shelf |
 | `about/`<br>`search/`<br>`404.qmd` | About<br>Search<br>The not-found page |
 | `_partials/` | Shared blocks for the shelf, the lab cards and the page head |
-| `assets/` | Theme, card and Start here templates, endnote style, card image sources, Plus Jakarta Sans, the AI+ mark and icons |
+| `assets/` | Theme, card, Highlighted articles and Start here templates, endnote style, card image sources, Plus Jakarta Sans, the AI+ mark and icons |
 | `tools/` | Post-render script, the call-to-action filter and the checks |
 | `docs/` | The finished site that GitHub Pages serves |
 
@@ -111,6 +111,10 @@ A new article or guide is published the day it is written and checked. In its `i
 A piece can still start with `draft: true` when John wants to see it before it is listed. Quarto then renders it at its own address with a Draft banner and leaves it out of the listings, the feeds and the sitemap, and `tools/postrender.py` keeps it out of the site's search and marks it noindex for search engines.
 
 Promotion on LinkedIn and other social media follows later, on the piece's planned promotion date, and needs no change to the site.
+
+## The home page's Highlighted articles row
+
+The row shows up to three pieces John is sharing now, newest first, each with the date it was highlighted. `index.qmd` lists them under the `highlighted-articles` listing, and `assets/highlighted.ejs` draws them. To highlight a piece, put its `index.qmd` first under `contents`, add its slug and the day's date under `dates`, and remove the last piece and its date so three remain. A piece already in the row moves to the front with the new date. Guides can be highlighted too and get the violet edge of Guides & Labs.
 
 ## The home page's Start here row
 

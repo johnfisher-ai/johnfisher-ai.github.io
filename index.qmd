@@ -5,6 +5,21 @@ pagetitle: "AI+ by John Fisher"
 description: "Articles, handbooks, guides and labs by John Fisher on AI, data science, statistics and Python."
 body-classes: home
 listing:
+  # Up to three pieces John is sharing now, newest first. To highlight one, put it first here with its date
+  # under dates, and drop the last so three remain (assets/highlighted.ejs).
+  - id: highlighted-articles
+    contents:
+      - articles/ask-how-a-survey-was-weighted/index.qmd
+      - articles/pandas-groupby-merge-and-reshape/index.qmd
+      - articles/value-at-every-milestone/index.qmd
+    template: assets/highlighted.ejs
+    sort: false
+    template-params:
+      empty: "Highlighted articles appear here."
+      dates:
+        ask-how-a-survey-was-weighted: "2026-10-22"
+        pandas-groupby-merge-and-reshape: "2026-10-22"
+        value-at-every-milestone: "2026-10-22"
   - id: newest-articles
     contents: "articles/*/index.qmd"
     template: assets/cards.ejs
@@ -42,6 +57,13 @@ I'm John Fisher. I help enterprises architect the data foundation that AI depend
 ::: {.ai-actions}
 [Follow on LinkedIn](https://www.linkedin.com/in/johnrfisher){.btn .btn-primary}
 [Connect on LinkedIn](https://www.linkedin.com/in/johnrfisher){.btn .btn-outline-primary}
+:::
+
+## Highlighted articles
+
+[The pieces I'm sharing now, newest first.]{.ai-highlight-note}
+
+::: {#highlighted-articles}
 :::
 
 ## Newest articles
