@@ -30,6 +30,6 @@ function Pandoc(doc)
     end
   end
 
-  doc.blocks:insert(pandoc.Div(content, pandoc.Attr("", {"cta"}, {role = "note", ["aria-label"] = "Follow and connect"})))
+  doc.blocks:insert(pandoc.Div(content, pandoc.Attr("", {"cta"}, {{"role", "note"}, {"aria-label", "Follow and connect"}})))
   return doc
 end

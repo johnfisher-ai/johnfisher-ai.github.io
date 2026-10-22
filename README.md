@@ -20,8 +20,10 @@ To build:
 ```bash
 pip install -r requirements.txt
 npm install --prefix tools
-quarto render
+TZ=America/New_York quarto render
 ```
+
+Render on US Eastern time, as the published builds have been, so the dates in the feeds and the sitemap stay the same from one build to the next.
 
 ## Checks
 

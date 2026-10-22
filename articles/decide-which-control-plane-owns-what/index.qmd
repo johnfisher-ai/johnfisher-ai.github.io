@@ -1,0 +1,70 @@
+---
+title: "Decide which agent control plane is authoritative for what"
+description: "Most enterprises will run more than one agent control plane. A default split says which one holds the record for inventory, identity, policy and audit."
+date: 2026-10-22
+date-modified: 2026-10-22
+sequence: 6
+categories: [CIO, CTO, AI control plane]
+source: "AI Control Plane Handbook"
+image: card.png
+image-alt: "Slide 25 of the AI Control Plane executive deck, headed Coexisting with the hyperscalers’ agent control planes, with a table of each estate’s native agent control plane, what it is usually authoritative for and MuleSoft Agent Fabric’s role, above a box that gives a workable default."
+license: "CC BY-NC-ND"
+cta-source: "Read [the full handbook](https://johnfisher-ai.github.io/ai-control-plane-handbook/) and [the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/) online."
+references:
+  - id: ms-frontier
+    type: webpage
+    title: "Microsoft, “Introducing the First Frontier Suite built on Intelligence + Trust,” Official Microsoft Blog, March 9, 2026; see also Microsoft, “What’s new in Microsoft Entra Agent ID,” Microsoft Learn, updated May 1, 2026, and Microsoft, “Microsoft Agent Framework overview,” Microsoft Learn, updated August 25, 2026. <https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/> <https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id>"
+    URL: https://learn.microsoft.com/en-us/agent-framework/overview/
+  - id: aws-agentcore
+    type: webpage
+    title: "Amazon Web Services, “What is Amazon Bedrock AgentCore?” and “Evaluate agent performance with Amazon Bedrock AgentCore Evaluations,” Amazon Bedrock AgentCore Developer Guide, accessed October 2026. <https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html>"
+    URL: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html
+  - id: google-agent-platform
+    type: webpage
+    title: "Kanchana Patlolla and Greg Brosman, “20 questions for the agentic enterprise (and how Agent Platform can help),” Google Cloud Blog, July 7, 2026."
+    URL: https://cloud.google.com/blog/products/ai-machine-learning/20-questions-for-the-agentic-enterprise
+  - id: mulesoft-agent-fabric
+    type: webpage
+    title: "MuleSoft, “Agent Fabric,” product page, accessed October 2026; see also the MuleSoft documentation pages “Agent Fabric release notes,” “Agent Scanners,” “Adding an MCP Bridge Instance,” “Creating and Managing Model Proxies” and “Detect and Contain Rogue Agents,” and MuleSoft, “AI Cost Management,” accessed October 2026. <https://www.mulesoft.com/ai/agent-fabric> <https://docs.mulesoft.com/general/agent-fabric-release-notes> <https://docs.mulesoft.com/exchange/agent-scanners> <https://docs.mulesoft.com/api-manager/latest/create-instance-task-mcp-bridge> <https://docs.mulesoft.com/general/model-proxy> <https://docs.mulesoft.com/general/exp-detect-and-contain-rogue-agents>"
+    URL: https://www.mulesoft.com/ai/agent-fabric/cost-management
+  - id: ms-caf-agents
+    type: webpage
+    title: "Microsoft, “Govern and secure AI agents across the organization,” Cloud Adoption Framework for Azure, Microsoft Learn, updated June 26, 2026."
+    URL: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization
+---
+
+Most enterprises that build agents on more than one platform will run more than one agent control plane. Microsoft describes Agent 365 as "the control-plane for AI agents," with Microsoft Entra Agent ID for agent identities.[@ms-frontier] The other large platforms each offer a plane of their own, and each one governs its own estate well. Once agents from different estates start to share data and processes, someone has to decide which plane is authoritative for which job.
+
+## Each native plane governs its own estate
+
+The native planes cover similar ground, each inside its own walls. Amazon Bedrock AgentCore's services include a runtime, memory, a gateway that connects MCP servers, identity and OpenTelemetry-compatible observability.[@aws-agentcore] Google's Gemini Enterprise Agent Platform includes an agent registry, an agent gateway and agent identities.[@google-agent-platform] Agentforce is a platform for building, running and optimizing agents inside Salesforce, with trusted context and controlled behavior.[@mulesoft-agent-fabric]
+
+Their claims also overlap. Microsoft's guidance for its own estate names Agent 365, or Entra Agent ID where Agent 365 is not in use at scale, as the authoritative inventory, and it asks for consistent policy across every agent platform.[@ms-caf-agents] An enterprise with two or three such planes has two or three candidates for the record of its agents, and it has to settle which record counts before an audit raises the question for it.
+
+## Where each plane is authoritative
+
+The handbook's default keeps each native plane authoritative for identity and runtime inside its own estate. A vendor-neutral plane, which the handbook realizes with MuleSoft Agent Fabric, is then authoritative for the cross-estate inventory, for policy on every call into enterprise capabilities and data, for orchestration across vendors, and for cost and audit.[@mulesoft-agent-fabric]
+
+| Estate | Native agent control plane | Usually authoritative for | MuleSoft Agent Fabric's role |
+|---|---|---|---|
+| Microsoft 365 and Azure | Agent 365 and Microsoft Entra Agent ID[@ms-frontier] | Identities and inventory of Microsoft agents<br>Access to Microsoft 365 data | Registers Copilot Studio and Foundry agents<br>Applies common policy to their calls into enterprise systems |
+| AWS | Amazon Bedrock AgentCore[@aws-agentcore] | Runtime, memory and identity for agents built on AWS | Registers Bedrock and AgentCore agents<br>Governs their access to enterprise APIs and MCP tools |
+| Google Cloud | Gemini Enterprise Agent Platform, with Agent Registry, Agent Gateway and Agent Identity[@google-agent-platform] | Agents built on Google Cloud | Registers them under the same policy as every other estate |
+| Salesforce | Agentforce[@mulesoft-agent-fabric] | Agents working in Salesforce data and processes | Registers and governs Agentforce agents |
+| Across estates | No single native plane | Cross-vendor inventory<br>Policy on every call into enterprise capabilities and data<br>Orchestration across vendors<br>Cost and audit | The vendor-neutral control plane |
+
+: Who is usually authoritative for what in each estate, and the role of MuleSoft Agent Fabric as the vendor-neutral plane[@mulesoft-agent-fabric]
+
+The split holds only when the planes share what they know. Each agent's identity should be federated from the plane that issued it, so every plane checks the same identity. One registry has to hold the record of ownership, or an agent that appears in two inventories ends up with two owners or none. Every plane's telemetry also belongs in one trace, so that an action that starts in one estate and finishes in another can be followed end to end.
+
+The native planes keep running and securing the agents inside their own estates. The vendor-neutral plane governs the crossings, where an agent's work reaches another estate or the enterprise's own systems and data.
+
+## What to do next
+
+1. **CIO.** List every agent platform in use, and for each one record which system is authoritative for inventory, identity, policy and telemetry, with a named owner for each decision.
+2. **CTO.** Federate agent identities from the plane that issued them, and send every agent's calls into enterprise APIs, tools and data through one policy point, whichever estate the agent runs in.
+3. **CIO and CTO.** Agree which registry holds the record of ownership, and send telemetry from every plane to one trace before the next agent platform goes live.
+
+## Go deeper
+
+[Section 7 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-07.html#coexisting-with-the-hyperscalers-agent-control-planes) sets this division of labor beside the handbook's map of requirements to capabilities and the checks to run on any agent platform. [Slide 25 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-3.html#slide-25) puts the table and the default on one page, with speaker notes you can present from.

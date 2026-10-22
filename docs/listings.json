@@ -2,6 +2,7 @@
   {
     "listing": "/guides/index.html",
     "items": [
+      "/guides/agent-network-from-one-config-file/index.html",
       "/guides/accuracy-and-the-base-rate/index.html",
       "/guides/survey-weights-and-margins-of-error/index.html",
       "/guides/choose-the-right-statistical-test/index.html"
@@ -10,6 +11,7 @@
   {
     "listing": "/articles/index.html",
     "items": [
+      "/articles/decide-which-control-plane-owns-what/index.html",
       "/articles/adoption-is-outrunning-governance/index.html",
       "/articles/what-an-ai-control-plane-is/index.html",
       "/articles/plan-for-the-new-agent-protocols/index.html",
@@ -24,6 +26,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/articles/decide-which-control-plane-owns-what/index.html",
       "/articles/adoption-is-outrunning-governance/index.html",
       "/articles/what-an-ai-control-plane-is/index.html",
       "/articles/plan-for-the-new-agent-protocols/index.html",

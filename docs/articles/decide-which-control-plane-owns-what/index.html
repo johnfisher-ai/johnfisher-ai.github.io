@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-10-22">
+<meta name="description" content="Most enterprises will run more than one agent control plane. A default split says which one holds the record for inventory, identity, policy and audit.">
+
+<title>Decide which agent control plane is authoritative for what · AI+ by John Fisher</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-ee4103398c8904488574c28388612f7d.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<link rel="preload" href="../../assets/fonts/plus-jakarta-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin="">
+<meta name="theme-color" content="#0F172A">
+<meta name="author" content="John Fisher">
+
+
+<link rel="stylesheet" href="../../assets/css/fonts.css">
+<meta property="og:title" content="Decide which agent control plane is authoritative for what">
+<meta property="og:description" content="Most enterprises will run more than one agent control plane. A default split says which one holds the record for inventory, identity, policy and audit.">
+<meta property="og:image" content="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/card.png">
+<meta property="og:site_name" content="AI+ by John Fisher">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:alt" content="Slide 25 of the AI Control Plane executive deck, headed Coexisting with the hyperscalers’ agent control planes, with a table of each estate’s native agent control plane, what it is usually authoritative for and MuleSoft Agent Fabric’s role, above a box that gives a workable default.">
+<meta name="twitter:title" content="Decide which agent control plane is authoritative for what">
+<meta name="twitter:description" content="Most enterprises will run more than one agent control plane. A default split says which one holds the record for inventory, identity, policy and audit.">
+<meta name="twitter:image" content="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/card.png">
+<meta name="twitter:image-height" content="630">
+<meta name="twitter:image-width" content="1200">
+<meta name="twitter:image:alt" content="Slide 25 of the AI Control Plane executive deck, headed Coexisting with the hyperscalers’ agent control planes, with a table of each estate’s native agent control plane, what it is usually authoritative for and MuleSoft Agent Fabric’s role, above a box that gives a workable default.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/">
+<meta property="og:url" content="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/">
+<meta property="og:type" content="article">
+<meta name="quarto:offset" content="../../">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+<a class="skip-link" href="#quarto-document-content">Skip to content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo light-content">
+    <img src="../../assets/img/mark.svg" alt="AI+ by John Fisher, home" class="navbar-logo dark-content">
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../handbooks/"> 
+<span class="menu-text">Handbooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../articles/"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guides/"> 
+<span class="menu-text">Guides &amp; Labs</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about/"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../search/"> <i class="bi bi-search" aria-hidden="true">
+</i> 
+<span class="menu-text">Search</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://www.linkedin.com/in/johnrfisher"> <i class="bi bi-linkedin" aria-hidden="true">
+</i> 
+<span class="menu-text">Follow on LinkedIn</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content" data-pagefind-body>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Decide which agent control plane is authoritative for what</h1>
+  <div class="quarto-categories">
+    <div class="ai-title-category"><a href="/articles/#category=CIO">CIO</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=CTO">CTO</a></div>
+    <div class="ai-title-category"><a href="/articles/#category=AI%20control%20plane">AI control plane</a></div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Most enterprises will run more than one agent control plane. A default split says which one holds the record for inventory, identity, policy and audit.
+  </div>
+</div>
+
+<!-- Quarto 1.10.19 title-metadata.html, with a reading-time field filled in by tools/postrender.py,
+     and a guide's time to complete (lab-time) and format (lab-format) from its front matter -->
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 22, 2026</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Last checked</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 22, 2026</p>
+    </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Reading time</div>
+    <div class="quarto-title-meta-contents">
+      <p class="ai-reading">4 min</p>
+    </div>
+  </div>
+  
+  
+  
+  </div>
+  
+
+
+</header>
+
+
+<p>Most enterprises that build agents on more than one platform will run more than one agent control plane. Microsoft describes Agent 365 as “the control-plane for AI agents,” with Microsoft Entra Agent ID for agent identities.<span class="citation" data-cites="ms-frontier"><sup><a href="#ref-ms-frontier" role="doc-biblioref">1</a></sup></span> The other large platforms each offer a plane of their own, and each one governs its own estate well. Once agents from different estates start to share data and processes, someone has to decide which plane is authoritative for which job.</p>
+<section id="each-native-plane-governs-its-own-estate" class="level2">
+<h2 class="anchored" data-anchor-id="each-native-plane-governs-its-own-estate">Each native plane governs its own estate</h2>
+<p>The native planes cover similar ground, each inside its own walls. Amazon Bedrock AgentCore’s services include a runtime, memory, a gateway that connects MCP servers, identity and OpenTelemetry-compatible observability.<span class="citation" data-cites="aws-agentcore"><sup><a href="#ref-aws-agentcore" role="doc-biblioref">2</a></sup></span> Google’s Gemini Enterprise Agent Platform includes an agent registry, an agent gateway and agent identities.<span class="citation" data-cites="google-agent-platform"><sup><a href="#ref-google-agent-platform" role="doc-biblioref">3</a></sup></span> Agentforce is a platform for building, running and optimizing agents inside Salesforce, with trusted context and controlled behavior.<span class="citation" data-cites="mulesoft-agent-fabric"><sup><a href="#ref-mulesoft-agent-fabric" role="doc-biblioref">4</a></sup></span></p>
+<p>Their claims also overlap. Microsoft’s guidance for its own estate names Agent 365, or Entra Agent ID where Agent 365 is not in use at scale, as the authoritative inventory, and it asks for consistent policy across every agent platform.<span class="citation" data-cites="ms-caf-agents"><sup><a href="#ref-ms-caf-agents" role="doc-biblioref">5</a></sup></span> An enterprise with two or three such planes has two or three candidates for the record of its agents, and it has to settle which record counts before an audit raises the question for it.</p>
+</section>
+<section id="where-each-plane-is-authoritative" class="level2">
+<h2 class="anchored" data-anchor-id="where-each-plane-is-authoritative">Where each plane is authoritative</h2>
+<p>The handbook’s default keeps each native plane authoritative for identity and runtime inside its own estate. A vendor-neutral plane, which the handbook realizes with MuleSoft Agent Fabric, is then authoritative for the cross-estate inventory, for policy on every call into enterprise capabilities and data, for orchestration across vendors, and for cost and audit.<span class="citation" data-cites="mulesoft-agent-fabric"><sup><a href="#ref-mulesoft-agent-fabric" role="doc-biblioref">4</a></sup></span></p>
+<div class="ai-table-scroll" tabindex="0" role="region" aria-label="Table: Who is usually authoritative for what in each estate, and the role of MuleSoft Agent Fabric as the vendor-neutral plane4"><table class="caption-top table">
+<caption>Who is usually authoritative for what in each estate, and the role of MuleSoft Agent Fabric as the vendor-neutral plane<span class="citation" data-cites="mulesoft-agent-fabric"><sup><a href="#ref-mulesoft-agent-fabric" role="doc-biblioref">4</a></sup></span></caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Estate</th>
+<th>Native agent control plane</th>
+<th>Usually authoritative for</th>
+<th>MuleSoft Agent Fabric’s role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Microsoft 365 and Azure</td>
+<td>Agent 365 and Microsoft Entra Agent ID<span class="citation" data-cites="ms-frontier"><sup><a href="#ref-ms-frontier" role="doc-biblioref">1</a></sup></span></td>
+<td>Identities and inventory of Microsoft agents<br>Access to Microsoft 365 data</td>
+<td>Registers Copilot Studio and Foundry agents<br>Applies common policy to their calls into enterprise systems</td>
+</tr>
+<tr class="even">
+<td>AWS</td>
+<td>Amazon Bedrock AgentCore<span class="citation" data-cites="aws-agentcore"><sup><a href="#ref-aws-agentcore" role="doc-biblioref">2</a></sup></span></td>
+<td>Runtime, memory and identity for agents built on AWS</td>
+<td>Registers Bedrock and AgentCore agents<br>Governs their access to enterprise APIs and MCP tools</td>
+</tr>
+<tr class="odd">
+<td>Google Cloud</td>
+<td>Gemini Enterprise Agent Platform, with Agent Registry, Agent Gateway and Agent Identity<span class="citation" data-cites="google-agent-platform"><sup><a href="#ref-google-agent-platform" role="doc-biblioref">3</a></sup></span></td>
+<td>Agents built on Google Cloud</td>
+<td>Registers them under the same policy as every other estate</td>
+</tr>
+<tr class="even">
+<td>Salesforce</td>
+<td>Agentforce<span class="citation" data-cites="mulesoft-agent-fabric"><sup><a href="#ref-mulesoft-agent-fabric" role="doc-biblioref">4</a></sup></span></td>
+<td>Agents working in Salesforce data and processes</td>
+<td>Registers and governs Agentforce agents</td>
+</tr>
+<tr class="odd">
+<td>Across estates</td>
+<td>No single native plane</td>
+<td>Cross-vendor inventory<br>Policy on every call into enterprise capabilities and data<br>Orchestration across vendors<br>Cost and audit</td>
+<td>The vendor-neutral control plane</td>
+</tr>
+</tbody>
+</table></div>
+<p>The split holds only when the planes share what they know. Each agent’s identity should be federated from the plane that issued it, so every plane checks the same identity. One registry has to hold the record of ownership, or an agent that appears in two inventories ends up with two owners or none. Every plane’s telemetry also belongs in one trace, so that an action that starts in one estate and finishes in another can be followed end to end.</p>
+<p>The native planes keep running and securing the agents inside their own estates. The vendor-neutral plane governs the crossings, where an agent’s work reaches another estate or the enterprise’s own systems and data.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CIO.</strong> List every agent platform in use, and for each one record which system is authoritative for inventory, identity, policy and telemetry, with a named owner for each decision.</li>
+<li><strong>CTO.</strong> Federate agent identities from the plane that issued them, and send every agent’s calls into enterprise APIs, tools and data through one policy point, whichever estate the agent runs in.</li>
+<li><strong>CIO and CTO.</strong> Agree which registry holds the record of ownership, and send telemetry from every plane to one trace before the next agent platform goes live.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-07.html#coexisting-with-the-hyperscalers-agent-control-planes">Section 7 of <em>The AI Control Plane Handbook</em></a> sets this division of labor beside the handbook’s map of requirements to capabilities and the checks to run on any agent platform. <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-3.html#slide-25">Slide 25 of the executive deck</a> puts the table and the default on one page, with speaker notes you can present from.</p>
+
+
+<div class="cta" data-pagefind-ignore role="note" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/">the full handbook</a> and <a href="https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/">the executive deck</a> online.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default" data-pagefind-ignore><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-ms-frontier" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">Microsoft, “Introducing the First Frontier Suite built on Intelligence + Trust,” Official Microsoft Blog, March 9, 2026; see also Microsoft, “What’s new in Microsoft Entra Agent ID,” Microsoft Learn, updated May 1, 2026, and Microsoft, “Microsoft Agent Framework overview,” Microsoft Learn, updated August 25, 2026. <a href="https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/" class="uri">https://blogs.microsoft.com/blog/2026/03/09/introducing-the-first-frontier-suite-built-on-intelligence-trust/</a> <a href="https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id" class="uri">https://learn.microsoft.com/en-us/entra/agent-id/whats-new-agent-id</a> <a href="https://learn.microsoft.com/en-us/agent-framework/overview/">https://learn.microsoft.com/en-us/agent-framework/overview/</a></div>
+</div>
+<div id="ref-aws-agentcore" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">Amazon Web Services, “What is Amazon Bedrock AgentCore?” and “Evaluate agent performance with Amazon Bedrock AgentCore Evaluations,” Amazon Bedrock AgentCore Developer Guide, accessed October 2026. <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html" class="uri">https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html</a> <a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html">https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html</a></div>
+</div>
+<div id="ref-google-agent-platform" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">Kanchana Patlolla and Greg Brosman, “20 questions for the agentic enterprise (and how Agent Platform can help),” Google Cloud Blog, July 7, 2026. <a href="https://cloud.google.com/blog/products/ai-machine-learning/20-questions-for-the-agentic-enterprise">https://cloud.google.com/blog/products/ai-machine-learning/20-questions-for-the-agentic-enterprise</a></div>
+</div>
+<div id="ref-mulesoft-agent-fabric" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">MuleSoft, “Agent Fabric,” product page, accessed October 2026; see also the MuleSoft documentation pages “Agent Fabric release notes,” “Agent Scanners,” “Adding an MCP Bridge Instance,” “Creating and Managing Model Proxies” and “Detect and Contain Rogue Agents,” and MuleSoft, “AI Cost Management,” accessed October 2026. <a href="https://www.mulesoft.com/ai/agent-fabric" class="uri">https://www.mulesoft.com/ai/agent-fabric</a> <a href="https://docs.mulesoft.com/general/agent-fabric-release-notes" class="uri">https://docs.mulesoft.com/general/agent-fabric-release-notes</a> <a href="https://docs.mulesoft.com/exchange/agent-scanners" class="uri">https://docs.mulesoft.com/exchange/agent-scanners</a> <a href="https://docs.mulesoft.com/api-manager/latest/create-instance-task-mcp-bridge" class="uri">https://docs.mulesoft.com/api-manager/latest/create-instance-task-mcp-bridge</a> <a href="https://docs.mulesoft.com/general/model-proxy" class="uri">https://docs.mulesoft.com/general/model-proxy</a> <a href="https://docs.mulesoft.com/general/exp-detect-and-contain-rogue-agents" class="uri">https://docs.mulesoft.com/general/exp-detect-and-contain-rogue-agents</a> <a href="https://www.mulesoft.com/ai/agent-fabric/cost-management">https://www.mulesoft.com/ai/agent-fabric/cost-management</a></div>
+</div>
+<div id="ref-ms-caf-agents" class="csl-entry" role="listitem">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">Microsoft, “Govern and secure AI agents across the organization,” Cloud Adoption Framework for Azure, Microsoft Learn, updated June 26, 2026. <a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization">https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai-agents/governance-security-across-organization</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/johnfisher-ai\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>John Fisher works for Salesforce. The views here are his own, not Salesforce’s, and are drawn from public information; this site is not affiliated with or endorsed by Salesforce. Product names are trademarks of their owners.</p>
+<p>Writing is licensed CC BY 4.0 unless an article says otherwise; code is MIT. <a href="../../about/#licenses">Licenses</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../articles/index.xml">
+<p>Articles feed</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../guides/index.xml">
+<p>Guides feed</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

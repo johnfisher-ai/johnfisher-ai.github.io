@@ -17,7 +17,79 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Fri, 16 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Run a broker and its specialist agents from one config file</title>
+  <link>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>In many agent frameworks the roster is written in code, with a class for each agent and a router that has a branch for each destination, so changing who the agents are means changing the program.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span> Before an agent network goes near a system of record, ask where its roster and its rule for what needs a person’s approval are written down, and who reviews a change to either.</p>
+<p>This network keeps the broker’s routing and synthesis prompts, the scenarios, the specialists and the risk rule in one XML file, and it builds its graph at load time from whatever the file declares, so a new agent is a new XML block and a new business is a new file.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span> The orchestration runs for real against gpt-4o, while every specialist’s answer is written into the file in advance and no vendor API is called, which keeps each run repeatable and lets the tests exercise the real graph with no key.<span class="citation" data-cites="agentnet-architecture"><sup>2</sup></span></p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>The notebook builds the network for a fictional online travel agency from <code>config/config_travel.xml</code>, then runs the same graph as a management consulting firm.<span class="citation" data-cites="agentnet-notebook"><sup>3</sup></span></p>
+<ol type="1">
+<li>Load the travel network and list its five specialists. Each one describes what it is good at in a line, and that description is all the broker sees when it decides whom to consult.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span></li>
+<li>Ask for the general sentiment of recent guest reviews. In the saved run the broker consults only the guest experience specialist, which returns the reply written for it in the file, and the answer comes back with no approval needed.<span class="citation" data-cites="agentnet-notebook"><sup>3</sup></span></li>
+<li>Ask whether to match a competitor’s lower rates. The synthesis step scores its own answer against the file’s rule, which sends any change to prices or published content to a person, so the answer stops at the human gate.<span class="citation" data-cites="agentnet-architecture"><sup>2</sup></span> Approve it and the proposal comes back word for word,<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span> or decline it and the run reports the action as cancelled.<span class="citation" data-cites="agentnet-run"><sup>4</sup></span></li>
+<li>Load <code>config/config_agency.xml</code> and ask where a post-merger integration can find synergies. The same graph now runs a consulting firm with five different specialists, and its gate fires on layoffs, restructuring and budget moves over $1M,<span class="citation" data-cites="agentnet-architecture"><sup>2</sup></span> as it does in the saved run, whose answer proposes a 10% headcount reduction.<span class="citation" data-cites="agentnet-notebook"><sup>3</sup></span></li>
+<li>Copy either config to start a network of your own. It needs the broker’s two prompts, a list of scenarios with keywords and the agents, each with a description and one canned reply per scenario, and nothing in the package has to change.<span class="citation" data-cites="agentnet-run"><sup>4</sup></span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/one-graph-two-configs.png" class="img-fluid figure-img" alt="A diagram titled Two businesses, one graph. On the left, config_travel.xml lists Market Scout, Revenue Strategist, Content Specialist, Guest Experience and Facilities Manager, with the risk rule that changing prices or publishing content needs a human. On the right, config_agency.xml lists Market Analyst, Financial Modeler, Organizational Strategist, Operations Specialist and Risk &amp; Compliance, with the risk rule that layoffs, restructuring or budget moves over $1M need a human. Both point to the same graph, agentic_network/graph.py, unchanged."></p>
+<figcaption>The same graph runs both businesses, because each config file holds its own specialists and risk rule. From the agent network’s overview.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span></figcaption>
+</figure>
+</div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>You need a free Google account and your own OpenAI API key, which you save in Colab’s secrets (the key icon in the left sidebar) under the name OPENAI_API_KEY. Each question makes two gpt-4o calls, one to route it and one to synthesize the answer, which costs a fraction of a cent, and the specialists cost nothing because their answers are written in advance.<span class="citation" data-cites="agentnet-run"><sup>4</sup></span> The notebook clones the repository and installs its own dependencies, so there is nothing else to set up.<span class="citation" data-cites="agentnet-run"><sup>4</sup></span> If you would rather spend nothing, the repository’s 19 checks run the real graph against a stub model from a clone, with Python 3.10 or newer and no key.<span class="citation" data-cites="agentnet-run"><sup>4</sup></span></p>
+<div class="ai-actions">
+<p><a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html" class="btn btn-primary">Read the architecture</a> <a href="https://colab.research.google.com/github/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb" class="btn btn-outline-primary">Open in Colab</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<p><a href="../../articles/what-an-ai-control-plane-is/index.html">What an enterprise AI control plane is</a> turns orchestration and trust into questions to put to any vendor. The broker’s routing and its human gate show both at work in one small network you can read from end to end.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-agentnet-overview" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, <em>A Config-Driven Agent Network</em>, overview, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/">https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/</a></div>
+</div>
+<div id="ref-agentnet-architecture" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Architecture,” in <em>A Config-Driven Agent Network</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html">https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html</a></div>
+</div>
+<div id="ref-agentnet-notebook" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “Agentic Travel Partner Agent Network,” notebook in the repository <em>fisher-agentic-network-langgraph</em>, with its executed output, accessed October 2026. <a href="https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb">https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb</a></div>
+</div>
+<div id="ref-agentnet-run" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">John Fisher, “Running it,” in <em>A Config-Driven Agent Network</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/run.html">https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/run.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>CTO</category>
+  <category>AI Engineer</category>
+  <category>Developer</category>
+  <category>Intermediate</category>
+  <category>AI control plane</category>
+  <guid>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</guid>
+  <pubDate>Thu, 22 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>Catch a model that is 88.7% accurate and misses almost every case</title>
   <link>https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/</link>
