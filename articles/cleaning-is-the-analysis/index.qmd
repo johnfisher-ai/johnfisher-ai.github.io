@@ -1,0 +1,74 @@
+---
+title: "Cleaning is the analysis"
+description: "Duplicates, hidden missing codes and mixed units change results without raising an error. Audit the data before you trust any number it gives you."
+date: 2026-10-22
+date-modified: 2026-10-22
+sequence: 70
+categories: [Analyst, Developer, Data science]
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card with three faults found by a first audit of the Visual Handbook's teaching datasets: 23 tempos recorded as 0, one genre spelled 19 ways, and one flipper length in centimeters."
+license: "CC BY"
+cta-source: "Read [chapter 18 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html) and [run the first-audit notebook from chapter 26 yourself](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/review-and-how-to-read-these-case-studies.ipynb)."
+references:
+  - id: vb-ch18
+    type: webpage
+    title: "John Fisher, “The Data-Cleaning Mindset,” chapter 18 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html
+  - id: vb-ch26
+    type: webpage
+    title: "John Fisher, “Review & Case-Study Roadmap,” chapter 26 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html
+  - id: vb-ch27
+    type: webpage
+    title: "John Fisher, “Case Study: Spotify Track Features,” chapter 27 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html
+  - id: vb-ch28
+    type: webpage
+    title: "John Fisher, “Case Study: Ames Housing Prices,” chapter 28 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html
+  - id: vb-ch29
+    type: webpage
+    title: "John Fisher, “Case Study: Palmer Penguins,” chapter 29 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html
+  - id: nasa-mco
+    type: report
+    title: "Mars Climate Orbiter Mishap Investigation Board, *Phase I Report*, NASA, November 10, 1999."
+    URL: https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf
+---
+
+A widely cited 2016 survey put roughly 60% of a data scientist's time on cleaning data, a figure the Visual Handbook asks readers to treat as a survey-based estimate.[@vb-ch18] Whatever the exact share, most of the errors that change a result sit in that same work, in duplicate rows, missing values and units, and none of them stops the code from running.
+
+## Small faults move the numbers
+
+The Visual Handbook's case studies work through three datasets written for the book, a music catalog, a set of house sales and a record of penguin measurements, each with problems planted on purpose.[@vb-ch26] A first audit of the three turns up the faults below, and every one of them changes a figure someone might quote.
+
+| Fault | Where it sits | Before the fix | After the fix |
+|---|---|---|---|
+| Duplicate rows | 10 house sales listed twice | 610 sales | 600 sales |
+| A missing reading stored as 0 | 23 tracks with a tempo of 0 | Mean tempo 115.3 BPM | Mean tempo 118.3 BPM |
+| One label, many spellings | Genre typed 19 ways for 8 genres | 161 rows of pop | 181 rows of pop |
+| A value in the wrong unit | One flipper of 19.5, in centimeters | Standard deviation 18.96 mm | Standard deviation 16.26 mm |
+| An impossible value | Three tracks of 25 to 300 minutes | Mean length 3.99 min | Mean length 3.61 min |
+
+: What one fix does to one number, computed with pandas from the raw teaching files, each fix applied on its own[@vb-ch26]
+
+The zero tempos show how quietly a fault can hide. No song plays at 0 beats per minute, so each zero is a missing reading stored as a number, and the mean counts it as real.[@vb-ch27] A check with `isna()` finds none of them, because to pandas a zero is data, and the same is true of codes such as -99 or 9999.[@vb-ch18] The genre column fails the other way. A group-by splits pop into `pop`, `Pop`, `POP` and `pop ` with a trailing space, so the largest of the four groups holds only 161 of the 181 rows.
+
+## Each fix is a judgment
+
+A value in the wrong unit is harder to spot, because it still looks like a number. NASA lost the Mars Climate Orbiter in 1999 because one piece of ground software supplied thruster data in English units where the navigation software expected metric units.[@nasa-mco] The penguin file holds a small version of the same fault. A single flipper length recorded in centimeters, among hundreds in millimeters, raises the column's standard deviation by about 17%.
+
+The right fix depends on why a value is wrong. The penguin flipper was multiplied by 10 and kept, because its cause was known.[@vb-ch29] The three impossible track lengths were removed, while long tracks that were merely unusual stayed in.[@vb-ch27] Duplicates barely moved the mean house price, from $184,147 to $184,027, yet they added ten sales to every count and made the sample look larger than it was.[@vb-ch28]
+
+These choices cannot be fully automated, since only the meaning of the data decides whether an age of 0 is a newborn or a missing default.[@vb-ch18] That is why the handbook asks for the reason behind every cleaning step to be written down.[@vb-ch26] Cleaning done in a script, with its reasons logged, can be checked and rerun by someone else, which a spreadsheet edited by hand never allows.
+
+## What to do next
+
+1. **Analyst.** Before any summary, audit the row count, duplicate rows, missing values in each column and the distinct values of every text column, and look for codes such as 0, -99 or 9999 that stand in for a blank.
+2. **Developer.** Keep the raw file untouched, clean it in a script, and add checks that stop the run when a value leaves its valid range or a key repeats.
+3. **Analyst and Developer.** Write down each cleaning decision and its reason beside the code, and report the row count before and after each step with the result.
+
+## Go deeper
+
+[Chapter 18 of the Visual Handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html) sets out the dimensions of data quality, the common faults and an audit routine, with a notebook that profiles a messy customer table. [Chapter 26](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html) runs one first audit on the three teaching datasets. Chapters [27](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html), [28](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html) and [29](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html) then clean each one from raw file to analysis-ready table and give the reason for every step.

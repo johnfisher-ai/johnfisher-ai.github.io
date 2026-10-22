@@ -133,6 +133,123 @@
   <media:content url="https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/card.png" medium="image" type="image/png" height="76" width="144"/>
 </item>
 <item>
+  <title>Cleaning is the analysis</title>
+  <link>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>A widely cited 2016 survey put roughly 60% of a data scientist’s time on cleaning data, a figure the Visual Handbook asks readers to treat as a survey-based estimate.<span class="citation" data-cites="vb-ch18"><sup>1</sup></span> Whatever the exact share, most of the errors that change a result sit in that same work, in duplicate rows, missing values and units, and none of them stops the code from running.</p>
+<section id="small-faults-move-the-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="small-faults-move-the-numbers">Small faults move the numbers</h2>
+<p>The Visual Handbook’s case studies work through three datasets written for the book, a music catalog, a set of house sales and a record of penguin measurements, each with problems planted on purpose.<span class="citation" data-cites="vb-ch26"><sup>2</sup></span> A first audit of the three turns up the faults below, and every one of them changes a figure someone might quote.</p>
+<table class="caption-top table">
+<caption>What one fix does to one number, computed with pandas from the raw teaching files, each fix applied on its own<span class="citation" data-cites="vb-ch26"><sup>2</sup></span></caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fault</th>
+<th>Where it sits</th>
+<th>Before the fix</th>
+<th>After the fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Duplicate rows</td>
+<td>10 house sales listed twice</td>
+<td>610 sales</td>
+<td>600 sales</td>
+</tr>
+<tr class="even">
+<td>A missing reading stored as 0</td>
+<td>23 tracks with a tempo of 0</td>
+<td>Mean tempo 115.3 BPM</td>
+<td>Mean tempo 118.3 BPM</td>
+</tr>
+<tr class="odd">
+<td>One label, many spellings</td>
+<td>Genre typed 19 ways for 8 genres</td>
+<td>161 rows of pop</td>
+<td>181 rows of pop</td>
+</tr>
+<tr class="even">
+<td>A value in the wrong unit</td>
+<td>One flipper of 19.5, in centimeters</td>
+<td>Standard deviation 18.96 mm</td>
+<td>Standard deviation 16.26 mm</td>
+</tr>
+<tr class="odd">
+<td>An impossible value</td>
+<td>Three tracks of 25 to 300 minutes</td>
+<td>Mean length 3.99 min</td>
+<td>Mean length 3.61 min</td>
+</tr>
+</tbody>
+</table>
+<p>The zero tempos show how quietly a fault can hide. No song plays at 0 beats per minute, so each zero is a missing reading stored as a number, and the mean counts it as real.<span class="citation" data-cites="vb-ch27"><sup>3</sup></span> A check with <code>isna()</code> finds none of them, because to pandas a zero is data, and the same is true of codes such as -99 or 9999.<span class="citation" data-cites="vb-ch18"><sup>1</sup></span> The genre column fails the other way. A group-by splits pop into <code>pop</code>, <code>Pop</code>, <code>POP</code> and <code>pop</code> with a trailing space, so the largest of the four groups holds only 161 of the 181 rows.</p>
+</section>
+<section id="each-fix-is-a-judgment" class="level2">
+<h2 class="anchored" data-anchor-id="each-fix-is-a-judgment">Each fix is a judgment</h2>
+<p>A value in the wrong unit is harder to spot, because it still looks like a number. NASA lost the Mars Climate Orbiter in 1999 because one piece of ground software supplied thruster data in English units where the navigation software expected metric units.<span class="citation" data-cites="nasa-mco"><sup>4</sup></span> The penguin file holds a small version of the same fault. A single flipper length recorded in centimeters, among hundreds in millimeters, raises the column’s standard deviation by about 17%.</p>
+<p>The right fix depends on why a value is wrong. The penguin flipper was multiplied by 10 and kept, because its cause was known.<span class="citation" data-cites="vb-ch29"><sup>5</sup></span> The three impossible track lengths were removed, while long tracks that were merely unusual stayed in.<span class="citation" data-cites="vb-ch27"><sup>3</sup></span> Duplicates barely moved the mean house price, from $184,147 to $184,027, yet they added ten sales to every count and made the sample look larger than it was.<span class="citation" data-cites="vb-ch28"><sup>6</sup></span></p>
+<p>These choices cannot be fully automated, since only the meaning of the data decides whether an age of 0 is a newborn or a missing default.<span class="citation" data-cites="vb-ch18"><sup>1</sup></span> That is why the handbook asks for the reason behind every cleaning step to be written down.<span class="citation" data-cites="vb-ch26"><sup>2</sup></span> Cleaning done in a script, with its reasons logged, can be checked and rerun by someone else, which a spreadsheet edited by hand never allows.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>Analyst.</strong> Before any summary, audit the row count, duplicate rows, missing values in each column and the distinct values of every text column, and look for codes such as 0, -99 or 9999 that stand in for a blank.</li>
+<li><strong>Developer.</strong> Keep the raw file untouched, clean it in a script, and add checks that stop the run when a value leaves its valid range or a key repeats.</li>
+<li><strong>Analyst and Developer.</strong> Write down each cleaning decision and its reason beside the code, and report the row count before and after each step with the result.</li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html">Chapter 18 of the Visual Handbook</a> sets out the dimensions of data quality, the common faults and an audit routine, with a notebook that profiles a messy customer table. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html">Chapter 26</a> runs one first audit on the three teaching datasets. Chapters <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html">27</a>, <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html">28</a> and <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html">29</a> then clean each one from raw file to analysis-ready table and give the reason for every step.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html">chapter 18 of the Visual Handbook</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/review-and-how-to-read-these-case-studies.ipynb">run the first-audit notebook from chapter 26 yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-vb-ch18" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Data-Cleaning Mindset,” chapter 18 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html</a></div>
+</div>
+<div id="ref-vb-ch26" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Review &amp; Case-Study Roadmap,” chapter 26 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html</a></div>
+</div>
+<div id="ref-vb-ch27" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “Case Study: Spotify Track Features,” chapter 27 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html</a></div>
+</div>
+<div id="ref-nasa-mco" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">Mars Climate Orbiter Mishap Investigation Board, <em>Phase I Report</em>, NASA, November 10, 1999. <a href="https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf">https://llis.nasa.gov/llis_lib/pdf/1009464main1_0641-mr.pdf</a></div>
+</div>
+<div id="ref-vb-ch29" class="csl-entry">
+<div class="csl-left-margin">5. </div><div class="csl-right-inline">John Fisher, “Case Study: Palmer Penguins,” chapter 29 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html</a></div>
+</div>
+<div id="ref-vb-ch28" class="csl-entry">
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">John Fisher, “Case Study: Ames Housing Prices,” chapter 28 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Developer</category>
+  <category>Data science</category>
+  <guid>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</guid>
+  <pubDate>Thu, 22 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
   <title>Adoption is outrunning governance</title>
   <link>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</link>
   <description><![CDATA[ 

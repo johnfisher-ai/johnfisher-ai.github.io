@@ -2,82 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://johnfisher-ai.github.io/search/</loc>
-    <lastmod>2026-10-22T13:27:02.426Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.100Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/handbooks/</loc>
-    <lastmod>2026-10-22T13:27:02.426Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.100Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/</loc>
-    <lastmod>2026-10-22T13:27:02.425Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.099Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</loc>
-    <lastmod>2026-10-22T14:18:51.574Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.097Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/what-an-ai-control-plane-is/</loc>
-    <lastmod>2026-10-22T14:17:25.167Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.041Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/plan-for-the-new-agent-protocols/</loc>
-    <lastmod>2026-10-22T13:27:02.398Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.038Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/map-agentic-threats-to-controls/</loc>
-    <lastmod>2026-10-22T13:27:02.397Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.036Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</loc>
-    <lastmod>2026-10-22T13:27:02.396Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.034Z</lastmod>
   </url>
   <url>
-    <loc>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</loc>
-    <lastmod>2026-10-22T13:27:02.395Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</loc>
-    <lastmod>2026-10-22T13:27:02.394Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/about/</loc>
-    <lastmod>2026-10-22T13:27:02.393Z</lastmod>
+    <loc>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</loc>
+    <lastmod>2026-10-22T17:35:00.120Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</loc>
-    <lastmod>2026-10-22T13:27:02.395Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.027Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/about/</loc>
+    <lastmod>2026-10-22T17:26:00.024Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</loc>
+    <lastmod>2026-10-22T17:26:00.026Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</loc>
+    <lastmod>2026-10-22T17:26:00.029Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/</loc>
-    <lastmod>2026-10-22T14:17:25.164Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.032Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/</loc>
-    <lastmod>2026-10-22T13:27:02.396Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.034Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/</loc>
-    <lastmod>2026-10-22T13:27:02.397Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.037Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/value-at-every-milestone/</loc>
-    <lastmod>2026-10-22T13:27:02.399Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.040Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/</loc>
-    <lastmod>2026-10-22T13:27:02.425Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.096Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/</loc>
-    <lastmod>2026-10-22T13:27:02.425Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.099Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/</loc>
-    <lastmod>2026-10-22T13:27:02.426Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.100Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/</loc>
-    <lastmod>2026-10-22T13:27:02.426Z</lastmod>
+    <lastmod>2026-10-22T17:26:00.100Z</lastmod>
   </url>
 </urlset>
