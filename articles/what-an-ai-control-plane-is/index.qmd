@@ -64,3 +64,7 @@ Most enterprises span several ecosystems, so the harder task is coordinating con
 ## Go deeper
 
 [Section 2 of *The AI Control Plane Handbook*](https://johnfisher-ai.github.io/ai-control-plane-handbook/handbook/section-02.html) sets out the definition and the lifecycle a control plane enforces for every agent, from proposal to retirement. [Slide 7 of the executive deck](https://johnfisher-ai.github.io/ai-control-plane-handbook/deck/part-1.html#slide-7) puts the three capabilities and their questions on one page.
+
+## Try it
+
+[Run a broker and its specialist agents from one config file](../../guides/agent-network-from-one-config-file/index.qmd) shows orchestration and an approval gate at work in a small agent network you can run in Colab with your own OpenAI key.

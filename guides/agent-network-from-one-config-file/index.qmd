@@ -1,0 +1,62 @@
+---
+title: "Run a broker and its specialist agents from one config file"
+description: "One XML file defines an agent network's specialists, routing prompts and risk rule. Run it in Colab, watch the human gate fire, then swap the file."
+date: 2026-10-22
+date-modified: 2026-10-22
+sequence: 3
+categories: [CTO, AI Engineer, Developer, Intermediate, AI control plane]
+lab-time: "About 45 minutes"
+lab-format: "Write-up and Colab lab"
+source: "Agent network"
+image: card.png
+image-alt: "A card listing the guide's four steps: load the config, ask a question, stop at the gate, and swap the file, with a note that the lab needs your own OpenAI key."
+license: "CC BY"
+references:
+  - id: agentnet-overview
+    type: webpage
+    title: "John Fisher, *A Config-Driven Agent Network*, overview, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/
+  - id: agentnet-architecture
+    type: webpage
+    title: "John Fisher, “Architecture,” in *A Config-Driven Agent Network*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html
+  - id: agentnet-notebook
+    type: webpage
+    title: "John Fisher, “Agentic Travel Partner Agent Network,” notebook in the repository *fisher-agentic-network-langgraph*, with its executed output, accessed October 2026."
+    URL: https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb
+  - id: agentnet-run
+    type: webpage
+    title: "John Fisher, “Running it,” in *A Config-Driven Agent Network*, accessed October 2026."
+    URL: https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/run.html
+---
+
+## Why it matters
+
+In many agent frameworks the roster is written in code, with a class for each agent and a router that has a branch for each destination, so changing who the agents are means changing the program.[@agentnet-overview] Before an agent network goes near a system of record, ask where its roster and its rule for what needs a person's approval are written down, and who reviews a change to either.
+
+This network keeps the broker's routing and synthesis prompts, the scenarios, the specialists and the risk rule in one XML file, and it builds its graph at load time from whatever the file declares, so a new agent is a new XML block and a new business is a new file.[@agentnet-overview] The orchestration runs for real against gpt-4o, while every specialist's answer is written into the file in advance and no vendor API is called, which keeps each run repeatable and lets the tests exercise the real graph with no key.[@agentnet-architecture]
+
+## What you will do
+
+The notebook builds the network for a fictional online travel agency from `config/config_travel.xml`, then runs the same graph as a management consulting firm.[@agentnet-notebook]
+
+1. Load the travel network and list its five specialists. Each one describes what it is good at in a line, and that description is all the broker sees when it decides whom to consult.[@agentnet-overview]
+2. Ask for the general sentiment of recent guest reviews. In the saved run the broker consults only the guest experience specialist, which returns the reply written for it in the file, and the answer comes back with no approval needed.[@agentnet-notebook]
+3. Ask whether to match a competitor's lower rates. The synthesis step scores its own answer against the file's rule, which sends any change to prices or published content to a person, so the answer stops at the human gate.[@agentnet-architecture] Approve it and the proposal comes back word for word,[@agentnet-overview] or decline it and the run reports the action as cancelled.[@agentnet-run]
+4. Load `config/config_agency.xml` and ask where a post-merger integration can find synergies. The same graph now runs a consulting firm with five different specialists, and its gate fires on layoffs, restructuring and budget moves over $1M,[@agentnet-architecture] as it does in the saved run, whose answer proposes a 10% headcount reduction.[@agentnet-notebook]
+5. Copy either config to start a network of your own. It needs the broker's two prompts, a list of scenarios with keywords and the agents, each with a description and one canned reply per scenario, and nothing in the package has to change.[@agentnet-run]
+
+![The same graph runs both businesses, because each config file holds its own specialists and risk rule. From the agent network's overview.[@agentnet-overview]](one-graph-two-configs.png){fig-alt="A diagram titled Two businesses, one graph. On the left, config_travel.xml lists Market Scout, Revenue Strategist, Content Specialist, Guest Experience and Facilities Manager, with the risk rule that changing prices or publishing content needs a human. On the right, config_agency.xml lists Market Analyst, Financial Modeler, Organizational Strategist, Operations Specialist and Risk & Compliance, with the risk rule that layoffs, restructuring or budget moves over $1M need a human. Both point to the same graph, agentic_network/graph.py, unchanged."}
+
+## Before you start
+
+You need a free Google account and your own OpenAI API key, which you save in Colab's secrets (the key icon in the left sidebar) under the name OPENAI_API_KEY. Each question makes two gpt-4o calls, one to route it and one to synthesize the answer, which costs a fraction of a cent, and the specialists cost nothing because their answers are written in advance.[@agentnet-run] The notebook clones the repository and installs its own dependencies, so there is nothing else to set up.[@agentnet-run] If you would rather spend nothing, the repository's 19 checks run the real graph against a stub model from a clone, with Python 3.10 or newer and no key.[@agentnet-run]
+
+::: {.ai-actions}
+[Read the architecture](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html){.btn .btn-primary}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+[What an enterprise AI control plane is](../../articles/what-an-ai-control-plane-is/index.qmd) turns orchestration and trust into questions to put to any vendor. The broker's routing and its human gate show both at work in one small network you can read from end to end.
