@@ -14,7 +14,7 @@ function pages(dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
-    if (name === 'site_libs') continue;
+    if (name === 'site_libs' || /^google[0-9a-f]+\.html$/.test(name)) continue; // verification files are not pages
     if (statSync(p).isDirectory()) out.push(...pages(p));
     else if (name.endsWith('.html')) out.push(relative(docs, p).split(sep).join('/').replace(/index\.html$/, ''));
   }

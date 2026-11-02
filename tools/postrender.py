@@ -36,6 +36,13 @@ SITE_URL = "https://johnfisher-ai.github.io"
 OUT = Path(os.environ.get("QUARTO_PROJECT_OUTPUT_DIR", "docs"))
 WPM = 200  # words a minute, the rate Quarto uses for its own listing reading times
 SECTIONS = ("articles", "guides")
+# Search engine verification files (google<hex>.html) are served exactly as committed, so they are never touched.
+VERIFICATION = re.compile(r"google[0-9a-f]+\.html")
+
+
+def site_pages():
+    """Every rendered page, without the verification files."""
+    return [f for f in sorted(OUT.rglob("*.html")) if not VERIFICATION.fullmatch(f.name)]
 
 
 def page_address(f: Path) -> str:
@@ -231,7 +238,7 @@ def remove_draft_placeholders():
     feeds, the sitemap and its own search, but still writes an empty page at its address and copies its
     images. Remove both, so nothing of a waiting piece is published."""
     held = []
-    for f in sorted(OUT.rglob("*.html")):
+    for f in site_pages():
         s = f.read_text(encoding="utf-8")
         if re.fullmatch(r"\s*<!DOCTYPE html>\s*<html[^>]*>\s*</html>\s*", s, re.I):
             folder = f.parent
@@ -256,7 +263,7 @@ def main():
     if not OUT.is_dir():
         raise SystemExit(f"post-render: no output folder at {OUT}")
     remove_draft_placeholders()
-    pages = sorted(OUT.rglob("*.html"))
+    pages = site_pages()
 
     minutes = {}
     for f in pages:

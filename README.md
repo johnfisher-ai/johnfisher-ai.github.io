@@ -51,6 +51,8 @@ It runs the Nu HTML validator, checks every internal link and anchor, checks eac
 | `_partials/` | Shared blocks for the shelf, the lab cards and the page head |
 | `assets/` | Theme, card, Highlighted articles and Start here templates, endnote style, card image sources, Plus Jakarta Sans, the AI+ mark and icons |
 | `tools/` | Post-render script, the call-to-action filter and the checks |
+| `robots.txt` | Allows every crawler and lists the sitemaps of the hub, the AI Control Plane Handbook, the Visual Handbook and Python, Visually |
+| `google14bc3cf24de6d500.html` | Google Search Console's verification file for the https://johnfisher-ai.github.io/ property. `_quarto.yml` lists it under `resources`, so every render copies it into `docs/` unchanged, and the post-render script and the checks skip it. Never delete, rename or edit it, or the property loses its verification |
 | `docs/` | The finished site that GitHub Pages serves |
 
 ## Writing an article

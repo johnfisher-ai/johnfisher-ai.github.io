@@ -75,8 +75,8 @@ def target(page: Path, url: str):
 
 pages = {}
 for f in sorted(root.rglob("*.html")):
-    if "site_libs" in f.parts:
-        continue
+    if "site_libs" in f.parts or re.fullmatch(r"google[0-9a-f]+\.html", f.name):
+        continue  # a verification file is a plain text file for Google, not a page
     p = Page()
     s = f.read_text(encoding="utf-8")
     p.feed(s)

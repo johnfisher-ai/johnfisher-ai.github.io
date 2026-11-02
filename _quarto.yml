@@ -7,6 +7,8 @@ project:
     - .nojekyll
     - favicon.ico
     - robots.txt
+    # Google Search Console verification (URL-prefix property). Served as a plain file: never delete or rename it.
+    - google14bc3cf24de6d500.html
     - assets/fonts/
     - assets/img/
     - assets/licenses/

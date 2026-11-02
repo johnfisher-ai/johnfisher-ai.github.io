@@ -7,7 +7,9 @@ cd "$(dirname "$0")"
 DOCS="$(cd ../../docs && pwd)"
 status=0
 echo "== HTML validator"
-java -jar node_modules/vnu-jar/build/dist/vnu.jar --skip-non-html --errors-only "$DOCS" || status=1
+# Every page, without the search engine verification files (google<hex>.html), which are plain text for Google.
+mapfile -t pages < <(find "$DOCS" -name '*.html' ! -regex '.*/google[0-9a-f]*\.html' | sort)
+java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only "${pages[@]}" || status=1
 echo "== Links, anchors and page standards"
 python3 sitecheck.py "$DOCS" || status=1
 echo "== Accessibility (axe) and sideways scroll"
