@@ -4,3 +4,4 @@ Disallow:
 Sitemap: https://johnfisher-ai.github.io/sitemap.xml
 Sitemap: https://johnfisher-ai.github.io/ai-control-plane-handbook/sitemap.xml
 Sitemap: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/sitemap.xml
+Sitemap: https://johnfisher-ai.github.io/Python-Visual-Guides/sitemap.xml
