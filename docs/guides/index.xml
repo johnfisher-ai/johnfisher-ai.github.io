@@ -111,12 +111,12 @@
 <li>Measure the model that does nothing. Flagging no transaction at all scores 99.73% accuracy, which is why the lab never reports accuracy again.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
 <li>Split the data by time, and catch a warehouse column that lifts PR-AUC from 0.30 to 0.98 although it is filed weeks after each purchase, too late to inform the decision.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
 <li>Compare oversampling, class weights and leaving the data alone. All three rank transactions almost identically, and the first two predict a fraud rate about 36 times the one observed.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
-<li>Set the threshold from the costs, and then test the review team’s capacity. The cheapest policy flags about five transactions a day for 31% less than flagging nothing, and working every case the team could costs 13 times as much as having no model.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
+<li>Price each decision, and then test the review team’s capacity. Flagging a transaction when its expected loss, the fraud probability times its amount plus $25, exceeds the expected cost of reviewing it beats any single threshold and costs 37% less than flagging nothing, at about four flags a day.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span> Working every case the team could costs 13 times as much as having no model.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/threshold-cost.png" class="img-fluid figure-img" alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, reaches its lowest point of $9,959 at 8.8 percent and rises gently after that. On the right, on a log scale, the cost-optimal threshold costs $9,959, flagging nothing costs $14,476 and filling the review team's capacity costs $190,667."></p>
-<figcaption>Total cost over 30 days at each threshold, and the cost of three policies on a log scale. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></figcaption>
+<p><img src="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/threshold-cost.png" class="img-fluid figure-img" alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, and stays nearly flat from there to 50 percent. The threshold chosen on the training data, 10.1 percent, costs $10,381. On the right, on a log scale, the amount-aware rule costs $9,181, the threshold from training $10,381, flagging nothing $14,476 and filling the review team's capacity $190,667."></p>
+<figcaption>Total cost over 30 days at each threshold, and the cost of four policies on a log scale. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch191"><sup>2</sup></span></figcaption>
 </figure>
 </div>
 </section>
@@ -144,7 +144,7 @@
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
 </div>
 <div id="ref-vb-ch191" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html</a></div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html</a></div>
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Analyst</category>
@@ -249,7 +249,7 @@
 <li>Read the test off the decision map. Switch to its rank-based twin when the data are skewed or have outliers, and to Fisher’s exact test when a cell’s expected count falls below about 5.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
 <li>Route four questions about the clinic through the map. Blood pressure fell by about 9 mmHg within patients (a paired t-test), and the new treatment lowered it more than the standard one did, by 11.6 mmHg against 6.3 (a Welch t-test).<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
 <li>Report the other two answers with the same care, although neither is significant. Satisfaction shows no clear link to treatment (a p-value of about 0.27), and wait times do not differ by clinic under ANOVA or under its rank-based twin.<span class="citation" data-cites="vb-ch83"><sup>1</sup></span></li>
-<li>Close each result with its p-value, effect size and confidence interval, as the review chapter does for the five case studies that follow it.<span class="citation" data-cites="vb-ch85"><sup>2</sup></span></li>
+<li>Close each result with its p-value, effect size and confidence interval, as the review chapter does for the six case studies that follow it.<span class="citation" data-cites="vb-ch85"><sup>2</sup></span></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -279,10 +279,10 @@
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
 <div id="ref-vb-ch83" class="csl-entry">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Choosing the Right Test,” chapter 83 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html</a></div>
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Choosing the Right Test,” chapter 83 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html</a></div>
 </div>
 <div id="ref-vb-ch85" class="csl-entry">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Review &amp; Choosing the Right Test,” chapter 85 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html</a></div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Review &amp; Choosing the Right Test,” chapter 85 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html</a></div>
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
   <category>Analyst</category>

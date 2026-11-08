@@ -2,7 +2,7 @@
 title: "Choose the right statistical test in four questions"
 description: "Four questions about your data pick the right test: outcome, groups, design and assumptions. Learn the map, then run it on clinic data in Colab."
 date: 2026-10-16
-date-modified: 2026-10-16
+date-modified: 2026-11-08
 sequence: 41
 categories: [Analyst, Beginner, Statistics]
 lab-time: "About 45 minutes"
@@ -14,11 +14,11 @@ license: "CC BY"
 references:
   - id: vb-ch83
     type: webpage
-    title: "John Fisher, “Choosing the Right Test,” chapter 83 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Choosing the Right Test,” chapter 83 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/choosing-the-right-test.html
   - id: vb-ch85
     type: webpage
-    title: "John Fisher, “Review & Choosing the Right Test,” chapter 85 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Review & Choosing the Right Test,” chapter 85 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-choosing-the-right-test.html
 ---
 
@@ -36,7 +36,7 @@ The lab runs on a clinic dataset written for the book, with 200 patients, their 
 2. Read the test off the decision map. Switch to its rank-based twin when the data are skewed or have outliers, and to Fisher's exact test when a cell's expected count falls below about 5.[@vb-ch83]
 3. Route four questions about the clinic through the map. Blood pressure fell by about 9 mmHg within patients (a paired t-test), and the new treatment lowered it more than the standard one did, by 11.6 mmHg against 6.3 (a Welch t-test).[@vb-ch83]
 4. Report the other two answers with the same care, although neither is significant. Satisfaction shows no clear link to treatment (a p-value of about 0.27), and wait times do not differ by clinic under ANOVA or under its rank-based twin.[@vb-ch83]
-5. Close each result with its p-value, effect size and confidence interval, as the review chapter does for the five case studies that follow it.[@vb-ch85]
+5. Close each result with its p-value, effect size and confidence interval, as the review chapter does for the six case studies that follow it.[@vb-ch85]
 
 ![The decision map from the visual guide. Start from the outcome, follow the number of groups and the design, and read off the test, with its rank-based fallback after the slash.[@vb-ch83]](decision-map.png){fig-alt="A decision tree that starts by asking what the outcome is. For a numeric outcome, two paired groups lead to the paired t-test or Wilcoxon, two independent groups to the Welch t-test or Mann-Whitney, and three or more groups to ANOVA or Kruskal-Wallis. For a categorical outcome, a rate leads to the z-test for proportions, and two variables lead to the chi-square test."}
 

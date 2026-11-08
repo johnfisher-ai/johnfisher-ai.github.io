@@ -2,14 +2,14 @@
 title: "Catch a model that is 88.7% accurate and misses almost every case"
 description: "A survey model was 88.7% accurate and found almost no one. Learn the checks that expose a model like it, then run them on card fraud data in Colab."
 date: 2026-10-16
-date-modified: 2026-10-16
+date-modified: 2026-11-08
 sequence: 1
 categories: [Analyst, Developer, Data Scientist, Beginner, Machine learning]
 lab-time: "About an hour"
 lab-format: "Visual guide and Colab lab"
 source: "Visual Handbook"
 image: card.png
-image-alt: "A card listing the guide's four steps: price each error, split by time, catch the leak, and set the threshold by cost."
+image-alt: "A card listing the guide's four steps: price each error, split by time, catch the leak, and flag by expected cost."
 license: "CC BY"
 references:
   - id: nsduh-analysis
@@ -18,7 +18,7 @@ references:
     URL: https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html
   - id: vb-ch191
     type: webpage
-    title: "John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html
 ---
 
@@ -36,9 +36,9 @@ The visual guide and its notebook follow one card issuer through four months of 
 2. Measure the model that does nothing. Flagging no transaction at all scores 99.73% accuracy, which is why the lab never reports accuracy again.[@vb-ch191]
 3. Split the data by time, and catch a warehouse column that lifts PR-AUC from 0.30 to 0.98 although it is filed weeks after each purchase, too late to inform the decision.[@vb-ch191]
 4. Compare oversampling, class weights and leaving the data alone. All three rank transactions almost identically, and the first two predict a fraud rate about 36 times the one observed.[@vb-ch191]
-5. Set the threshold from the costs, and then test the review team's capacity. The cheapest policy flags about five transactions a day for 31% less than flagging nothing, and working every case the team could costs 13 times as much as having no model.[@vb-ch191]
+5. Price each decision, and then test the review team's capacity. Flagging a transaction when its expected loss, the fraud probability times its amount plus $25, exceeds the expected cost of reviewing it beats any single threshold and costs 37% less than flagging nothing, at about four flags a day.[@vb-ch191] Working every case the team could costs 13 times as much as having no model.[@vb-ch191]
 
-![Total cost over 30 days at each threshold, and the cost of three policies on a log scale. From the visual guide, on data written for the book.[@vb-ch191]](threshold-cost.png){fig-alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, reaches its lowest point of $9,959 at 8.8 percent and rises gently after that. On the right, on a log scale, the cost-optimal threshold costs $9,959, flagging nothing costs $14,476 and filling the review team's capacity costs $190,667."}
+![Total cost over 30 days at each threshold, and the cost of four policies on a log scale. From the visual guide, on data written for the book.[@vb-ch191]](threshold-cost.png){fig-alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, and stays nearly flat from there to 50 percent. The threshold chosen on the training data, 10.1 percent, costs $10,381. On the right, on a log scale, the amount-aware rule costs $9,181, the threshold from training $10,381, flagging nothing $14,476 and filling the review team's capacity $190,667."}
 
 ## Before you start
 

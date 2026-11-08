@@ -94,13 +94,13 @@ div.csl-indent {
 <meta property="og:site_name" content="AI+ by John Fisher">
 <meta property="og:image:height" content="630">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:alt" content="A card listing the guide's four steps: price each error, split by time, catch the leak, and set the threshold by cost.">
+<meta property="og:image:alt" content="A card listing the guide's four steps: price each error, split by time, catch the leak, and flag by expected cost.">
 <meta name="twitter:title" content="Catch a model that is 88.7% accurate and misses almost every case">
 <meta name="twitter:description" content="A survey model was 88.7% accurate and found almost no one. Learn the checks that expose a model like it, then run them on card fraud data in Colab.">
 <meta name="twitter:image" content="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/card.png">
 <meta name="twitter:image-height" content="630">
 <meta name="twitter:image-width" content="1200">
-<meta name="twitter:image:alt" content="A card listing the guide's four steps: price each error, split by time, catch the leak, and set the threshold by cost.">
+<meta name="twitter:image:alt" content="A card listing the guide's four steps: price each error, split by time, catch the leak, and flag by expected cost.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/">
 <meta property="og:url" content="https://johnfisher-ai.github.io/guides/accuracy-and-the-base-rate/">
@@ -208,7 +208,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Last checked</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 16, 2026</p>
+      <p class="date-modified">November 8, 2026</p>
     </div>
   </div>
     
@@ -247,12 +247,12 @@ div.csl-indent {
 <li>Measure the model that does nothing. Flagging no transaction at all scores 99.73% accuracy, which is why the lab never reports accuracy again.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></li>
 <li>Split the data by time, and catch a warehouse column that lifts PR-AUC from 0.30 to 0.98 although it is filed weeks after each purchase, too late to inform the decision.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></li>
 <li>Compare oversampling, class weights and leaving the data alone. All three rank transactions almost identically, and the first two predict a fraud rate about 36 times the one observed.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></li>
-<li>Set the threshold from the costs, and then test the review team’s capacity. The cheapest policy flags about five transactions a day for 31% less than flagging nothing, and working every case the team could costs 13 times as much as having no model.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></li>
+<li>Price each decision, and then test the review team’s capacity. Flagging a transaction when its expected loss, the fraud probability times its amount plus $25, exceeds the expected cost of reviewing it beats any single threshold and costs 37% less than flagging nothing, at about four flags a day.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span> Working every case the team could costs 13 times as much as having no model.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="threshold-cost.png" class="img-fluid figure-img" alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, reaches its lowest point of $9,959 at 8.8 percent and rises gently after that. On the right, on a log scale, the cost-optimal threshold costs $9,959, flagging nothing costs $14,476 and filling the review team's capacity costs $190,667."></p>
-<figcaption>Total cost over 30 days at each threshold, and the cost of three policies on a log scale. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></figcaption>
+<p><img src="threshold-cost.png" class="img-fluid figure-img" alt="Two charts. On the left, total cost over 30 days falls steeply as the threshold rises from zero, drops below the $14,476 cost of flagging nothing at a threshold of about 2 percent, and stays nearly flat from there to 50 percent. The threshold chosen on the training data, 10.1 percent, costs $10,381. On the right, on a log scale, the amount-aware rule costs $9,181, the threshold from training $10,381, flagging nothing $14,476 and filling the review team's capacity $190,667."></p>
+<figcaption>Total cost over 30 days at each threshold, and the cost of four policies on a log scale. From the visual guide, on data written for the book.<span class="citation" data-cites="vb-ch191"><sup><a href="#ref-vb-ch191" role="doc-biblioref">2</a></sup></span></figcaption>
 </figure>
 </div>
 </section>
@@ -280,7 +280,7 @@ div.csl-indent {
 <div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “The Statistical Analysis,” in <em>Depression and Substance Use in the NSDUH</em>, an analysis of the Substance Abuse and Mental Health Services Administration’s National Survey on Drug Use and Health, 2022–2024 public-use files, accessed October 2026. <a href="https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html">https://johnfisher-ai.github.io/fisher-nsduh-analysis/analysis.html</a></div>
 </div>
 <div id="ref-vb-ch191" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed October 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html</a></div>
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “Imbalanced Classification: Credit Card Fraud,” chapter 191 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/capstone-credit-card-fraud.html</a></div>
 </div>
 </div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -20,7 +20,7 @@ A vendor-neutral handbook on the enterprise AI control plane: architecture, orch
 
 ### Statistics, Data Science and AI: A Visual Handbook
 
-A visual handbook on statistics and data science. Its chapter pages pair with Python notebooks you can read online or run in Colab.
+A visual handbook on statistics and data science. 195 of its 205 chapters pair with a Python notebook you can read online or run in Colab.
 
 ::: {.ai-links}
 [Open the handbook](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/){.btn .btn-primary}

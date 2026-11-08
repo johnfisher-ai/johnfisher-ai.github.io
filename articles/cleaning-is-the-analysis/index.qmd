@@ -2,7 +2,7 @@
 title: "Cleaning is the analysis"
 description: "Duplicates, hidden missing codes and mixed units change results without raising an error. Audit the data before you trust any number it gives you."
 date: 2026-10-22
-date-modified: 2026-10-22
+date-modified: 2026-11-08
 sequence: 70
 categories: [Analyst, Developer, Data science]
 source: "Visual Handbook"
@@ -13,23 +13,23 @@ cta-source: "Read [chapter 18 of the Visual Handbook](https://johnfisher-ai.gith
 references:
   - id: vb-ch18
     type: webpage
-    title: "John Fisher, “The Data-Cleaning Mindset,” chapter 18 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “The Data-Cleaning Mindset,” chapter 18 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html
   - id: vb-ch26
     type: webpage
-    title: "John Fisher, “Review & Case-Study Roadmap,” chapter 26 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Review & Case-Study Roadmap,” chapter 26 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html
   - id: vb-ch27
     type: webpage
-    title: "John Fisher, “Case Study: Spotify Track Features,” chapter 27 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Case Study: Spotify Track Features,” chapter 27 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html
   - id: vb-ch28
     type: webpage
-    title: "John Fisher, “Case Study: Ames Housing Prices,” chapter 28 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Case Study: Ames Housing Prices,” chapter 28 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html
   - id: vb-ch29
     type: webpage
-    title: "John Fisher, “Case Study: Palmer Penguins,” chapter 29 of *Statistics, Data Science and AI: A Visual Handbook*, accessed October 2026."
+    title: "John Fisher, “Case Study: Palmer Penguins,” chapter 29 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
     URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html
   - id: nasa-mco
     type: report
@@ -41,7 +41,7 @@ A widely cited 2016 survey put roughly 60% of a data scientist's time on cleanin
 
 ## Small faults move the numbers
 
-The Visual Handbook's case studies work through three datasets written for the book, a music catalog, a set of house sales and a record of penguin measurements, each with problems planted on purpose.[@vb-ch26] A first audit of the three turns up the faults below, and every one of them changes a figure someone might quote.
+Three of the Visual Handbook's case studies each work through one dataset written for the book, a music catalog, a set of house sales and a record of penguin measurements, with problems planted on purpose.[@vb-ch26] A first audit of the three turns up the faults below, and every one of them changes a figure someone might quote.
 
 | Fault | Where it sits | Before the fix | After the fix |
 |---|---|---|---|
