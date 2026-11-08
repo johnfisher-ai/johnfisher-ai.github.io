@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</loc>
-    <lastmod>2026-10-22T17:26:00.097Z</lastmod>
+    <lastmod>2026-11-08T13:14:39.271Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/what-an-ai-control-plane-is/</loc>
@@ -29,36 +29,40 @@
     <lastmod>2026-10-22T17:26:00.036Z</lastmod>
   </url>
   <url>
-    <loc>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</loc>
+    <loc>https://johnfisher-ai.github.io/articles/</loc>
     <lastmod>2026-10-22T17:26:00.034Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</loc>
-    <lastmod>2026-11-08T00:06:45.099Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</loc>
-    <lastmod>2026-10-22T17:26:00.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/about/</loc>
-    <lastmod>2026-10-22T17:26:00.024Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</loc>
-    <lastmod>2026-10-22T17:26:00.026Z</lastmod>
-  </url>
-  <url>
-    <loc>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</loc>
-    <lastmod>2026-10-22T17:26:00.029Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/</loc>
     <lastmod>2026-10-22T17:26:00.032Z</lastmod>
   </url>
   <url>
-    <loc>https://johnfisher-ai.github.io/articles/</loc>
+    <loc>https://johnfisher-ai.github.io/articles/ask-how-a-survey-was-weighted/</loc>
+    <lastmod>2026-10-22T17:26:00.029Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/accurate-and-missing-almost-every-case/</loc>
+    <lastmod>2026-10-22T17:26:00.026Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/about/</loc>
+    <lastmod>2026-10-22T17:26:00.024Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/adoption-is-outrunning-governance/</loc>
+    <lastmod>2026-10-22T17:26:00.027Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</loc>
+    <lastmod>2026-11-08T00:06:45.099Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</loc>
     <lastmod>2026-10-22T17:26:00.034Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/articles/keep-the-agent-roster-in-configuration/</loc>
+    <lastmod>2026-11-08T13:17:15.282Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/pandas-groupby-merge-and-reshape/</loc>

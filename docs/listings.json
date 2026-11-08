@@ -11,6 +11,7 @@
   {
     "listing": "/articles/index.html",
     "items": [
+      "/articles/keep-the-agent-roster-in-configuration/index.html",
       "/articles/decide-which-control-plane-owns-what/index.html",
       "/articles/cleaning-is-the-analysis/index.html",
       "/articles/adoption-is-outrunning-governance/index.html",
@@ -30,6 +31,7 @@
       "/articles/ask-how-a-survey-was-weighted/index.html",
       "/articles/pandas-groupby-merge-and-reshape/index.html",
       "/articles/value-at-every-milestone/index.html",
+      "/articles/keep-the-agent-roster-in-configuration/index.html",
       "/articles/decide-which-control-plane-owns-what/index.html",
       "/articles/cleaning-is-the-analysis/index.html",
       "/articles/adoption-is-outrunning-governance/index.html",

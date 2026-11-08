@@ -59,4 +59,6 @@ You need a free Google account and your own OpenAI API key, which you save in Co
 
 ## Articles it puts into practice
 
+[Keep the agent roster and its risk rule in configuration](../../articles/keep-the-agent-roster-in-configuration/index.qmd) makes the case for the pattern this lab runs, and for reviewing the file as policy.
+
 [What an enterprise AI control plane is](../../articles/what-an-ai-control-plane-is/index.qmd) turns orchestration and trust into questions to put to any vendor. The broker's routing and its human gate show both at work in one small network you can read from end to end.

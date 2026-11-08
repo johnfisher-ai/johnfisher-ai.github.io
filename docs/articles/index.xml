@@ -17,7 +17,132 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Thu, 22 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Keep the agent roster and its risk rule in configuration</title>
+  <link>https://johnfisher-ai.github.io/articles/keep-the-agent-roster-in-configuration/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In most agent frameworks the roster is written in code, with a class for each agent, a router with a branch for each destination and edges wired by hand.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span> That holds until the business wants a new specialist or a stricter approval rule, and then each request becomes a software release.</p>
+<section id="what-belongs-in-the-file" class="level2">
+<h2 class="anchored" data-anchor-id="what-belongs-in-the-file">What belongs in the file</h2>
+<p>The config-driven agent network in this site’s Guides &amp; Labs keeps four things in one XML file: the prompt its broker routes with, the prompt it uses to write an answer and score that answer’s risk, the scenarios, and the agents.<span class="citation" data-cites="agentnet-code"><sup>2</sup></span> The graph is built when the file loads, with a node for every agent the file declares, so a new agent is a new XML block and a new business is a new file.<span class="citation" data-cites="agentnet-overview agentnet-graph"><sup>1,3</sup></span></p>
+<p>Here is one agent from the travel network’s file, shortened to two of its five scenario replies.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb1-1">&lt;<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">agent</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">id=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"revenue_strategist"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">name=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Revenue Strategist"</span>&gt;</span>
+<span id="cb1-2">  &lt;<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">description</span>&gt;pricing, rates&lt;/<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">description</span>&gt;</span>
+<span id="cb1-3">  &lt;<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">mock_data</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">default=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rates are optimal."</span>&gt;</span>
+<span id="cb1-4">    &lt;<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">response</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">scenario_id=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1"</span>&gt;{"your_rate": 250, "comp_rate": 200, "variance": "Drop rate by $50", "recommendation": "Drop Rate"}&lt;/<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">response</span>&gt;</span>
+<span id="cb1-5">    &lt;<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">response</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">scenario_id=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"5"</span>&gt;{"alert": "Price War", "comp_move": "-$30 drop", "recommendation": "Match competitor rate or add value"}&lt;/<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">response</span>&gt;</span>
+<span id="cb1-6">  &lt;/<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">mock_data</span>&gt;</span>
+<span id="cb1-7">&lt;/<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">agent</span>&gt;</span></code></pre></div></div>
+<p>The description is all the broker sees when it decides whom to consult, so those three words carry real weight.<span class="citation" data-cites="agentnet-code"><sup>2</sup></span> Each response is a reply written in advance, because the network is a prototype. Its routing, synthesis and human gate run against gpt-4o, while no vendor API is called and nothing is fetched.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span> A second file turns the same graph into a management consulting firm, with five different specialists, a different routing prompt and a different risk rule, and the two networks differ by no lines of Python.<span class="citation" data-cites="agentnet-code"><sup>2</sup></span></p>
+</section>
+<section id="review-the-file-the-way-you-review-policy" class="level2">
+<h2 class="anchored" data-anchor-id="review-the-file-the-way-you-review-policy">Review the file the way you review policy</h2>
+<p>Moving the roster out of code doesn’t make it harmless, because the file decides who is consulted and when a person is interrupted. In the travel network, any recommendation to change prices or publish content stops at the human gate. In the consulting network the gate stops layoffs, major restructuring and budget moves over $1M.<span class="citation" data-cites="agentnet-code"><sup>2</sup></span> Editing that one sentence changes what a model may do without a person’s approval, the kind of change an architecture review would normally see.</p>
+<p>The rule is also prose. The model is asked to score its own recommendation, and the gate opens only when its answer contains the words “RISK: YES”, so the rule is only as reliable as the model’s reading of it.<span class="citation" data-cites="agentnet-code agentnet-graph"><sup>2,3</sup></span> The code holds what should not depend on a prompt. The loader refuses a file that lacks a required element or declares no agents.<span class="citation" data-cites="agentnet-config"><sup>4</sup></span> The router’s choices are checked against the roster, and every fallback is logged.<span class="citation" data-cites="agentnet-graph"><sup>3</sup></span> An approved proposal goes back to the user word for word, because generating it a second time could hand them something other than what they approved.<span class="citation" data-cites="agentnet-overview"><sup>1</sup></span></p>
+<p>That split is a useful test for any agent platform. Configuration should say which agents this business has and when to ask a person, and code should enforce what must hold in every business.</p>
+</section>
+<section id="what-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-do-next">What to do next</h2>
+<ol type="1">
+<li><strong>CTO.</strong> Ask each agent platform you evaluate where its roster, routing prompts and approval rules are defined, and whether changing one needs a release.</li>
+<li><strong>Architect.</strong> Keep agent configuration under version control with a named reviewer, and give a change to an approval rule the same sign-off as any other policy change.</li>
+<li><strong>AI Engineer.</strong> Keep validation, logged fallbacks and the approval path in code, and test the real graph against a stub model, as the network’s 19 checks do with no API key.<span class="citation" data-cites="agentnet-code"><sup>2</sup></span></li>
+</ol>
+</section>
+<section id="go-deeper" class="level2">
+<h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
+<p><a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/">The overview</a> explains the pattern and why the human gate returns exactly what was approved. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html">The architecture page</a> follows a question through the graph, and <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/code.html">the code page</a> sets the two configuration files side by side, every file in full.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>To run the network and swap one business for another, open <a href="../../guides/agent-network-from-one-config-file/index.html">Run a broker and its specialist agents from one config file</a>, whose notebook runs in Colab with your own OpenAI key.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+<p>Read <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/">the agent network’s write-up</a> and <a href="https://colab.research.google.com/github/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb">run its notebook yourself</a>.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-agentnet-overview" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, <em>A Config-Driven Agent Network</em>, overview, accessed November 2026. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/">https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/</a></div>
+</div>
+<div id="ref-agentnet-code" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, “The code,” in <em>A Config-Driven Agent Network</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/code.html">https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/code.html</a></div>
+</div>
+<div id="ref-agentnet-graph" class="csl-entry">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">John Fisher, “agentic_network/graph.py,” in the repository <em>fisher-agentic-network-langgraph</em>, accessed November 2026. <a href="https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/graph.py">https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/graph.py</a></div>
+</div>
+<div id="ref-agentnet-config" class="csl-entry">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">John Fisher, “agentic_network/config.py,” in the repository <em>fisher-agentic-network-langgraph</em>, accessed November 2026. <a href="https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/config.py">https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/config.py</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>CTO</category>
+  <category>AI Engineer</category>
+  <category>Architect</category>
+  <category>AI</category>
+  <guid>https://johnfisher-ai.github.io/articles/keep-the-agent-roster-in-configuration/</guid>
+  <pubDate>Sun, 08 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/articles/keep-the-agent-roster-in-configuration/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>Decide which agent control plane is authoritative for what</title>
   <link>https://johnfisher-ai.github.io/articles/decide-which-control-plane-owns-what/</link>

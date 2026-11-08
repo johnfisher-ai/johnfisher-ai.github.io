@@ -1,0 +1,72 @@
+---
+title: "Keep the agent roster and its risk rule in configuration"
+description: "When agents and approval rules live in code, every change is a release. Move them into one reviewed file, and the same graph runs another business."
+date: 2026-11-08
+date-modified: 2026-11-08
+sequence: 96
+categories: [CTO, AI Engineer, Architect, AI]
+source: "Agent network"
+image: card.png
+image-alt: "A code card showing one agent declared in XML, with a note that its three-word description is all the broker sees, and the risk rule that sends price changes to a person."
+license: "CC BY"
+cta-source: "Read [the agent network's write-up](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/) and [run its notebook yourself](https://colab.research.google.com/github/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/notebooks/agentic_network.ipynb)."
+references:
+  - id: agentnet-overview
+    type: webpage
+    title: "John Fisher, *A Config-Driven Agent Network*, overview, accessed November 2026."
+    URL: https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/
+  - id: agentnet-code
+    type: webpage
+    title: "John Fisher, “The code,” in *A Config-Driven Agent Network*, accessed November 2026."
+    URL: https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/code.html
+  - id: agentnet-graph
+    type: webpage
+    title: "John Fisher, “agentic_network/graph.py,” in the repository *fisher-agentic-network-langgraph*, accessed November 2026."
+    URL: https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/graph.py
+  - id: agentnet-config
+    type: webpage
+    title: "John Fisher, “agentic_network/config.py,” in the repository *fisher-agentic-network-langgraph*, accessed November 2026."
+    URL: https://github.com/johnfisher-ai/fisher-agentic-network-langgraph/blob/main/agentic_network/config.py
+---
+
+In most agent frameworks the roster is written in code, with a class for each agent, a router with a branch for each destination and edges wired by hand.[@agentnet-overview] That holds until the business wants a new specialist or a stricter approval rule, and then each request becomes a software release.
+
+## What belongs in the file
+
+The config-driven agent network in this site's Guides & Labs keeps four things in one XML file: the prompt its broker routes with, the prompt it uses to write an answer and score that answer's risk, the scenarios, and the agents.[@agentnet-code] The graph is built when the file loads, with a node for every agent the file declares, so a new agent is a new XML block and a new business is a new file.[@agentnet-overview; @agentnet-graph]
+
+Here is one agent from the travel network's file, shortened to two of its five scenario replies.
+
+```xml
+<agent id="revenue_strategist" name="Revenue Strategist">
+  <description>pricing, rates</description>
+  <mock_data default="Rates are optimal.">
+    <response scenario_id="1">{"your_rate": 250, "comp_rate": 200, "variance": "Drop rate by $50", "recommendation": "Drop Rate"}</response>
+    <response scenario_id="5">{"alert": "Price War", "comp_move": "-$30 drop", "recommendation": "Match competitor rate or add value"}</response>
+  </mock_data>
+</agent>
+```
+
+The description is all the broker sees when it decides whom to consult, so those three words carry real weight.[@agentnet-code] Each response is a reply written in advance, because the network is a prototype. Its routing, synthesis and human gate run against gpt-4o, while no vendor API is called and nothing is fetched.[@agentnet-overview] A second file turns the same graph into a management consulting firm, with five different specialists, a different routing prompt and a different risk rule, and the two networks differ by no lines of Python.[@agentnet-code]
+
+## Review the file the way you review policy
+
+Moving the roster out of code doesn't make it harmless, because the file decides who is consulted and when a person is interrupted. In the travel network, any recommendation to change prices or publish content stops at the human gate. In the consulting network the gate stops layoffs, major restructuring and budget moves over $1M.[@agentnet-code] Editing that one sentence changes what a model may do without a person's approval, the kind of change an architecture review would normally see.
+
+The rule is also prose. The model is asked to score its own recommendation, and the gate opens only when its answer contains the words "RISK: YES", so the rule is only as reliable as the model's reading of it.[@agentnet-code; @agentnet-graph] The code holds what should not depend on a prompt. The loader refuses a file that lacks a required element or declares no agents.[@agentnet-config] The router's choices are checked against the roster, and every fallback is logged.[@agentnet-graph] An approved proposal goes back to the user word for word, because generating it a second time could hand them something other than what they approved.[@agentnet-overview]
+
+That split is a useful test for any agent platform. Configuration should say which agents this business has and when to ask a person, and code should enforce what must hold in every business.
+
+## What to do next
+
+1. **CTO.** Ask each agent platform you evaluate where its roster, routing prompts and approval rules are defined, and whether changing one needs a release.
+2. **Architect.** Keep agent configuration under version control with a named reviewer, and give a change to an approval rule the same sign-off as any other policy change.
+3. **AI Engineer.** Keep validation, logged fallbacks and the approval path in code, and test the real graph against a stub model, as the network's 19 checks do with no API key.[@agentnet-code]
+
+## Go deeper
+
+[The overview](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/) explains the pattern and why the human gate returns exactly what was approved. [The architecture page](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/architecture.html) follows a question through the graph, and [the code page](https://johnfisher-ai.github.io/fisher-agentic-network-langgraph/code.html) sets the two configuration files side by side, every file in full.
+
+## Try it
+
+To run the network and swap one business for another, open [Run a broker and its specialist agents from one config file](../../guides/agent-network-from-one-config-file/index.qmd), whose notebook runs in Colab with your own OpenAI key.
