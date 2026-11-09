@@ -1,14 +1,5 @@
 [
   {
-    "listing": "/guides/index.html",
-    "items": [
-      "/guides/agent-network-from-one-config-file/index.html",
-      "/guides/accuracy-and-the-base-rate/index.html",
-      "/guides/survey-weights-and-margins-of-error/index.html",
-      "/guides/choose-the-right-statistical-test/index.html"
-    ]
-  },
-  {
     "listing": "/articles/index.html",
     "items": [
       "/articles/keep-the-agent-roster-in-configuration/index.html",
@@ -23,6 +14,17 @@
       "/articles/ask-how-a-survey-was-weighted/index.html",
       "/articles/accurate-and-missing-almost-every-case/index.html",
       "/articles/pandas-groupby-merge-and-reshape/index.html"
+    ]
+  },
+  {
+    "listing": "/guides/index.html",
+    "items": [
+      "/guides/find-and-fix-text-with-regular-expressions/index.html",
+      "/guides/remove-duplicates-without-losing-records/index.html",
+      "/guides/agent-network-from-one-config-file/index.html",
+      "/guides/accuracy-and-the-base-rate/index.html",
+      "/guides/survey-weights-and-margins-of-error/index.html",
+      "/guides/choose-the-right-statistical-test/index.html"
     ]
   },
   {

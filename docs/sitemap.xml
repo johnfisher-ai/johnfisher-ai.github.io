@@ -9,8 +9,12 @@
     <lastmod>2026-10-22T17:26:00.100Z</lastmod>
   </url>
   <url>
-    <loc>https://johnfisher-ai.github.io/guides/</loc>
-    <lastmod>2026-10-22T17:26:00.099Z</lastmod>
+    <loc>https://johnfisher-ai.github.io/guides/remove-duplicates-without-losing-records/</loc>
+    <lastmod>2026-11-09T00:39:47.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/guides/find-and-fix-text-with-regular-expressions/</loc>
+    <lastmod>2026-11-09T00:46:46.515Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</loc>
@@ -54,7 +58,7 @@
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/cleaning-is-the-analysis/</loc>
-    <lastmod>2026-11-08T00:06:45.099Z</lastmod>
+    <lastmod>2026-11-09T00:40:16.497Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/articles/every-ai-claim-is-statistical/</loc>
@@ -79,6 +83,10 @@
   <url>
     <loc>https://johnfisher-ai.github.io/guides/choose-the-right-statistical-test/</loc>
     <lastmod>2026-11-08T00:06:45.099Z</lastmod>
+  </url>
+  <url>
+    <loc>https://johnfisher-ai.github.io/guides/</loc>
+    <lastmod>2026-10-22T17:26:00.099Z</lastmod>
   </url>
   <url>
     <loc>https://johnfisher-ai.github.io/guides/survey-weights-and-margins-of-error/</loc>

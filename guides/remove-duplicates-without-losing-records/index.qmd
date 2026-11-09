@@ -1,0 +1,51 @@
+---
+title: "Remove duplicates without losing real records"
+description: "Exact copies are easy to drop, and near-duplicates need a key. Clean a contact list in Colab, and count the real people a weak key would merge."
+date: 2026-11-09
+date-modified: 2026-11-09
+sequence: 52
+categories: [Analyst, Beginner, Data science]
+lab-time: "About 30 minutes"
+lab-format: "Visual guide and Colab lab"
+source: "Visual Handbook"
+image: card.png
+image-alt: "A card listing the guide's four steps: drop the exact copies, standardize case and spaces first, deduplicate on the email key, and count who a weak key would lose."
+license: "CC BY"
+references:
+  - id: vb-ch19
+    type: webpage
+    title: "John Fisher, “Finding & Removing Duplicates and Inconsistencies,” chapter 19 of *Statistics, Data Science and AI: A Visual Handbook*, accessed November 2026."
+    URL: https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/finding-and-removing-duplicates-and-inconsistencies.html
+---
+
+## Why it matters
+
+Duplicates inflate counts, double-count revenue and bias every average, and a duplicated row that lands in both the training and the test set inflates every score reported for a model.[@vb-ch19] Before you trust a count of customers or a model's test score, ask how duplicates were removed, and on which key.
+
+Removing too much is the quieter failure. Two different customers can share a name, and without a unique key such as an email address or an account ID, two rows that look identical may not be the same person.[@vb-ch19] The lab shows both mistakes on one contact list.
+
+## What you will do
+
+The visual guide and its notebook work on a contact list written for the book, 207 rows covering 180 people, with exact copies and with near-duplicates whose names were re-cased or padded with spaces.[@vb-ch19]
+
+1. Drop the exact copies with `drop_duplicates()`, inspect whole duplicate groups with `keep=False`, and log how many rows each step removes. On the contact list, exact copies take 207 rows down to 192.[@vb-ch19]
+2. Standardize before you deduplicate, so that "Acme " and "Acme" collapse together. Strip spaces, unify case and map each variant to one canonical value, as the notebook does when eight spellings of one column become two.[@vb-ch19]
+3. Deduplicate on the business key. Dropping duplicates by email removes 12 more near-duplicates and leaves the 180 people.[@vb-ch19]
+4. Try a weaker key and count who disappears. The 180 people on this list share only 127 distinct names, by our count from the chapter's dataset, so deduplicating by name would merge 53 real people into others.
+5. Score the near-duplicates no key can catch. A normalized Levenshtein ratio rates "John Smith" and "Jon Smith" at 0.90, and the chapter's rule is to review every match above the threshold, because a loose one merges two different people.[@vb-ch19]
+6. Write the rules the clean data must pass, a unique key, a valid range, allowed values and a well-formed email, and make them fail loudly. The notebook's `validate()` reports all four violations in a small table.[@vb-ch19]
+
+![The contact list in two stages: 207 rows, 192 once the exact copies go, and 180 once duplicates are removed by email. From the visual guide's notebook, on data written for the book.[@vb-ch19]](two-stage-dedup.png){fig-alt="A bar chart titled Two-stage deduplication: exact, then by key. Three bars show 207 raw rows, 192 rows after exact deduplication and 180 rows after deduplication on the email key."}
+
+## Before you start
+
+You need a free Google account to run the notebook in Colab. It loads the contact list from the book's repository, and Colab already has pandas, matplotlib and openpyxl, so there is nothing to install. A little pandas helps, and the chapter's five practice challenges have a separate solutions notebook.
+
+::: {.ai-actions}
+[Open the visual guide](https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/finding-and-removing-duplicates-and-inconsistencies.html){.btn .btn-primary}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/finding-and-removing-duplicates-and-inconsistencies.ipynb){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+[Cleaning is the analysis](../../articles/cleaning-is-the-analysis/index.qmd) finds ten house sales listed twice, which add a sale to every count they touch. This lab is the step that removes copies like those while keeping every real record.

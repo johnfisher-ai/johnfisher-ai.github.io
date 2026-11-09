@@ -337,6 +337,10 @@ font-style: inherit;">agent</span>&gt;</span></code></pre></div></div>
 <section id="go-deeper" class="level2">
 <h2 class="anchored" data-anchor-id="go-deeper">Go deeper</h2>
 <p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/the-data-cleaning-mindset.html">Chapter 18 of the Visual Handbook</a> sets out the dimensions of data quality, the common faults and an audit routine, with a notebook that profiles a messy customer table. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/review-and-how-to-read-these-case-studies.html">Chapter 26</a> runs one first audit on the three teaching datasets. Chapters <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-spotify-track-features.html">27</a>, <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-ames-housing-prices.html">28</a> and <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/case-study-palmer-penguins.html">29</a> then clean each one from raw file to analysis-ready table and give the reason for every step.</p>
+</section>
+<section id="try-it" class="level2">
+<h2 class="anchored" data-anchor-id="try-it">Try it</h2>
+<p>To remove duplicates on the right key and count what a weaker key would lose, open <a href="../../guides/remove-duplicates-without-losing-records/index.html">Remove duplicates without losing real records</a>. To fix text typed many ways by pattern, open <a href="../../guides/find-and-fix-text-with-regular-expressions/index.html">Find and fix messy text with regular expressions</a>. Both run in Colab with nothing to install.</p>
 
 
 <div class="cta" aria-label="Follow and connect">

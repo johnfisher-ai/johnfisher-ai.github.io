@@ -1,0 +1,61 @@
+---
+title: "Find and fix messy text with regular expressions"
+description: "Python's find and replace need the exact text, and a regular expression describes its shape. Find, extract and fix text by pattern in a Colab notebook."
+date: 2026-11-09
+date-modified: 2026-11-09
+sequence: 22
+categories: [Analyst, Developer, Beginner, Python]
+lab-time: "About 30 minutes"
+lab-format: "Colab notebook"
+source: "Python, Visually"
+image: card.png
+image-alt: "A card listing the guide's four steps: search for a shape, write raw strings, extract fields with groups, and mark every match to check it."
+license: "CC BY"
+references:
+  - id: pvg-regex
+    type: webpage
+    title: "John Fisher, “Regular Expressions,” notebook in *Python from the Start*, Python, Visually, with its saved output, accessed November 2026."
+    URL: https://github.com/johnfisher-ai/Python-Visual-Guides/blob/main/notebooks/python-from-the-start/05-regular-expressions.ipynb
+  - id: pvg-start
+    type: webpage
+    title: "John Fisher, *Python from the Start*, Python, Visually, accessed November 2026."
+    URL: https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html
+---
+
+## Why it matters
+
+Messy text rarely arrives in one exact form. Phone numbers come as `215-555-0134` and as `(215) 555 0134`, and dates, order numbers and email addresses sit inside longer lines of logs, forms and exports.[@pvg-regex] Python's `find` and `replace` need the exact text, so cleaning that kind of data with them turns into loops full of conditions.
+
+A regular expression describes the shape of the text instead, such as four digits in a row or a word at the start of a line, and Python's `re` module finds, extracts, splits or replaces everything that fits.[@pvg-regex] Ask whoever cleans your text data to show the patterns they used, because a pattern that matches more or less than intended changes the data without an error.
+
+## What you will do
+
+The notebook works on short log lines, contact text and a scrap of HTML, and every cell's output is saved in it.[@pvg-regex]
+
+1. Search for a shape with `re.search`, and test the result before using it. A pattern that matches nothing returns `None` instead of raising an error.[@pvg-regex]
+2. Write every pattern as a raw string. In an ordinary string `\b` is a backspace, so `re.findall("\bweb", log)` returns an empty list with no warning, while `r"\bweb"` finds the word.[@pvg-regex]
+3. Build patterns from `\d`, `\w` and `\s`, your own character classes in square brackets, and counts such as `+` and `{4}`.[@pvg-regex]
+4. Pull fields out with named groups, turning a log line that starts `2026-09-04 10:22:31 ERROR` into its date, level and message.[@pvg-regex]
+5. Make a greedy pattern lazy. On `<b>bold</b> and <i>italic</i>`, the pattern `<.*>` returns the whole string as one match, and `<.*?>` returns the four tags.[@pvg-regex]
+6. Read the three errors the notebook runs on purpose: calling `.group()` on no match, a repeat with nothing in front of it, and a parenthesis that is never closed.[@pvg-regex]
+
+The quickest check of a pattern is the notebook's own. It marks every match inside the original text, so you can see what the pattern caught and what it left alone.[@pvg-regex]
+
+```python
+text = "Call 215-555-0134 or 610-555-9876 before 2026-09-04"
+print(re.sub(r"\d{3}-\d{3}-\d{4}", r"[\g<0>]", text))
+# Call [215-555-0134] or [610-555-9876] before 2026-09-04
+```
+
+## Before you start
+
+You need only a free Google account to open the notebook in Colab. The `re` module comes with Python, so there is nothing to install and no data to download. The notebook follows the Strings notebook in [Python from the Start](https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html), and its six exercises have a separate solutions notebook.[@pvg-start; @pvg-regex]
+
+::: {.ai-actions}
+[Open in Colab](https://colab.research.google.com/github/johnfisher-ai/Python-Visual-Guides/blob/main/notebooks/python-from-the-start/05-regular-expressions.ipynb){.btn .btn-primary}
+[See Python from the Start](https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html){.btn .btn-outline-primary}
+:::
+
+## Articles it puts into practice
+
+[Cleaning is the analysis](../../articles/cleaning-is-the-analysis/index.qmd) finds a genre column typed 19 ways for 8 genres, with spellings that differ in case, spacing and punctuation. Patterns like the ones in this lab are how a column like that is brought back to one spelling per genre.

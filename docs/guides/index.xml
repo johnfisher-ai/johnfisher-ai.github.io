@@ -17,7 +17,171 @@
 <width>144</width>
 </image>
 <generator>quarto-1.10.19</generator>
-<lastBuildDate>Thu, 22 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 09 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Find and fix messy text with regular expressions</title>
+  <link>https://johnfisher-ai.github.io/guides/find-and-fix-text-with-regular-expressions/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>Messy text rarely arrives in one exact form. Phone numbers come as <code>215-555-0134</code> and as <code>(215) 555 0134</code>, and dates, order numbers and email addresses sit inside longer lines of logs, forms and exports.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span> Python’s <code>find</code> and <code>replace</code> need the exact text, so cleaning that kind of data with them turns into loops full of conditions.</p>
+<p>A regular expression describes the shape of the text instead, such as four digits in a row or a word at the start of a line, and Python’s <code>re</code> module finds, extracts, splits or replaces everything that fits.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span> Ask whoever cleans your text data to show the patterns they used, because a pattern that matches more or less than intended changes the data without an error.</p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>The notebook works on short log lines, contact text and a scrap of HTML, and every cell’s output is saved in it.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></p>
+<ol type="1">
+<li>Search for a shape with <code>re.search</code>, and test the result before using it. A pattern that matches nothing returns <code>None</code> instead of raising an error.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+<li>Write every pattern as a raw string. In an ordinary string <code>\b</code> is a backspace, so <code>re.findall("\bweb", log)</code> returns an empty list with no warning, while <code>r"\bweb"</code> finds the word.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+<li>Build patterns from <code>\d</code>, <code>\w</code> and <code>\s</code>, your own character classes in square brackets, and counts such as <code>+</code> and <code>{4}</code>.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+<li>Pull fields out with named groups, turning a log line that starts <code>2026-09-04 10:22:31 ERROR</code> into its date, level and message.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+<li>Make a greedy pattern lazy. On <code>&lt;b&gt;bold&lt;/b&gt; and &lt;i&gt;italic&lt;/i&gt;</code>, the pattern <code>&lt;.*&gt;</code> returns the whole string as one match, and <code>&lt;.*?&gt;</code> returns the four tags.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+<li>Read the three errors the notebook runs on purpose: calling <code>.group()</code> on no match, a repeat with nothing in front of it, and a parenthesis that is never closed.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></li>
+</ol>
+<p>The quickest check of a pattern is the notebook’s own. It marks every match inside the original text, so you can see what the pattern caught and what it left alone.<span class="citation" data-cites="pvg-regex"><sup>1</sup></span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">text <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Call 215-555-0134 or 610-555-9876 before 2026-09-04"</span></span>
+<span id="cb1-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(re.sub(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\d</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{3}</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\d</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{3}</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\d</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{4}</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>, <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"</span><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">[</span><span class="er" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">\</span><span class="pp" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">g&lt;0&gt;]</span><span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>, text))</span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Call [215-555-0134] or [610-555-9876] before 2026-09-04</span></span></code></pre></div></div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>You need only a free Google account to open the notebook in Colab. The <code>re</code> module comes with Python, so there is nothing to install and no data to download. The notebook follows the Strings notebook in <a href="https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html">Python from the Start</a>, and its six exercises have a separate solutions notebook.<span class="citation" data-cites="pvg-start pvg-regex"><sup>1,2</sup></span></p>
+<div class="ai-actions">
+<p><a href="https://colab.research.google.com/github/johnfisher-ai/Python-Visual-Guides/blob/main/notebooks/python-from-the-start/05-regular-expressions.ipynb" class="btn btn-primary">Open in Colab</a> <a href="https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html" class="btn btn-outline-primary">See Python from the Start</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<p><a href="../../articles/cleaning-is-the-analysis/index.html">Cleaning is the analysis</a> finds a genre column typed 19 ways for 8 genres, with spellings that differ in case, spacing and punctuation. Patterns like the ones in this lab are how a column like that is brought back to one spelling per genre.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-pvg-regex" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Regular Expressions,” notebook in <em>Python from the Start</em>, Python, Visually, with its saved output, accessed November 2026. <a href="https://github.com/johnfisher-ai/Python-Visual-Guides/blob/main/notebooks/python-from-the-start/05-regular-expressions.ipynb">https://github.com/johnfisher-ai/Python-Visual-Guides/blob/main/notebooks/python-from-the-start/05-regular-expressions.ipynb</a></div>
+</div>
+<div id="ref-pvg-start" class="csl-entry">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">John Fisher, <em>Python from the Start</em>, Python, Visually, accessed November 2026. <a href="https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html">https://johnfisher-ai.github.io/Python-Visual-Guides/python-from-the-start.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Developer</category>
+  <category>Beginner</category>
+  <category>Python</category>
+  <guid>https://johnfisher-ai.github.io/guides/find-and-fix-text-with-regular-expressions/</guid>
+  <pubDate>Mon, 09 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/find-and-fix-text-with-regular-expressions/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
+<item>
+  <title>Remove duplicates without losing real records</title>
+  <link>https://johnfisher-ai.github.io/guides/remove-duplicates-without-losing-records/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="why-it-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-it-matters">Why it matters</h2>
+<p>Duplicates inflate counts, double-count revenue and bias every average, and a duplicated row that lands in both the training and the test set inflates every score reported for a model.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span> Before you trust a count of customers or a model’s test score, ask how duplicates were removed, and on which key.</p>
+<p>Removing too much is the quieter failure. Two different customers can share a name, and without a unique key such as an email address or an account ID, two rows that look identical may not be the same person.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span> The lab shows both mistakes on one contact list.</p>
+</section>
+<section id="what-you-will-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-will-do">What you will do</h2>
+<p>The visual guide and its notebook work on a contact list written for the book, 207 rows covering 180 people, with exact copies and with near-duplicates whose names were re-cased or padded with spaces.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></p>
+<ol type="1">
+<li>Drop the exact copies with <code>drop_duplicates()</code>, inspect whole duplicate groups with <code>keep=False</code>, and log how many rows each step removes. On the contact list, exact copies take 207 rows down to 192.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></li>
+<li>Standardize before you deduplicate, so that “Acme” and “Acme” collapse together. Strip spaces, unify case and map each variant to one canonical value, as the notebook does when eight spellings of one column become two.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></li>
+<li>Deduplicate on the business key. Dropping duplicates by email removes 12 more near-duplicates and leaves the 180 people.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></li>
+<li>Try a weaker key and count who disappears. The 180 people on this list share only 127 distinct names, by our count from the chapter’s dataset, so deduplicating by name would merge 53 real people into others.</li>
+<li>Score the near-duplicates no key can catch. A normalized Levenshtein ratio rates “John Smith” and “Jon Smith” at 0.90, and the chapter’s rule is to review every match above the threshold, because a loose one merges two different people.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></li>
+<li>Write the rules the clean data must pass, a unique key, a valid range, allowed values and a well-formed email, and make them fail loudly. The notebook’s <code>validate()</code> reports all four violations in a small table.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://johnfisher-ai.github.io/guides/remove-duplicates-without-losing-records/two-stage-dedup.png" class="img-fluid figure-img" alt="A bar chart titled Two-stage deduplication: exact, then by key. Three bars show 207 raw rows, 192 rows after exact deduplication and 180 rows after deduplication on the email key."></p>
+<figcaption>The contact list in two stages: 207 rows, 192 once the exact copies go, and 180 once duplicates are removed by email. From the visual guide’s notebook, on data written for the book.<span class="citation" data-cites="vb-ch19"><sup>1</sup></span></figcaption>
+</figure>
+</div>
+</section>
+<section id="before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-start">Before you start</h2>
+<p>You need a free Google account to run the notebook in Colab. It loads the contact list from the book’s repository, and Colab already has pandas, matplotlib and openpyxl, so there is nothing to install. A little pandas helps, and the chapter’s five practice challenges have a separate solutions notebook.</p>
+<div class="ai-actions">
+<p><a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/finding-and-removing-duplicates-and-inconsistencies.html" class="btn btn-primary">Open the visual guide</a> <a href="https://colab.research.google.com/github/johnfisher-ai/Statistics-Data-Science-AI-Visual-Book/blob/main/chapters/notebooks/finding-and-removing-duplicates-and-inconsistencies.ipynb" class="btn btn-outline-primary">Open in Colab</a></p>
+</div>
+</section>
+<section id="articles-it-puts-into-practice" class="level2">
+<h2 class="anchored" data-anchor-id="articles-it-puts-into-practice">Articles it puts into practice</h2>
+<p><a href="../../articles/cleaning-is-the-analysis/index.html">Cleaning is the analysis</a> finds ten house sales listed twice, which add a sale to every count they touch. This lab is the step that removes copies like those while keeping every real record.</p>
+
+
+<div class="cta" aria-label="Follow and connect">
+<p><strong>Found this useful?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Follow me on LinkedIn</a> for the next one.</p>
+<p><strong>Working on this?</strong> <a href="https://www.linkedin.com/in/johnrfisher">Connect</a> and tell me what you are seeing.</p>
+</div>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Endnotes</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-vb-ch19" class="csl-entry">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">John Fisher, “Finding &amp; Removing Duplicates and Inconsistencies,” chapter 19 of <em>Statistics, Data Science and AI: A Visual Handbook</em>, accessed November 2026. <a href="https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/finding-and-removing-duplicates-and-inconsistencies.html">https://johnfisher-ai.github.io/Statistics-Data-Science-AI-Visual-Book/chapters/finding-and-removing-duplicates-and-inconsistencies.html</a></div>
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div> ]]></description>
+  <category>Analyst</category>
+  <category>Beginner</category>
+  <category>Data science</category>
+  <guid>https://johnfisher-ai.github.io/guides/remove-duplicates-without-losing-records/</guid>
+  <pubDate>Mon, 09 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://johnfisher-ai.github.io/guides/remove-duplicates-without-losing-records/card.png" medium="image" type="image/png" height="76" width="144"/>
+</item>
 <item>
   <title>Run a broker and its specialist agents from one config file</title>
   <link>https://johnfisher-ai.github.io/guides/agent-network-from-one-config-file/</link>
